@@ -4,7 +4,7 @@
 
 Plan the perfect date!
 
-#[Live site](https://placeholder.herokuapp.com)
+[Live site](https://placeholder.herokuapp.com)
 
 **Table of Contents**
 
