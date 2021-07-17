@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Redirect } from 'react-router-dom';
-import { signUp } from '../../store/session';
+import { Redirect, useHistory } from 'react-router-dom';
+import { signUp } from '../../../store/session';
 
 const SignUpForm = () => {
+  const history = useHistory();
+  const [profileImg, setProfileImg] = useState(null);
+  const [imageLoading, setImageLoading] = useState(false);
   const [errors, setErrors] = useState([]);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastname] = useState('');
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -14,12 +19,38 @@ const SignUpForm = () => {
 
   const onSignUp = async (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append('image', profileImg)
+    setImageLoading(true)
+    const res = await fetch('/api/images', {
+      method: "POST",
+      body: formData,
+    });
+    if (res.ok) {
+      await res.json();
+      setImageLoading(false);
+      history.push("/images");
+    }
+    else {
+      setImageLoading(false);
+      // a real app would probably use more advanced
+      // error handling
+      console.log("error");
+    }
     if (password === repeatPassword) {
-      const data = await dispatch(signUp(username, email, password));
+      const data = await dispatch(signUp(firstName, lastName, profileImg ,username, email, password));
       if (data) {
         setErrors(data)
       }
     }
+  };
+
+  const updateFirstName = (e) => {
+    setFirstName(e.target.value);
+  };
+
+  const updateLastName = (e) => {
+    setLastname(e.target.value);
   };
 
   const updateUsername = (e) => {
@@ -38,6 +69,11 @@ const SignUpForm = () => {
     setRepeatPassword(e.target.value);
   };
 
+  const updateImage = (e) => {
+    const file = e.target.files[0];
+    setProfileImg(file);
+  }
+
   if (user) {
     return <Redirect to='/' />;
   }
@@ -48,6 +84,24 @@ const SignUpForm = () => {
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
+      </div>
+      <div>
+        <label>First Name</label>
+        <input
+          type='text'
+          name='firstName'
+          onChange={updateFirstName}
+          value={firstName}
+        ></input>
+      </div>
+      <div>
+        <label>Last Name</label>
+        <input
+          type='text'
+          name='firstName'
+          onChange={updateLastName}
+          value={lastName}
+        ></input>
       </div>
       <div>
         <label>User Name</label>
@@ -86,7 +140,14 @@ const SignUpForm = () => {
           required={true}
         ></input>
       </div>
-      <button type='submit'>Sign Up</button>
+      <input
+        type="file"
+        accept="image/*"
+        onChange={updateImage}
+      />
+      <button type="submit">Submit</button>
+      {(imageLoading) && <p>Loading...</p>}
+      {/* <button type='submit'>Sign Up</button> */}
     </form>
   );
 };
