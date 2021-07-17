@@ -5,7 +5,7 @@ import { signUp } from '../../../store/session';
 
 const SignUpForm = () => {
   const history = useHistory();
-  const [profileImg, setProfileImg] = useState(null);
+  const [image, setImage] = useState(null)
   const [imageLoading, setImageLoading] = useState(false);
   const [errors, setErrors] = useState([]);
   const [firstName, setFirstName] = useState('');
@@ -14,22 +14,24 @@ const SignUpForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
+  const [profileImg, setProfileImg] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
+
 
   const onSignUp = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('image', profileImg)
+    formData.append('image', image)
     setImageLoading(true)
     const res = await fetch('/api/images', {
       method: "POST",
       body: formData,
     });
     if (res.ok) {
-      await res.json();
+      // let profileImg = await res.json();
       setImageLoading(false);
-      history.push("/images");
+      // history.push("/images");
     }
     else {
       setImageLoading(false);
@@ -38,12 +40,43 @@ const SignUpForm = () => {
       console.log("error");
     }
     if (password === repeatPassword) {
-      const data = await dispatch(signUp(firstName, lastName, profileImg ,username, email, password));
+      let profileImg = await res.json();
+      const data = await dispatch(signUp(firstName, lastName, username, email, password, profileImg,));
       if (data) {
         setErrors(data)
       }
     }
   };
+
+
+  // const onSignUp = async (e) => {
+  //   e.preventDefault();
+  //   if (password === repeatPassword) {
+  //   const formData = new FormData();
+  //   formData.append('image', image)
+  //   setImageLoading(true)
+  //   const res = await fetch('/api/images', {
+  //     method: "POST",
+  //     body: formData,
+  //   });
+  //   if (res.ok) {
+  //     let profileImg = await res.json();
+  //     setImageLoading(false);
+  //     // history.push("/images");
+  //     const user = await dispatch(signUp(firstName, lastName, username, email, password, profileImg))
+  //   }
+  //   else {
+  //     setImageLoading(false);
+  //     // a real app would probably use more advanced
+  //     // error handling
+  //     console.log("error");
+  //   }
+  //     // const data = await dispatch(signUp(firstName, lastName, username, email, password, profileImg));
+  //     // if (data) {
+  //     //   setErrors(data)
+  //     // }
+  //   }
+  // };
 
   const updateFirstName = (e) => {
     setFirstName(e.target.value);
@@ -71,7 +104,7 @@ const SignUpForm = () => {
 
   const updateImage = (e) => {
     const file = e.target.files[0];
-    setProfileImg(file);
+    setImage(file);
   }
 
   if (user) {
