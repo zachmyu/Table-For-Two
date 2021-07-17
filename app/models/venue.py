@@ -6,8 +6,10 @@ class Venue(db.Model, UserMixin):
     __tablename__ = 'venues'
 
     id = db.Column(db.Integer, primary_key=True)
+    creator_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     name = db.Column(db.String(40), nullable=False, unique=True)
-    date_type_id = db.Column(db.Integer, nullable=False, unique=True)
+    date_type_id = db.Column(db.Integer, db.ForeignKey(
+        'date_type.id'), nullable=False,)
     price = db.Column(db.Integer, nullable=False)
     description = db.Column(db.Text(4000), nullable=False)
     image_url = db.Column(db.String(255))
