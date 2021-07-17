@@ -6,8 +6,10 @@ class Reservation(db.Model, UserMixin):
     __tablename__ = 'reservations'
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, nullable=False)
-    venue_id = db.Column(db.Integer, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(
+        'users.id'), nullable=False)
+    venue_id = db.Column(db.Integer, db.ForeignKey(
+        'venues.id'), nullable=False)
     reservation_date = db.Column(db.DateTime, nullable=False)
     reservation_time = db.Column(db.DateTime, nullable=False)
     party_size = db.Column(db.Integer, nullable=False)
