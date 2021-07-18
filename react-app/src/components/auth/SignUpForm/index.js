@@ -5,9 +5,9 @@ import { signUp } from '../../../store/session';
 
 const SignUpForm = () => {
   const history = useHistory();
-  const [image, setImage] = useState(null)
-  const [imageLoading, setImageLoading] = useState(false);
-  const [errors, setErrors] = useState([]);
+  // const [image, setImage] = useState(null)
+  // const [imageLoading, setImageLoading] = useState(false);
+  // const [errors, setErrors] = useState([]);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastname] = useState('');
   const [username, setUsername] = useState('');
@@ -21,30 +21,30 @@ const SignUpForm = () => {
 
   const onSignUp = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append('image', image)
-    setImageLoading(true)
-    const res = await fetch('/api/images', {
-      method: "POST",
-      body: formData,
-    });
-    if (res.ok) {
-      // let profileImg = await res.json();
-      setImageLoading(false);
-      // history.push("/images");
-    }
-    else {
-      setImageLoading(false);
-      // a real app would probably use more advanced
-      // error handling
-      console.log("error");
-    }
+    // const formData = new FormData();
+    // formData.append('image', image)
+    // setImageLoading(true)
+    // const res = await fetch('/api/images', {
+    //   method: "POST",
+    //   body: formData,
+    // });
+    // if (res.ok) {
+    //   // let profileImg = await res.json();
+    //   setImageLoading(false);
+    //   // history.push("/images");
+    // }
+    // else {
+    //   setImageLoading(false);
+    //   // a real app would probably use more advanced
+    //   // error handling
+    //   console.log("error");
+    // }
     if (password === repeatPassword) {
-      let profileImg = await res.json();
+      // let profileImg = await res.json();
       const data = await dispatch(signUp(firstName, lastName, username, email, password, profileImg,));
-      if (data) {
-        setErrors(data)
-      }
+      // if (data) {
+      //   setErrors(data)
+      // }
     }
   };
 
@@ -104,7 +104,7 @@ const SignUpForm = () => {
 
   const updateImage = (e) => {
     const file = e.target.files[0];
-    setImage(file);
+    if (file) setProfileImg(file)
   }
 
   if (user) {
@@ -113,11 +113,11 @@ const SignUpForm = () => {
 
   return (
     <form onSubmit={onSignUp}>
-      <div>
-        {errors.map((error, ind) => (
+      {/* <div>
+        {errors?.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
-      </div>
+      </div> */}
       <div>
         <label>First Name</label>
         <input
@@ -179,7 +179,7 @@ const SignUpForm = () => {
         onChange={updateImage}
       />
       <button type="submit">Submit</button>
-      {(imageLoading) && <p>Loading...</p>}
+      {/* {(imageLoading) && <p>Loading...</p>} */}
       {/* <button type='submit'>Sign Up</button> */}
     </form>
   );

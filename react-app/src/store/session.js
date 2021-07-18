@@ -71,33 +71,61 @@ export const logout = () => async (dispatch) => {
 
 
 export const signUp = (firstName, lastName, username, email, password, profileImg) => async (dispatch) => {
+  // const response = await fetch('/api/auth/signup', {
+  //   method: 'POST',
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //   },
+  //   body: JSON.stringify({
+  //     firstName,
+  //     lastName,
+  //     username,
+  //     email,
+  //     password,
+  //     profileImg
+  //   }),
+  // });
+  
+  const formData = new FormData();
+
+  formData.append('firstName', firstName);
+  formData.append('lastName', lastName);
+  formData.append('username', username);
+  formData.append('email', email);
+  formData.append('password', password);
+
+  if (profileImg) formData.append("image", profileImg);
+
   const response = await fetch('/api/auth/signup', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'multipart/form-data',
     },
-    body: JSON.stringify({
-      firstName,
-      lastName,
-      username,
-      email,
-      password,
-      profileImg
-    }),
-  });
-  
-  if (response.ok) {
-    const data = await response.json();
-    dispatch(setUser(data))
-    return null;
-  } else if (response.status < 500) {
-    const data = await response.json();
-    if (data.errors) {
-      return data.errors;
-    }
-  } else {
-    return ['An error occurred. Please try again.']
+    body: formData,
+  })
+
+  const data = await response.json();
+  if (data.errors) {
+    return data
   }
+  dispatch(setUser(data))
+  return {}
+
+
+
+
+  // if (response.ok) {
+  //   const data = await response.json();
+  //   dispatch(setUser(data))
+  //   return null;
+  // } else if (response.status < 500) {
+  //   const data = await response.json();
+  //   if (data.errors) {
+  //     return data.errors;
+  //   }
+  // } else {
+  //   return ['An error occurred. Please try again.']
+  // }
 }
 
 export default function reducer(state = initialState, action) {
