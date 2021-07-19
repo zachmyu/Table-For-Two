@@ -15,7 +15,7 @@ class User(db.Model, UserMixin):
     profileImg = db.Column(db.String, nullable=False)
     
     images = db.relationship("Image", back_populates="user")
-    
+    venues = db.relationship("Venue", back_populates="user")
 
     @property
     def password(self):
