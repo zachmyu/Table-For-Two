@@ -1,6 +1,7 @@
 from app.models import db, Reservation
 from datetime import datetime
 
+def seed_reservations():
     num1 = Reservation(user_id=1, venue_id=1, reservation_date=datetime(2021, 7, 16, 17, 30), reservation_time=datetime(2021, 7, 16), party_size=2, duration=1)
     # 2 = Reservation(user_id=2, venue_id=4, reservation_date=datetime(2021, 7, 16), reservation_time=datetime(2021, 7, 16), party_size=4, duration=2)
     # 3 = Reservation(user_id=2, venue_id=5, reservation_date=datetime(2021, 7, 16), reservation_time=datetime(2021, 7, 16), party_size=2, duration=1)
