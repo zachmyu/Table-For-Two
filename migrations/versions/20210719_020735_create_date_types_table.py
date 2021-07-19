@@ -30,7 +30,7 @@ def upgrade():
     sa.Column('name', sa.String(length=40), nullable=False),
     sa.Column('date_type_id', sa.Integer(), nullable=False),
     sa.Column('price', sa.Integer(), nullable=False),
-    sa.Column('description', sa.Text(length=4000), nullable=False),
+    sa.Column('description', sa.Text(), nullable=False),
     sa.Column('image_url', sa.String(length=255), nullable=True),
     sa.Column('phone_number', sa.String(length=255), nullable=True),
     sa.Column('address', sa.String(length=255), nullable=False),

@@ -2,8 +2,8 @@ from app.models import db, Venue
 
 
 def seed_venues():
-    NewportFunTours = Venue(creator_id=7, name="Newport Fun Tours",
-                            date_type_id=7, price=150,
+    NewportFunTours = Venue(creator_id=1, name="Newport Fun Tours",
+                            date_type_id=1, price=150,
                             description="90-Minute Electric-Boat Rental on Newport Harbor",
                             image_url="https://img.grouponcdn.com/deal/bTMFesdQLRvf94A95sn8/M1-4640x2784/v1/c870x524.webp",
                             phone_number="(949) 675-8433",

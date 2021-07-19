@@ -14,7 +14,7 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     profileImg = db.Column(db.String, nullable=False)
     
-    images = db.relationship("Image", back_populates="user")
+    # images = db.relationship("Image", back_populates="users")
     venues = db.relationship("Venue", back_populates="user")
 
     @property

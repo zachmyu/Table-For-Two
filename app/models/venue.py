@@ -11,7 +11,7 @@ class Venue(db.Model, UserMixin):
     date_type_id = db.Column(db.Integer, db.ForeignKey(
         'date_types.id'), nullable=False,)
     price = db.Column(db.Integer, nullable=False)
-    description = db.Column(db.Text(4000), nullable=False)
+    description = db.Column(db.Text, nullable=False)
     image_url = db.Column(db.String(255))
     phone_number = db.Column(db.String(255))
     address = db.Column(db.String(255), nullable=False)
@@ -22,13 +22,14 @@ class Venue(db.Model, UserMixin):
     latitude = db.Column(db.Float, nullable=False)
     longitude = db.Column(db.Float, nullable=False)
 
-    user = db.relationship("User", back_populates="venue")
-    date_type = db.relationship("Date_Type", back_populates="venue")
+    user = db.relationship('User', back_populates='venues')
+    date_type = db.relationship("Date_type", back_populates="venues")
 
     def to_dict(self):
         return {
             'id': self.id,
-            'username': self.username,
+            'creator_id': self.creator_id,
+            'username': self.name,
             'name': self.name,
             'date_type_id': self.date_type_id,
             'description': self.description,

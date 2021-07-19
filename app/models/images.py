@@ -7,7 +7,7 @@ class Image(db.Model):
     profileImg = db.Column(db.String(1000), nullable=False)
     userId = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     
-    user = db.relationship('User', back_populates='images')
+    # user = db.relationship('User', back_populates='images')
     
     def to_dict(self):
         return {
