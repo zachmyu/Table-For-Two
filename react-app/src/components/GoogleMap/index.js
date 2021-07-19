@@ -1,7 +1,13 @@
 import React, { useState }from 'react'
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import { getVenues } from '../../store/venue'
+import { useSelector, useDispatch } from 'react-redux'
 //AIzaSyBUxfH8gj9gvfMEvpu4C0xDtNs3QW7doS8
-function Map( ) {
+function Map( {venues} ) {
+
+    // const venues = useSelector(state => state.venues)
+    // const venue = Object.values(venues)
+    
     const containerStyle = {
         width: '400px',
         height: '400px'
@@ -17,11 +23,22 @@ function Map( ) {
                 mapContainerStyle={containerStyle}
                 center={center}
                 zoom={10}>
-                <Marker 
-                    lat={59.955413}
-                    lng={30.337844}>
+                {venues?.map(venue => {
                     
-                    </Marker>
+                    <Marker key='marker'
+                        key={venue.id}
+                        position={
+                            {
+                                lat: venue.latitude,
+                                lng: venue.longitude
+                            }
+                        }
+                        
+    
+                        >
+                        
+                        </Marker>
+                })}
             </GoogleMap>
         </LoadScript>
     )

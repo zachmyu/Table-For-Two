@@ -28,6 +28,7 @@ function Venue() {
 
             })}
             <button onClick={() => console.log('**************************', venue, venues)}>Venues</button>
+            {/* <Map venues={venues} ></Map> */}
 
             {/* <div>
             </div> */}
