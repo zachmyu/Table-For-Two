@@ -12,7 +12,7 @@ function Map( ) {
         lng: -38.523
     };
     return (
-        <LoadScript googleMapsApiKey='AIzaSyBUxfH8gj9gvfMEvpu4C0xDtNs3QW7doS8'>
+        <LoadScript googleMapsApiKey={`${process.env.REACT_APP_GOOGLE_KEY}`}>
             <GoogleMap 
                 mapContainerStyle={containerStyle}
                 center={center}
