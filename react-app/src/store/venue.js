@@ -14,7 +14,7 @@ const loadSingleVenue = (venue) => ({
 
 
 export const getVenues = () => async(dispatch) => {
-    const response = await fetch("/api/venues/")
+    const response = await fetch("/api/venues")
 
     if (response.ok) {
         const venues = await response.json()

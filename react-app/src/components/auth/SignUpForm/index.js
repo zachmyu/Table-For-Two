@@ -8,7 +8,7 @@ const SignUpForm = () => {
   const history = useHistory();
   // const [image, setImage] = useState(null)
   // const [imageLoading, setImageLoading] = useState(false);
-  // const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState([]);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastname] = useState('');
   const [username, setUsername] = useState('');
@@ -42,10 +42,10 @@ const SignUpForm = () => {
     // }
     if (password === repeatPassword) {
       // let profileImg = await res.json();
-      const data = await dispatch(signUp(firstName, lastName, username, email, password, profileImg,));
-      // if (data) {
-      //   setErrors(data)
-      // }
+      const data = await dispatch(signUp(firstName, lastName, username, email, password, profileImg));
+      if (data) {
+        setErrors(data)
+      }
     }
   };
 
@@ -114,11 +114,11 @@ const SignUpForm = () => {
 
   return (
     <form onSubmit={onSignUp} className='p-10'>
-      {/* <div>
+      <div>
         {errors?.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
-      </div> */}
+      </div>
       <div>
         <label>First Name</label>
         <input

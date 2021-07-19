@@ -62,19 +62,20 @@ def sign_up():
     """
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print('********************************', form.data['profileImg'])
+    # print('********************************', form.data['profileImg'])
+    print('BEFORE VALIDATION')
     if form.validate_on_submit():
-        profileImg = form.data['profileImg']
-        print('######################', form.data['profileImg'])
-        profileImg = form.data['profileImg']
-        print('ZZZZZZZZZZZZZZZZZZZZZZZ', profileImg)
+        profile_image_url = form.data['profile_image_url']
+        print('######################', form.data['profile_image_url'])
+        profile_image_url = form.data['profile_image_url']
+        print('ZZZZZZZZZZZZZZZZZZZZZZZ', profile_image_url)
         user = User(
-            firstName=form.data['firstName'],
-            lastName=form.data['lastName'],
+            first_name=form.data['first_name'],
+            last_name=form.data['last_name'],
             username=form.data['username'],
             email=form.data['email'],
             password=form.data['password'],
-            profileImg=profileImg["url"],
+            profile_image_url=["profile_image_url"],
         )
         #   form['csrf_token'].data = request.cookies['csrf_token']
         # if form.validate_on_submit():
@@ -85,7 +86,7 @@ def sign_up():
         #         password=form.data['password'],
         #         is_owner=True,
         #         profile_photo=profile_photo["url"]
-        print('000000000000000000000000000000000000', profileImg)
+        print('000000000000000000000000000000000000', profile_image_url)
         db.session.add(user)
         db.session.commit()
         login_user(user)

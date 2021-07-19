@@ -4,14 +4,13 @@ class Image(db.Model):
     __tablename__ = 'images'
     
     id = db.Column(db.Integer, primary_key=True)
-    profileImg = db.Column(db.String(1000), nullable=False)
+    profile_image_url = db.Column(db.String(1000), nullable=False)
     userId = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     
-    # user = db.relationship('User', back_populates='images')
+    user = db.relationship('User', back_populates='images')
     
     def to_dict(self):
         return {
             "id": self.id,
-            "profileImg": self.profileImg,
-            "userId": self.userId
+            "profile_image_url": self.profile_image_url
         }

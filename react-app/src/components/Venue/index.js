@@ -7,30 +7,35 @@ import { useSelector, useDispatch } from 'react-redux'
 
 function Venue() {
     const { id } = useParams()
-    const venues = useSelector(state => state.venues)
-    const venue = Object.values(venues)
-    const val = Object.keys(venue)
+    const venues = useSelector(state => state.venues.venues)
+    // const venue = Object.values(venues)
+    // const val = Object.keys(venue)
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(getVenues())
-        console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%', id)
+        // console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%', id)
     }, [dispatch])
-
+    console.log('THIS IS THE VALUE OF VENUES', venues)
 
     return (
         <div>
-            {venue.map(value => {
-                <div>
-                    <button onClick={() => console.log('**************************', value)}>Venues</button>
-             
+            {console.log('Before mapping')}
+            {venues?.map(value => (
+                // { console.log('After mapping') }
+
+                <div className='testing'>
+                    <button onClick={() => console.log('**************************', value.id)}>Venues</button>
+                    {/* <h1>
+                        {value.id}
+                    </h1> */}
 
                 </div>
 
-            })}
-            <button onClick={() => console.log('This is the value of const venues = useSelector(state => state.venues)', venues)}>Venues</button>
+                ))}
+            {/* <button onClick={() => console.log('This is the value of const venues = useSelector(state => state.venues)', venues)}>Venues</button>
             <button onClick={() => console.log('This is the value of const venues = useSelector(state => state.venues)', venue)}>Venue</button> 
-            <button onClick={() => console.log('This is the value of const venues = useSelector(state => state.venues)', val)}>Val</button> 
+            <button onClick={() => console.log('This is the value of const venues = useSelector(state => state.venues)', val)}>Val</button>  */}
             {/* <Map venues={venues} ></Map>
 
             {/* <div>
