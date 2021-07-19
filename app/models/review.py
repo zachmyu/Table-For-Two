@@ -11,7 +11,7 @@ class Review(db.Model, UserMixin):
     venue_id = db.Column(db.Integer, db.ForeignKey(
         'venues.id'), nullable=False)
     title = db.Column(db.String(255), nullable=False)
-    body = db.Column(db.Text(4000), nullable=False)
+    body = db.Column(db.Text(), nullable=False)
     rating = db.Column(db.Integer, nullable=False)
 
     def to_dict(self):
