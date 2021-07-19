@@ -19,11 +19,10 @@ class Venue(db.Model, UserMixin):
     state = db.Column(db.String(25), nullable=False)
     zipcode = db.Column(db.String(10), nullable=False)
     operation_hours = db.Column(db.String(255), nullable=False)
-    longitude = db.Column(db.Float, nullable=False)
     latitude = db.Column(db.Float, nullable=False)
+    longitude = db.Column(db.Float, nullable=False)
     user = db.relationship('User', back_populates='venues')
     date_type = db.relationship('Date_type', back_populates='venues')
-
 
     def to_dict(self):
         return {
