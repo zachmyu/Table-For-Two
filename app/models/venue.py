@@ -9,9 +9,9 @@ class Venue(db.Model, UserMixin):
     creator_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     name = db.Column(db.String(40), nullable=False, unique=True)
     date_type_id = db.Column(db.Integer, db.ForeignKey(
-        'date_types.id'), nullable=False,)
+        'date_types.id'), nullable=False)
     price = db.Column(db.Integer, nullable=False)
-    description = db.Column(db.Text, nullable=False)
+    description = db.Column(db.Text(4000), nullable=False)
     image_url = db.Column(db.String(255))
     phone_number = db.Column(db.String(255))
     address = db.Column(db.String(255), nullable=False)
