@@ -3,7 +3,8 @@ from app.models import User, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
-
+from app.awsS3 import (
+    upload_file_to_s3, allowed_file, get_unique_filename)
 auth_routes = Blueprint('auth', __name__)
 
 
@@ -61,12 +62,31 @@ def sign_up():
     """
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    # print('********************************', form.data['profileImg'])
+    print('BEFORE VALIDATION')
     if form.validate_on_submit():
+        profile_image_url = form.data['profile_image_url']
+        print('######################', form.data['profile_image_url'])
+        profile_image_url = form.data['profile_image_url']
+        print('ZZZZZZZZZZZZZZZZZZZZZZZ', profile_image_url)
         user = User(
+            first_name=form.data['first_name'],
+            last_name=form.data['last_name'],
             username=form.data['username'],
             email=form.data['email'],
-            password=form.data['password']
+            password=form.data['password'],
+            profile_image_url=["profile_image_url"],
         )
+        #   form['csrf_token'].data = request.cookies['csrf_token']
+        # if form.validate_on_submit():
+        #     profile_photo = form.data["profile_photo"]
+        #     user = User(
+        #         username=form.data['username'],
+        #         email=form.data['email'],
+        #         password=form.data['password'],
+        #         is_owner=True,
+        #         profile_photo=profile_photo["url"]
+        print('000000000000000000000000000000000000', profile_image_url)
         db.session.add(user)
         db.session.commit()
         login_user(user)

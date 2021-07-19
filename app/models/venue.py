@@ -9,7 +9,7 @@ class Venue(db.Model, UserMixin):
     creator_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     name = db.Column(db.String(40), nullable=False, unique=True)
     date_type_id = db.Column(db.Integer, db.ForeignKey(
-        'date_types.id'), nullable=False,)
+        'date_types.id'), nullable=False)
     price = db.Column(db.Integer, nullable=False)
     description = db.Column(db.Text, nullable=False)
     image_url = db.Column(db.String(255))
@@ -19,15 +19,17 @@ class Venue(db.Model, UserMixin):
     state = db.Column(db.String(25), nullable=False)
     zipcode = db.Column(db.String(10), nullable=False)
     operation_hours = db.Column(db.String(255), nullable=False)
-    longitude = db.Column(db.float, nullable=False)
-    latitude = db.Column(db.float, nullable=False)
+    longitude = db.Column(db.Float, nullable=False)
+    latitude = db.Column(db.Float, nullable=False)
+    user = db.relationship('User', back_populates='venues')
     date_type = db.relationship('Date_type', back_populates='venues')
 
 
     def to_dict(self):
         return {
             'id': self.id,
-            'username': self.username,
+            'creator_id': self.creator_id,
+            'username': self.name,
             'name': self.name,
             'date_type_id': self.date_type_id,
             'description': self.description,
@@ -37,5 +39,7 @@ class Venue(db.Model, UserMixin):
             'city': self.city,
             'state': self.state,
             'zipcode': self.zipcode,
-            'operation_hours': self.operation_hours
+            'operation_hours': self.operation_hours,
+            "latitude": self.latitude,
+            "longitude": self.longitude,
         }

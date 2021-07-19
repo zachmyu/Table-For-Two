@@ -20,6 +20,7 @@ def seed():
     seed_reservations()
     seed_reviews()
     seed_favorites()
+    # Add other seed functions here
 
 
 # Creates the `flask seed undo` command
@@ -31,3 +32,5 @@ def undo():
     undo_reservations()
     undo_reviews()
     undo_favorites()
+    # Add other undo functions here
+

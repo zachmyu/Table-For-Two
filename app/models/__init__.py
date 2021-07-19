@@ -5,3 +5,4 @@ from .venue import Venue
 from .reservation import Reservation
 from .review import Review
 from .favorite import Favorite
+from .images import Image

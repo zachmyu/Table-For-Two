@@ -289,11 +289,12 @@ def seed_users():
                        profile_image_url="image.com/1",
                        email="randallpark@hollywoodstar.com",
                        hashed_password=pw)
-    # RobertDeNiro = User(first_name="Robert",
-    #                     last_name="De Niro",
-    #                     profile_image_url="image.com/1",
-    #                     email="robertdeniro@hollywoodstar.com",
-    #                     hashed_password=pw)
+    RobertDeNiro = User(first_name="Robert",
+                         last_name="De Niro",
+                         username="Someone",
+                         profile_image_url="image.com/1",
+                         email="robertdeniro@hollywoodstar.com",
+                         hashed_password=pw)
     RobertDowneyJr = User(first_name="Robert",
                           last_name="Downey Jr.",
                           username="RealIronMan",
@@ -420,7 +421,7 @@ def seed_users():
     db.session.add(NicoleKidman)
     db.session.add(PaulRudd)
     db.session.add(RandallPark)
-    # db.session.add(RobertDeNiro)
+    db.session.add(RobertDeNiro)
     db.session.add(RobertDowneyJr)
     db.session.add(RyanGosling)
     db.session.add(SamuelLJackson)

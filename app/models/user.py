@@ -13,6 +13,10 @@ class User(db.Model, UserMixin):
     profile_image_url = db.Column(db.String(1000))
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    # profileImg = db.Column(db.String, nullable=False)
+    
+    images = db.relationship("Image", back_populates="user")
+    venues = db.relationship("Venue", back_populates="user")
 
     @property
     def password(self):
