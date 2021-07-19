@@ -12,8 +12,8 @@ seed_commands = AppGroup('seed')
 @seed_commands.command('all')
 def seed():
     seed_users()
-    seed_date_types
-    seed_venues
+    seed_date_types()
+    seed_venues()
     # Add other seed functions here
 
 
@@ -21,6 +21,6 @@ def seed():
 @seed_commands.command('undo')
 def undo():
     undo_users()
-    undo_date_types
-    undo_venues
+    undo_date_types()
+    undo_venues()
     # Add other undo functions here
