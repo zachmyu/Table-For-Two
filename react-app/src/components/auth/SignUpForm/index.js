@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect, useHistory } from 'react-router-dom';
 import { signUp } from '../../../store/session';
+import { Button } from '@material-ui/core'
 
 const SignUpForm = () => {
   const history = useHistory();
@@ -112,7 +113,7 @@ const SignUpForm = () => {
   }
 
   return (
-    <form onSubmit={onSignUp}>
+    <form onSubmit={onSignUp} className='p-10'>
       {/* <div>
         {errors?.map((error, ind) => (
           <div key={ind}>{error}</div>
@@ -178,7 +179,8 @@ const SignUpForm = () => {
         accept="image/*"
         onChange={updateImage}
       />
-      <button type="submit">Submit</button>
+      {/* <button type="submit">Submit</button> */}
+      <Button color="primary" type="submit" variant="contained">Submit</Button>
       {/* {(imageLoading) && <p>Loading...</p>} */}
       {/* <button type='submit'>Sign Up</button> */}
     </form>
