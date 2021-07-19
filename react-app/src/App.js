@@ -8,6 +8,7 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
 import Calendar from './components/Calendar'
+import DropDown from './components/DropDown'
 import { authenticate } from './store/session';
 
 function App() {
@@ -31,6 +32,9 @@ function App() {
       <Switch>
         <Route path='/calendar' exact={true}>
           <Calendar></Calendar>
+        </Route>
+        <Route path='/dropdown' exact={true}>
+          <DropDown></DropDown>
         </Route>
         <Route path='/login' exact={true}>
           <LoginForm />
