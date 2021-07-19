@@ -9,6 +9,7 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import Calendar from './components/Calendar'
 import DropDown from './components/DropDown'
+import GoogleMap from './components/GoogleMap'
 import { authenticate } from './store/session';
 
 function App() {
@@ -35,6 +36,9 @@ function App() {
         </Route>
         <Route path='/dropdown' exact={true}>
           <DropDown></DropDown>
+        </Route>
+        <Route path='/google-map' exact={true}>
+          <GoogleMap></GoogleMap>
         </Route>
         <Route path='/login' exact={true}>
           <LoginForm />
