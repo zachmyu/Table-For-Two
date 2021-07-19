@@ -1,30 +1,37 @@
 from .db import db
-from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
 
-class User(db.Model, UserMixin):
-    __tablename__ = 'users'
+class Venue(db.Model, UserMixin):
+    __tablename__ = 'venues'
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(40), nullable=False, unique=True)
-    email = db.Column(db.String(255), nullable=False, unique=True)
-    hashed_password = db.Column(db.String(255), nullable=False)
-
-    @property
-    def password(self):
-        return self.hashed_password
-
-    @password.setter
-    def password(self, password):
-        self.hashed_password = generate_password_hash(password)
-
-    def check_password(self, password):
-        return check_password_hash(self.password, password)
+    creator_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    name = db.Column(db.String(40), nullable=False, unique=True)
+    date_type_id = db.Column(db.Integer, db.ForeignKey(
+        'date_type.id'), nullable=False,)
+    price = db.Column(db.Integer, nullable=False)
+    description = db.Column(db.Text(4000), nullable=False)
+    image_url = db.Column(db.String(255))
+    phone_number = db.Column(db.String(255))
+    address = db.Column(db.String(255), nullable=False)
+    city = db.Column(db.String(100), nullable=False)
+    state = db.Column(db.String(25), nullable=False)
+    zipcode = db.Column(db.Integer, nullable=False)
+    operation_hours = db.Column(db.String(255), nullable=False)
 
     def to_dict(self):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'name': self.name,
+            'date_type_id': self.date_type_id,
+            'description': self.description,
+            'image_url': self.image_url,
+            'phone_number': self.phone_number,
+            'address': self.address,
+            'city': self.city,
+            'state': self.state,
+            'zipcode': self.zipcode,
+            'operation_hours': self.operation_hours
         }
