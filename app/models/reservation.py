@@ -13,7 +13,7 @@ class Reservation(db.Model, UserMixin):
     reservation_date = db.Column(db.DateTime, nullable=False)
     reservation_time = db.Column(db.DateTime, nullable=False)
     party_size = db.Column(db.Integer, nullable=False)
-    duration = db.Column(db.Integer, nullable=False)
+    duration = db.Column(db.Float, nullable=False)
 
     def to_dict(self):
         return {
