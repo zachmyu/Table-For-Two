@@ -9,6 +9,7 @@ function Venue() {
     const { id } = useParams()
     const venues = useSelector(state => state.venues)
     const venue = Object.values(venues)
+    const val = Object.keys(venue)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -19,16 +20,18 @@ function Venue() {
 
     return (
         <div>
-            {Object.values(venues).map(venue => {
+            {venue.map(value => {
                 <div>
-                    {/* <button onClick={() => console.log('**************************', venue)}>Venues</button> */}
-                    {/* <Map venues={venue} ></Map> */}
+                    <button onClick={() => console.log('**************************', value)}>Venues</button>
+             
 
                 </div>
 
             })}
-            <button onClick={() => console.log('**************************', venue, venues)}>Venues</button>
-            {/* <Map venues={venues} ></Map> */}
+            <button onClick={() => console.log('This is the value of const venues = useSelector(state => state.venues)', venues)}>Venues</button>
+            <button onClick={() => console.log('This is the value of const venues = useSelector(state => state.venues)', venue)}>Venue</button> 
+            <button onClick={() => console.log('This is the value of const venues = useSelector(state => state.venues)', val)}>Val</button> 
+            {/* <Map venues={venues} ></Map>
 
             {/* <div>
             </div> */}
