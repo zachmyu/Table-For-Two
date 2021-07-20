@@ -44,8 +44,8 @@ function App() {
         <Route exact path='/venues'>
           <Venue></Venue>
         </Route>
-        <Route path='/venues/:id'>
-          <Venue></Venue>
+        <Route exact path='/venues/:id'>
+          <GoogleMap></GoogleMap>
         </Route>
         <Route path='/login' exact={true}>
           <LoginForm />
