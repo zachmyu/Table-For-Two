@@ -6,7 +6,9 @@ import LogoutButton from '../auth/LogoutButton';
 import "./NavBar.css"
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import CalendarTodayRoundedIcon from '@material-ui/icons/CalendarTodayRounded';
+import DemoUser from '../DemoUser'
 import { Button } from "@material-ui/core"
+import User from "../User"
 // import * as SessionActions from './SessionActions'
 
 
@@ -27,7 +29,7 @@ const NavBar = ({ loaded }) => {
     sessionLinks = (
       <>
         <li className='navbar-button'>
-          <NavLink to='/users' exact={true} activeClassName='active'>
+          <NavLink to='/users/:userId' exact={true} activeClassName='active'>
             <AccountCircleIcon color= 'primary'></AccountCircleIcon>
           </NavLink>
         </li>
@@ -55,11 +57,11 @@ const NavBar = ({ loaded }) => {
             Sign Up
           </NavLink>
         </li>
-        {/* <li className='navbar-button'>
-          <NavLink to='/sign-up' exact={true} activeClassName='active'>
-            DemoUser
+        <li className='navbar-button'>
+          <NavLink to='/' exact={true} activeClassName='active'>
+            <DemoUser></DemoUser>
           </NavLink>
-        </li> */}
+        </li>
       </>
       );
   }
