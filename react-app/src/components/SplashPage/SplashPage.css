@@ -1,0 +1,21 @@
+.Splash-container{
+    background-image: url("background.jpg");
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    height: 49vh;
+    transition-duration: 4s;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.booking-container{
+    display: flex;
+}
+
+#date{
+    color: white ;
+    font-size: 60px;
+}

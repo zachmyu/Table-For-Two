@@ -12,6 +12,7 @@ import DropDown from './components/DropDown'
 import GoogleMap from './components/GoogleMap'
 import Venue from './components/Venue'
 import { authenticate } from './store/session';
+import Splash from "./components/SplashPage";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -52,6 +53,9 @@ function App() {
         </Route>
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
+        </Route>
+        <Route path='/splash' exact={true} >
+          <Splash />
         </Route>
         <ProtectedRoute path='/users' exact={true} >
           <UsersList/>

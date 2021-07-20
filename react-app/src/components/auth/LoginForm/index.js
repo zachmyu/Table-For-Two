@@ -32,13 +32,14 @@ const LoginForm = () => {
   }
 
   return (
-    <form className= 'form' onSubmit={onLogin}>
+    <form className= 'form-container' onSubmit={onLogin}>
       <div className= 'form'>
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
       </div>
       <div>
+        <h1>Please Sign in </h1>
         <label htmlFor='email'>Email</label>
         <input
           name='email'
