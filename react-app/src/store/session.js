@@ -71,62 +71,62 @@ export const logout = () => async (dispatch) => {
 
 
 export const signUp = (firstName, lastName, username, email, password, profileImg) => async (dispatch) => {
-  const response = await fetch('/api/auth/signup', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      first_name: firstName,
-      last_name: lastName,
-      username,
-      email,
-      password,
-      profile_image_url: profileImg
-    }),
-  });
-  
-  // const formData = new FormData();
-
-  // formData.append('firstName', firstName);
-  // formData.append('lastName', lastName);
-  // formData.append('username', username);
-  // formData.append('email', email);
-  // formData.append('password', password);
-
-  // if (profileImg) formData.append("image", profileImg);
-
   // const response = await fetch('/api/auth/signup', {
   //   method: 'POST',
   //   headers: {
-  //     'Content-Type': 'multipart/form-data',
+  //     'Content-Type': 'application/json',
   //   },
-  //   body: formData,
-  // })
+  //   body: JSON.stringify({
+  //     first_name: firstName,
+  //     last_name: lastName,
+  //     username,
+  //     email,
+  //     password,
+  //     profile_image_url: profileImg
+  //   }),
+  // });
+  
+  const formData = new FormData();
 
-  // const data = await response.json();
-  // if (data.errors) {
-  //   return data
-  // }
-  // dispatch(setUser(data))
-  // return {}
+  formData.append('firstName', firstName);
+  formData.append('lastName', lastName);
+  formData.append('username', username);
+  formData.append('email', email);
+  formData.append('password', password);
 
+  if (profileImg) formData.append("image", profileImg);
 
+  const response = await fetch('/api/auth/signup', {
+    method: 'POST',
+    headers: {
+      'enctype': 'multipart/form-data',
+    },
+    body: formData,
+  })
 
-
-  if (response.ok) {
-    const data = await response.json();
-    dispatch(setUser(data))
-    return null;
-  } else if (response.status < 500) {
-    const data = await response.json();
-    if (data.errors) {
-      return data.errors;
-    }
-  } else {
-    return ['An error occurred. Please try again.']
+  const data = await response.json();
+  if (data.errors) {
+    return data
   }
+  dispatch(setUser(data))
+  return 
 }
+
+
+
+//   if (response.ok) {
+//     const data = await response.json();
+//     dispatch(setUser(data))
+//     return null;
+//   } else if (response.status < 500) {
+//     const data = await response.json();
+//     if (data.errors) {
+//       return data.errors;
+//     }
+//   } else {
+//     return ['An error occurred. Please try again.']
+//   }
+// }
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
