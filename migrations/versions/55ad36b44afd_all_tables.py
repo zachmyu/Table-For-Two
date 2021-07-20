@@ -1,8 +1,8 @@
-"""create simple_people table
+"""all tables
 
-Revision ID: a51cda25ef79
+Revision ID: 55ad36b44afd
 Revises: 
-Create Date: 2021-07-19 16:52:36.879708
+Create Date: 2021-07-19 20:40:24.171651
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'a51cda25ef79'
+revision = '55ad36b44afd'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -76,8 +76,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('venue_id', sa.Integer(), nullable=False),
-    sa.Column('reservation_date', sa.DateTime(), nullable=False),
-    sa.Column('reservation_time', sa.DateTime(), nullable=False),
+    sa.Column('reservation_datetime', sa.DateTime(), nullable=False),
     sa.Column('party_size', sa.Integer(), nullable=False),
     sa.Column('duration', sa.Float(), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),

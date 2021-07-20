@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-// import * as sessionActions from "../../../store/session";
 import { login } from '../../../store/session';
+import './LoginForm.css'
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
@@ -32,8 +32,8 @@ const LoginForm = () => {
   }
 
   return (
-    <form onSubmit={onLogin}>
-      <div>
+    <form className= 'form' onSubmit={onLogin}>
+      <div className= 'form'>
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
