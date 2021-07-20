@@ -31,7 +31,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar />
+      <NavBar loaded= { loaded } />
       <Switch>
         <Route path='/calendar' exact={true}>
           <Calendar></Calendar>
