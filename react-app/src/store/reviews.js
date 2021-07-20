@@ -1,0 +1,2 @@
+const GET_REVIEWS = "review/GET_REVIEWS"
+const GET_SINGLE_REVIEW = "review/GET_SINGLE_REVIEW"
