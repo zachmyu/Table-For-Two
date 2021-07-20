@@ -9,8 +9,9 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import Calendar from './components/Calendar'
 import DropDown from './components/DropDown'
-import GoogleMap from './components/GoogleMap'
+import GoogleMap from './components/Venue/GoogleMap'
 import Venue from './components/Venue'
+import Home from './components/Home'
 import { authenticate } from './store/session';
 
 function App() {
@@ -41,11 +42,11 @@ function App() {
         <Route path='/google-map' exact={true}>
           <GoogleMap></GoogleMap>
         </Route>
-        <Route exact path='/venues'>
+        {/* <Route exact path='/venue'>
           <Venue></Venue>
-        </Route>
+        </Route> */}
         <Route exact path='/venues/:id'>
-          <GoogleMap></GoogleMap>
+          <Venue></Venue>
         </Route>
         <Route path='/login' exact={true}>
           <LoginForm />
@@ -60,7 +61,7 @@ function App() {
           <User />
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
-          <h1>My Home Page</h1>
+          <Home></Home>
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

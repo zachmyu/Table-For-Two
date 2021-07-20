@@ -1,65 +1,45 @@
-import { useEffect } from "react";
-import { NavLink, useParams, useHistory } from "react-router-dom";
-import Map from "../GoogleMap"
-import {Marker } from "@react-google-maps/api";
-import { getVenues } from '../../store/venue'
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux'
-
+import { getSingleVenue } from '../../store/venue'
+import { NavLink, useParams, useHistory } from "react-router-dom";
+import StarsIcon from '@material-ui/icons/Stars';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
 
 function Venue() {
     const { id } = useParams()
-    const venues = useSelector(state => state.venues.venues)
-    // const venue = Object.values(venues)
-    // const val = Object.keys(venue)
-    const dispatch = useDispatch()
-    const history = useHistory()
+    const dispatch = useDispatch();
+    const history = useHistory();
 
+    const user = useSelector(state => state.session.user)
+    // const venue = useSelector(state => state.venues.venue)
+    const venues = useSelector(state => state.venues)
+    const venue = venues[id]
+    
     useEffect(() => {
-        dispatch(getVenues())
-        // console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%', id)
-    }, [dispatch])
-    console.log('THIS IS THE VALUE OF VENUES', venues)
-
-    const handleClick = (id) => {
-        history.push(`/venues/${id}`)
-    }
-
+        dispatch(getSingleVenue(Number(id)))
+    }, [dispatch, id])
+    console.log('THIS IS VENUE???????', venue)
+    
     return (
         <div>
-            {console.log('Before mapping')}
-            {venues?.map(venue => (
-                // { console.log('After mapping') }
-                <div className='testing'>
-                    <button onClick={() => history.push(`/venues/${venue.id}`)}>Press</button>
-                    {/* <button onClick={() => console.log('**************************', venue.id)}>Venues</button> */}
-                    {/* <h1>
-                        {value.id}
-                    </h1> */}
-                    {/* <Map id={venue.id}>
-                        <Marker key={venue.id} position={{
-                            lat: venue.latitude,
-                            lng: venue.longitude
-                        }}
-                        onClick={handleClick(venue.id)}
-                        >
-
-                        </Marker>
-                    </Map> */}
-                    <Map venue={venue} />
-
-                </div>
-
-                ))}
-            {/* <button onClick={() => console.log('This is the value of const venues = useSelector(state => state.venues)', venues)}>Venues</button>
-            <button onClick={() => console.log('This is the value of const venues = useSelector(state => state.venues)', venue)}>Venue</button> 
-            <button onClick={() => console.log('This is the value of const venues = useSelector(state => state.venues)', val)}>Val</button>  */}
-            {/* <Map venues={venues} ></Map>
-
-            {/* <div>
-            </div> */}
+            {/* <div className="venue--title"> */}
+                {/* <h2>{venue?.name}</h2> */}
+                {/* <button onClick={() => console.log('Value of Venuessss', venues[id])}>Click me</button>
+                <button onClick={() => console.log('Single venue', venue)}>Click ME</button> */}
+            {/* </div> */}
+            <Typography variant="h5" component='h6' align="center">
+                {venue?.name}
+            </Typography>
+            <hr></hr>
+            <Grid container align="center">
+                <Grid item md={6}>
+                    <StarsIcon></StarsIcon> {}
+                </Grid>
+                <Grid item md={3}>Reservation</Grid>
+            </Grid>
         </div>
     )
-
 }
 
 export default Venue

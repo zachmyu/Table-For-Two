@@ -14,7 +14,7 @@ function Calendar() {
     <MuiPickersUtilsProvider utils={DateMomentUtils}>
         {/* <DatePicker value={selectedDate} onChange={handleDateChange} />
         <TimePicker value={selectedDate} onChange={handleDateChange} /> */}
-        <DateTimePicker value={selectedDate} onChange={handleDateChange} />
+        <DateTimePicker value={selectedDate} onChange={handleDateChange}  style={{color: "green"}}/>
     </MuiPickersUtilsProvider>
     )
 }
