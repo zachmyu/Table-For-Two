@@ -9,7 +9,7 @@ const NavBar = () => {
     <nav>
       <ul>
         <div className='home-container'>
-        <li>
+        <li className='navbar-button'>
           <NavLink to='/' exact={true} activeClassName='active'>
             TableForTwo
           </NavLink>
@@ -28,7 +28,7 @@ const NavBar = () => {
         </li>
         <li className='navbar-button'>
           <NavLink to='/users' exact={true} activeClassName='active'>
-            ProfilePage
+            Profile
           </NavLink>
         </li>
         <li className='navbar-button'>
