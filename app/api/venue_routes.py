@@ -24,15 +24,17 @@ def venues():
 
 @venue_routes.route('/<int:id>')
 def venue(id):
-    venue = Venue.query.get(id)
+    venue = Venue.query.get(id)\
+        .join(Review)\
+        .filter(Review.venue_id == id)
     return venue.to_dict()
 
 
-@venue_routes.route('/<int:id>')
-def reviews(id):
-    reviews = Review.query.filter_by(
-        venue_id=request.args.get(id)).all()
-    return {'reviews': [review.to_dict() for review in reviews]}
+# @venue_routes.route('/<int:id>')
+# def reviews(id):
+#     reviews = Review.query.filter_by(
+#         venue_id=request.args.get(id)).all()
+#     return {'reviews': [review.to_dict() for review in reviews]}
 
 
 @venue_routes.route('/<int:id>', methods=['POST'])
