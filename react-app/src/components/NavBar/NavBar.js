@@ -51,10 +51,10 @@ const NavBar = ({ loaded }) => {
           <NavLink to='/sign-up' exact={true} activeClassName='active'>
             Sign Up
           </NavLink>
-        </li>
-        <li className='navbar-button'>
-          <DemoUser></DemoUser>
-        </li>
+          <div className='navbar-button'>
+            <DemoUser></DemoUser>
+          </div>
+        </div>
       </>
     );
   }
