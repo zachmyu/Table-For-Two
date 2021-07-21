@@ -1,25 +1,25 @@
 // Imports
-// import DemoUser from "../DemoUser";
+import DemoUser from "../DemoUser";
 import "./HomePage.css";
 // import Calendar from "../Calendar";
 import DropDown from "../DropDown";
 
 
-import { useEffect } from "react";
-import { NavLink, useParams, useHistory } from "react-router-dom";
-import Map from "../Venue/GoogleMap"
-import {Marker } from "@react-google-maps/api";
-import { getVenues } from '../../store/venue'
-import { useSelector, useDispatch } from 'react-redux'
+// import { useEffect } from "react";
+// import { NavLink, useParams, useHistory } from "react-router-dom";
+// import Map from "../Venue/GoogleMap"
+// import {Marker } from "@react-google-maps/api";
+// import { getVenues } from '../../store/venue'
+// import { useSelector, useDispatch } from 'react-redux'
 import Calendar from "../Calendar";
 
 function HomePage(){
-    const { id } = useParams()
-    const venues = useSelector(state => state.venues.venues)
+    // const { id } = useParams()
+    // const venues = useSelector(state => state.venues.venues)
     // const venue = Object.values(venues)
     // const val = Object.keys(venue)
-    const dispatch = useDispatch()
-    const history = useHistory()
+    // const dispatch = useDispatch()
+    // const history = useHistory()
 
     useEffect(() => {
         dispatch(getVenues())
@@ -27,9 +27,9 @@ function HomePage(){
     }, [dispatch])
     // console.log('THIS IS THE VALUE OF VENUES', venues)
 
-    const handleClick = (id) => {
-        history.push(`/venues/${id}`)
-    }
+    // const handleClick = (id) => {
+    //     history.push(`/venues/${id}`)
+    // }
 
     return (
         <>
@@ -37,13 +37,14 @@ function HomePage(){
             
             <h1 id= 'date'>A date for any occasion</h1>
             <div className='booking-container'>
+                {/* <DemoUser></DemoUser> */}
                 <Calendar id='calender'/>
                 <DropDown/>
                 <button>Let's go </button>
             </div>
-            {/* <DemoUser></DemoUser> */}
+            
         </div>
-            <h2>Netflix and Chill</h2>
+            {/* <h2>Netflix and Chill</h2>
             {venues?.map(venue => (
                 // { console.log('After mapping') }
                 <div className='testing'>
@@ -62,11 +63,11 @@ function HomePage(){
 
                         </Marker>
                     </Map> */}
-                    <Map venue={venue} />
+                    {/* <Map venue={venue} />
 
                 </div>
 
-            ))}
+            ))}  */}
         </>
     );
 }

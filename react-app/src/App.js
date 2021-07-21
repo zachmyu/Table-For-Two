@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import LoginForm from '../src/components/auth/LoginForm';
+// import LoginFormModal from './components/auth/LoginFormModal';
 import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/NavBar/NavBar';
+import Footer from './components/NavBar/Footer';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
@@ -30,41 +31,46 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
-      <NavBar loaded= { loaded } />
-      <Switch>
-        <Route path='/calendar' exact={true}>
-          <Calendar></Calendar>
-        </Route>
-        <Route path='/dropdown' exact={true}>
-          <DropDown></DropDown>
-        </Route>
-        <Route path='/google-map' exact={true}>
-          <GoogleMap></GoogleMap>
-        </Route>
-        {/* <Route exact path='/venue'>
-          <Venue></Venue>
-        </Route> */}
-        <Route exact path='/venues/:id'>
-          <Venue></Venue>
-        </Route>
-        <Route path='/login' exact={true}>
-          <LoginForm />
-        </Route>
-        <Route path='/sign-up' exact={true}>
-          <SignUpForm />
-        </Route>
-        <Route path='/' exact={true} >
-          <HomePage />
-        </Route>
-        <ProtectedRoute path='/users' exact={true} >
-          <UsersList />
-        </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId' exact={true} >
-          <User />
-        </ProtectedRoute>
-      </Switch>
-    </BrowserRouter>
+    <>
+
+      <NavBar loaded={loaded} />
+      {loaded && (
+        <Switch>
+          <Route exact path='/calendar'>
+            <Calendar></Calendar>
+          </Route>
+          <Route exact path='/dropdown'>
+            <DropDown></DropDown>
+          </Route>
+          <Route exact path='/google-map'>
+            <GoogleMap></GoogleMap>
+          </Route>
+          {/* <Route exact path='/venue'>
+                <Venue></Venue>
+              </Route> */}
+          <Route exact path='/venues/:id'>
+            <Venue></Venue>
+          </Route>
+          {/* <Route path='/login' exact={true}>
+                <LoginFormModal />
+              </Route> */}
+          <Route exact path='/sign-up'>
+            <SignUpForm />
+          </Route>
+          <Route exact path='/'>
+            <HomePage />
+          </Route>
+          <ProtectedRoute exact path='/users'>
+            <UsersList />
+          </ProtectedRoute>
+          <ProtectedRoute exact path='/users/:userId'>
+            <User />
+          </ProtectedRoute>
+        </Switch>
+      )}
+      <Footer />
+
+    </>
   );
 }
 
