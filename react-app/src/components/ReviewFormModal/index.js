@@ -15,6 +15,8 @@ function ReviewFormModal({venue_id}) {
     const reviews = useSelector(state => state.review)
     const [errors, setErrors] = useState([]);
     const { id } = useParams()
+    venue_id = Number(venue_id)
+    console.log('TYPE OF VENUE_ID', typeof(venue_id))
 
     // const handleSubmit = async (e) => {
     //     e.preventDefault();
@@ -45,8 +47,9 @@ function ReviewFormModal({venue_id}) {
     // })
     console.log('COMING FROM REVIEWFORMMODAL&&&&&&&&&&&&&&&&&&&&&', venue_id)
 
-    const handleSubmit = () => {
-        dispatch(createReview(sessionUser?.id, venue_id, title, body, rating))
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        dispatch(createReview({user_id: sessionUser.id, venue_id, title, body, rating}))
     }
 
     const ratingHelper = (num) => {

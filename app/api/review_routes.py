@@ -43,8 +43,8 @@ def review_edit(id):
         return review.to_dict()
     return {'errors': validation_error_messages(form.errors)}, 401
 
-@review_routes.route('/', methods=['POST'])
-def new_review():
+@review_routes.route('/venues/<int:id>', methods=['POST'])
+def new_review(id):
     request_json = request.get_json()
     review = Review(
         user_id=request_json["user_id"],

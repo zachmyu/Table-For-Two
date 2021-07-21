@@ -9,7 +9,7 @@ const loadReviews = reviews => ({
 
 const addReview = (review) => ({
     type: ADD_REVIEW,
-    payload: review
+    review
 })
 
 
@@ -43,7 +43,7 @@ export const getReviews = (id) => async (dispatch) => {
     
 // }
 
-export const createReview = (user_id, venue_id, title, body, rating) => async (dispatch) => {
+export const createReview = review => async (dispatch) => {
     // const response = await fetch(`/api/venues/reviews/${review.venue_id}`, {
     //     method: "POST",
     //     headers: {
@@ -57,15 +57,21 @@ export const createReview = (user_id, venue_id, title, body, rating) => async (d
     //     dispatch(addReview(data))
     //     console.log("++++++++++", data)
     // }
-    const response = await fetch(`/api/reviews`, {
+
+    const response = await fetch(`/api/reviews/venues/${review.venue_id}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ user_id, venue_id, title, body, rating })
+        body: JSON.stringify(review)
     })
-    const review = await response.json()
-    return review
+    if (response.ok) {
+        const newReview = await response.json()
+        dispatch(addReview(newReview))
+        console.log('<><><><><><><><><><><>', newReview)
+    }
+    console.log('from store in reviews', review)
+    // return review
 }
 
 
@@ -79,9 +85,8 @@ export default function reviews(state = initialState, action) {
                 reviews: action.payload
             }
         case ADD_REVIEW:
-            return {
-                reviews: action.payload
-            }
+            updatedState[action.review.id] = action.review
+            return updatedState
         default:
             return state
     }
