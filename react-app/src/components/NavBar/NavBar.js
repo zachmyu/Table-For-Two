@@ -13,10 +13,10 @@ import User from "../User"
 
 
 const NavBar = ({ loaded }) => {
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const sessionUser = useSelector(state => state.session.user);
-  console.log('*****************************', sessionUser)
+  // const dispatch = useDispatch();
+  // const history = useHistory();
+  const user = useSelector(state => state.session.user);
+  // console.log('*****************************', sessionUser)
 
   // const logout = (e) => {
   //   e.preventDefault();
@@ -25,18 +25,18 @@ const NavBar = ({ loaded }) => {
   // };
 
   let sessionLinks;
-  if (sessionUser) {
+  if (user) {
     sessionLinks = (
       <>
         <li className='navbar-button'>
-          <NavLink to='/users/:userId' exact={true} activeClassName='active'>
+          <NavLink to='/users/{sessionUser.id}' exact={true} activeClassName='active'>
             <AccountCircleIcon color= 'primary'></AccountCircleIcon>
           </NavLink>
         </li>
         <li className='navbar-button'>
-          <NavLink to='/users' exact={true} activeClassName='active'>
+          {/* <NavLink to='/users' exact={true} activeClassName='active'> */}
             <CalendarTodayRoundedIcon></CalendarTodayRoundedIcon>
-          </NavLink>
+          {/* </NavLink> */}
         </li>
         <li className='navbar-button'>
           <LogoutButton />
@@ -58,9 +58,7 @@ const NavBar = ({ loaded }) => {
           </NavLink>
         </li>
         <li className='navbar-button'>
-          <NavLink to='/' exact={true} activeClassName='active'>
-            <DemoUser></DemoUser>
-          </NavLink>
+          <DemoUser></DemoUser>
         </li>
       </>
     );
