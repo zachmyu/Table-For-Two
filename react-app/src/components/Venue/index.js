@@ -138,7 +138,7 @@ function Venue() {
                         <Grid item md={3}>
                             <div>
                             <div>Reservations</div>
-                            <ReservationForm venue_id={id} venue={venue}></ReservationForm>
+                            <ReservationForm venue_id={id} venue={venue} reservations={reservations}></ReservationForm>
 
                             </div>
                         </Grid>
