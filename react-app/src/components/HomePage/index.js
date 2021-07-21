@@ -25,7 +25,7 @@ function HomePage(){
         dispatch(getVenues())
         // console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%', id)
     }, [dispatch])
-    console.log('THIS IS THE VALUE OF VENUES', venues)
+    // console.log('THIS IS THE VALUE OF VENUES', venues)
 
     const handleClick = (id) => {
         history.push(`/venues/${id}`)

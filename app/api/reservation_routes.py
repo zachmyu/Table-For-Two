@@ -27,7 +27,7 @@ def postReservation():
     # db.session.commit()
     # return {}
     # data = request.json
-    request_json = request.get_json()['reservation']
+    request_json = request.get_json()
     reservation = Reservation(
         user_id = request_json['user_id'],
         venue_id = request_json['venue_id'],

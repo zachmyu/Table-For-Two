@@ -18,13 +18,13 @@ function DemoUser() {
 
         // Creating demouser object with the signin information
         // got this from the store login thing
-        const DemoUser = {
+        const Demo = {
             email: 'demo-user@demodata.com', 
-            password: 'password',
+            password: 'table42User!',
         };
 
         // thunk that sends the new context back to the store
-        await dispatch(login(DemoUser))
+        await dispatch(login(Demo))
         // use history redirects to the signed in home page 
         history.push("/");
     }
