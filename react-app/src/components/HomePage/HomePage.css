@@ -13,7 +13,10 @@
 
 .booking-container{
     display: flex;
+    justify-content: space-around;
 }
+
+
 
 #date{
     color: white ;

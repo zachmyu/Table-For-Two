@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, jsonify
 from flask_login import current_user
 
 from app.models import Venue, Review, db
@@ -22,12 +22,24 @@ def venues():
     return {"venues": [venue.to_dict() for venue in venues]}
 
 
+# @venue_routes.route('/<int:id>')
+# def venue(id):
+#     venue = Venue.query.get(id)\
+#         .join(Review)\
+#         .filter(Review.venue_id == id)
+#     return venue.to_dict()
+
 @venue_routes.route('/<int:id>')
 def venue(id):
-    venue = Venue.query.get(id)\
-        .join(Review)\
-        .filter(Review.venue_id == id)
-    return venue.to_dict()
+    venue = Venue.query.get(id)
+    review_data = Review.query.filter(Review.venue_id == id).all()
+    
+    venues = venue.to_dict()
+    reviews = [review.to_dict() for review in review_data]
+    
+    return jsonify(venues, {
+        "reviews": reviews
+    })
 
 
 # @venue_routes.route('/<int:id>')
@@ -37,21 +49,21 @@ def venue(id):
 #     return {'reviews': [review.to_dict() for review in reviews]}
 
 
-@venue_routes.route('/<int:id>', methods=['POST'])
-def new_review(id):
-    venue_id = Venue.query.get(id)
-    user_id = current_user.id
-    form = ReviewForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
-    if form.validate_on_submit():
-        review = Review(
-            user_id=user_id,
-            venue_id=venue_id,
-            title=form.data['title'],
-            body=form.data['body'],
-            rating=form.data['rating']
-        )
-        db.session.update(review)
-        db.session.commit()
-        return review.to_dict()
-    return {'errors': validation_error_messages(form.errors)}, 401
+# @venue_routes.route('/reviews/<int:id>', methods=['POST'])
+# def new_review(id):
+#     venue_id = Venue.query.get(id)
+#     user_id = current_user.id
+#     form = ReviewForm()
+#     form['csrf_token'].data = request.cookies['csrf_token']
+#     if form.validate_on_submit():
+#         review = Review(
+#             user_id=user_id,
+#             venue_id=venue_id,
+#             title=form.data['title'],
+#             body=form.data['body'],
+#             rating=form.data['rating']
+#         )
+#         # db.session.update(review)
+#         db.session.commit()
+#         return review.to_dict()
+#     return {'errors': validation_error_messages(form.errors)}, 401

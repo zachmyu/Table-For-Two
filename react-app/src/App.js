@@ -11,9 +11,8 @@ import Calendar from './components/Calendar'
 import DropDown from './components/DropDown'
 import GoogleMap from './components/Venue/GoogleMap'
 import Venue from './components/Venue'
-import Home from './components/Home'
 import { authenticate } from './store/session';
-import Splash from "./components/SplashPage";
+import HomePage from './components/HomePage'
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -55,17 +54,14 @@ function App() {
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
         </Route>
-        <Route path='/splash' exact={true} >
-          <Splash />
+        <Route path='/' exact={true} >
+          <HomePage />
         </Route>
         <ProtectedRoute path='/users' exact={true} >
           <UsersList />
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
-        </ProtectedRoute>
-        <ProtectedRoute path='/' exact={true} >
-          <Home></Home>
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
