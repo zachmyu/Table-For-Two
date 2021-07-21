@@ -68,6 +68,7 @@ function Venue() {
     console.log('ADD A REVIEW@@@@@@@@@@', reviews)
     console.log('USEEEEEEERRRRRRR$$$$$$$$', user.id)
     console.log('++++++++++++++++++RESERVATIONS', reservations)
+    console.log('THIS IS THE VENUE ID', id)
     // console.log('SOMETHING GOES HERE', reviewsInfo)
 
     return (
@@ -131,7 +132,7 @@ function Venue() {
                                     </div>
                                     </div>
                                 ))}
-                                <div><ReviewFormModal></ReviewFormModal></div>
+                                <div><ReviewFormModal venue_id={id}></ReviewFormModal></div>
                             </div>
                         </Grid>
                         <Grid item md={3}>Reservation</Grid>

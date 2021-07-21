@@ -49,21 +49,21 @@ def venue(id):
 #     return {'reviews': [review.to_dict() for review in reviews]}
 
 
-@venue_routes.route('/reviews/<int:id>', methods=['POST'])
-def new_review(id):
-    venue_id = Venue.query.get(id)
-    user_id = current_user.id
-    form = ReviewForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
-    if form.validate_on_submit():
-        review = Review(
-            user_id=user_id,
-            venue_id=venue_id,
-            title=form.data['title'],
-            body=form.data['body'],
-            rating=form.data['rating']
-        )
-        # db.session.update(review)
-        db.session.commit()
-        return review.to_dict()
-    return {'errors': validation_error_messages(form.errors)}, 401
+# @venue_routes.route('/reviews/<int:id>', methods=['POST'])
+# def new_review(id):
+#     venue_id = Venue.query.get(id)
+#     user_id = current_user.id
+#     form = ReviewForm()
+#     form['csrf_token'].data = request.cookies['csrf_token']
+#     if form.validate_on_submit():
+#         review = Review(
+#             user_id=user_id,
+#             venue_id=venue_id,
+#             title=form.data['title'],
+#             body=form.data['body'],
+#             rating=form.data['rating']
+#         )
+#         # db.session.update(review)
+#         db.session.commit()
+#         return review.to_dict()
+#     return {'errors': validation_error_messages(form.errors)}, 401

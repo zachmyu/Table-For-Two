@@ -5,33 +5,33 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as reviewActions from '../../store/reviews';
 import { createReview } from '../../store/reviews'
 
-function ReviewFormModal() {
+function ReviewFormModal({venue_id}) {
     const dispatch = useDispatch();
     const history = useHistory()
     const sessionUser = useSelector((state) => state.session.user)
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
-    const [rating, setRating] = useState('');
+    const [rating, setRating] = useState(0);
     const reviews = useSelector(state => state.review)
     const [errors, setErrors] = useState([]);
     const { id } = useParams()
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        // id = parseInt(id)
-        // setErrors([]);
-        await dispatch(createReview({user_id: sessionUser.id, venue_id: id, title, body, rating}))
-        // dispatch(reviewActions.createReview({
-        //     user_id: sessionUser.id,
-        //     venue_id: id,
-        //     review: review
-        // }))
-        //     .then(() => history.push(`/venue/${id}`))
-        //     .catch(async (res) => {
-        //         const data = await res.json();
-        //         if (data && data.errors) setErrors(data.errors);
-        //     });
-    }
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     // id = parseInt(id)
+    //     // setErrors([]);
+    //     await dispatch(createReview({user_id: sessionUser.id, venue_id: id, title, body, rating}))
+    //     // dispatch(reviewActions.createReview({
+    //     //     user_id: sessionUser.id,
+    //     //     venue_id: id,
+    //     //     review: review
+    //     // }))
+    //     //     .then(() => history.push(`/venue/${id}`))
+    //     //     .catch(async (res) => {
+    //     //         const data = await res.json();
+    //     //         if (data && data.errors) setErrors(data.errors);
+    //     //     });
+    // }
 
     // useEffect(() => {
     //     if (errors.length > 0) setSubmission(false);
@@ -40,12 +40,34 @@ function ReviewFormModal() {
     // useEffect(() =>{
 
     // })
+    // useEffect(() => {
+
+    // })
+    console.log('COMING FROM REVIEWFORMMODAL&&&&&&&&&&&&&&&&&&&&&', venue_id)
+
+    const handleSubmit = () => {
+        dispatch(createReview(sessionUser?.id, venue_id, title, body, rating))
+    }
+
+    const ratingHelper = (num) => {
+        setRating(num)
+    }
+
+    const radioHelper = () => {
+        return [5,4,3,2,1].map(i => (
+            <div>
+                <input type="radio" key={i} value={i} checked={i === rating} onClick={() => ratingHelper(i)}>
+
+                </input>
+            </div>
+        ))
+    }
     console.log(reviews)
 
     return (
         <>
 
-                    <form className='form--container' method='POST' onSubmit={handleSubmit}>
+                    <form className='form--container' onSubmit={handleSubmit}>
                         <ul>
                             {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                         </ul>
@@ -67,11 +89,11 @@ function ReviewFormModal() {
                                 required
                             />
                         </label>
-                        <label>
-                            <input
+                        {/* <label> */}
+                            {/* <input
                                 className="form--rating"
                                 type="radio"
-                                value="1"
+                                value={1}
                                 checked={false}
                                 onChange={(e) => setRating(e.target.value)}
                             />
@@ -102,8 +124,12 @@ function ReviewFormModal() {
                                 value="5"
                                 checked={false}
                                 onChange={(e) => setRating(e.target.value)}
-                            />
-                        </label>
+                            /> */}
+
+                        {/* </label> */}
+                        <div>
+                            {radioHelper()}
+                        </div>
                         <button className="button2" type="submit">Submit Review</button>
                     </form >
         </>
