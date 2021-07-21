@@ -23,7 +23,7 @@ export const getReservations = (user_id) => async (dispatch) => {
 }
 
 export const createReservation = (reservationInfo) => async (dispatch) => {
-    const response = await fetch(`/api/reservations`, {
+    const response = await fetch(`/api/reservations/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

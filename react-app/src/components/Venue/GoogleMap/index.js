@@ -15,7 +15,7 @@ function Map( {venue} ) {
         dispatch(getVenues())
         dispatch(getSingleVenue())
     }, [dispatch])
-    console.log('THIS IS THE VALUE OF VENUES', venues)
+    // console.log('THIS IS THE VALUE OF VENUES', venues)
     
     const containerStyle = {
         width: '400px',

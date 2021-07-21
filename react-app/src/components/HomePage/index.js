@@ -21,10 +21,10 @@ function HomePage(){
     // const dispatch = useDispatch()
     // const history = useHistory()
 
-    // useEffect(() => {
-    //     dispatch(getVenues())
-    //     // console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%', id)
-    // }, [dispatch])
+    useEffect(() => {
+        dispatch(getVenues())
+        // console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%', id)
+    }, [dispatch])
     // console.log('THIS IS THE VALUE OF VENUES', venues)
 
     // const handleClick = (id) => {

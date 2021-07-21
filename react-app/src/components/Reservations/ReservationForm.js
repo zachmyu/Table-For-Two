@@ -2,6 +2,7 @@ import { useEffect, useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Calendar from '../Calendar'
 import DropDown from '../DropDown';
+// import { format } from 'date-fns'
 import { createReservation } from '../../store/reservations';
 
 
@@ -9,7 +10,7 @@ const durations = [1,2,3]
 
 function ReservationForm({venue_id, venue, reservations}) {
     const sessionUser = useSelector(state => state.session.user)
-    const [date, setDate] = useState()
+    const [date, setDate] = useState(new Date())
     const [people, setPeople] = useState(2)
     const [booking, setBooking] = useState(false)
     const [duration, setDuration] = useState(1.0)
@@ -17,8 +18,8 @@ function ReservationForm({venue_id, venue, reservations}) {
     const map = Object.values(venues)
     const dispatch = useDispatch()
   
-    
 
+    // const [time, setTime] = useState({ date: format(date, 'H') })
     console.log('HERE WE HAVE THE VALUE OF DATE', date)
 
     const reservation = async (e) => {
@@ -27,6 +28,7 @@ function ReservationForm({venue_id, venue, reservations}) {
       
 
     }
+    // console.log('==========This is time=========', time)
 
     return (
         <div>
