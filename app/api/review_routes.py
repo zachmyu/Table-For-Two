@@ -1,5 +1,5 @@
 from app.forms import ReviewForm
-from flask import Blueprint, request
+from flask import Blueprint, request, jsonify
 
 from app.models import Review, db
 
@@ -14,10 +14,15 @@ def validation_error_messages(validation_errors):
     return errorMessages
 
 
-@review_routes.route('/<int:id>')
-def review(id):
-    review = Review.query.get(id)
-    return review.to_dict()
+# @review_routes.route('/<int:id>')
+# def review(id):
+#     review = Review.query.get(id)
+#     return review.to_dict()
+
+# @review_routes.route('/<int:id>')
+# def review(id):
+#     review = Review.query.filter_by(user_id=id).all()
+#     return review.to_dict()
 
 
 @review_routes.route('/<int:id>', methods=['PUT'])
@@ -37,3 +42,19 @@ def review_edit(id):
         db.session.commit()
         return review.to_dict()
     return {'errors': validation_error_messages(form.errors)}, 401
+
+@review_routes.route('/venues/<int:id>', methods=['POST'])
+def new_review(id):
+    request_json = request.get_json()
+    review = Review(
+        user_id=request_json["user_id"],
+        venue_id=request_json["venue_id"],
+        title=request_json["title"],
+        body=request_json['body'],
+        rating=request_json['rating']
+    )
+    # db.session.update(review)
+    db.session.add(review)
+    db.session.commit()
+    return review.to_dict()
+    # return {'errors': validation_error_messages(form.errors)}, 401

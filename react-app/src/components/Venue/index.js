@@ -1,10 +1,19 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import { getSingleVenue } from '../../store/venue'
+// import { getReviews } from '../../store/reviews'
+import { createReview } from '../../store/reviews'
+import { getReservations, createReservation } from '../../store/reservations'
 import { NavLink, useParams, useHistory } from "react-router-dom";
 import StarsIcon from '@material-ui/icons/Stars';
-import Typography from '@material-ui/core/Typography';
+import ModeCommentOutlinedIcon from '@material-ui/icons/ModeCommentOutlined'; import Typography from '@material-ui/core/Typography';
+import LocalAtmOutlinedIcon from '@material-ui/icons/LocalAtmOutlined';
+import NaturePeopleOutlinedIcon from '@material-ui/icons/NaturePeopleOutlined';
+import NewReservation from '../Reservations/NewReservation'
 import Grid from '@material-ui/core/Grid';
+import ReviewFormModal from '../ReviewFormModal'
+import ReservationForm from '../Reservations/ReservationForm'
+
 
 function Venue() {
     const { id } = useParams()
@@ -14,30 +23,135 @@ function Venue() {
     const user = useSelector(state => state.session.user)
     // const venue = useSelector(state => state.venues.venue)
     const venues = useSelector(state => state.venues)
-    const venue = venues[id]
-    
+    const reviews = useSelector(state => state.reviews)
+    const reservations = useSelector(state => state.reservations)
+    // const venue = venues
+    // const reviews = useSelector(state => state.reviews)
+    const map = Object.values(venues)
+    const singleVenue = map['0']
+    // const something = singleVenue.keys(singleVenue)
+    // const reviewsInfo = map[0]['1']['reviews']
+    // const total = 0
+    // let ratingAverage = Object.values(venues).map(venue => {
+    //     let reviewsArr = Object.values(venue['1'].reviews);
+    //     reviewsArr.forEach(review => total += review.rating);
+    //     let avg = (total * 1.0) / reviewsArr.length;
+    //     return avg
+    // })
+
+    const handleSubmit = () => {
+        const reviewsInfo = map[0]['1']['reviews']
+        // return reviewsInfo
+        let total = 0
+        reviewsInfo.forEach(review => total += review.rating)
+        let avg = (total * 1.0) / reviewsInfo.length
+        return avg
+
+    }
+
     useEffect(() => {
         dispatch(getSingleVenue(Number(id)))
     }, [dispatch, id])
-    console.log('THIS IS VENUE???????', venue)
-    
+
+    useEffect(() => {
+        dispatch(getReservations(user.id))
+    }, [dispatch])
+
+    // useEffect(() => {
+    //     dispatch(getReviews(Number(id)))
+    // }, [dispatch, id])
+    // console.log('THIS IS VENUE???????', venue)
+    // console.log('&&&&&&&&&&&&&&&&&&&&&&&&', reviews)
+    console.log('VENUES', venues)
+    console.log('MAP?', map)
+    console.log('PLEASE WORK', singleVenue)
+    console.log('ADD A REVIEW@@@@@@@@@@', reviews)
+    console.log('USEEEEEEERRRRRRR$$$$$$$$', user.id)
+    console.log('++++++++++++++++++RESERVATIONS', reservations)
+    console.log('THIS IS THE VENUE ID', id)
+    // console.log('SOMETHING GOES HERE', reviewsInfo)
+
     return (
         <div>
             {/* <div className="venue--title"> */}
-                {/* <h2>{venue?.name}</h2> */}
-                {/* <button onClick={() => console.log('Value of Venuessss', venues[id])}>Click me</button>
+            {/* <div className="venue--title"> */}
+            {/* <h2>{venue?.name}</h2> */}
+            {/* <button onClick={() => console.log('Value of Venuessss', venues[id])}>Click me</button>
                 <button onClick={() => console.log('Single venue', venue)}>Click ME</button> */}
             {/* </div> */}
-            <Typography variant="h5" component='h6' align="center">
-                {venue?.name}
-            </Typography>
-            <hr></hr>
-            <Grid container align="center">
-                <Grid item md={6}>
-                    <StarsIcon></StarsIcon> {}
-                </Grid>
-                <Grid item md={3}>Reservation</Grid>
-            </Grid>
+            {Object.values(venues).map(venue => (
+                <div>
+                    <img src={venue['0'].image_url} style={{width: '100vw', height: '50vh'}} alt="" />
+                    {/* <Typography variant="h5" component='h6' align="center">
+                        {venue['0'].name}
+                    </Typography> */}
+
+                    {/* <hr></hr> */}
+                    <Grid container align="center">
+                        <Grid item md={2}></Grid>
+                        
+                        <Grid item md={5} style={{ boxShadow: '10px 5px 5px gray' }}>
+                            <div>
+                                <Typography variant="h1" component='h6' align="center">
+                                    {venue['0'].name}
+                                    <hr />
+                                </Typography>
+                            <StarsIcon fontSize='small' style={{ marginTop: '10px', paddingRight: '10px' }} ></StarsIcon>
+                            <span>
+                                {handleSubmit()}
+                                {/* <button onClick={() => console.log('AAAAAHHHHHHHHHHHH',handleSubmit())}>****************</button> */}
+                            </span>
+                            <ModeCommentOutlinedIcon fontSize='small' ></ModeCommentOutlinedIcon>
+                            <span style={{ paddingLeft: '5px', paddingRight: '10px', marginBottom: '100px' }}>
+                                {venue['1'].reviews.length} reviews
+                            </span>
+                            <LocalAtmOutlinedIcon></LocalAtmOutlinedIcon> $30 under
+                            </div>
+                            <div>
+                                {venue['0'].description}
+                            </div>
+                            <div>
+                                {/* {Object.values(venue).map(rating => {
+                                    <button onClick={() => console.log(rating)}>REVIEW?</button>
+                                })} */}
+                                {/* {singleVenue[]} */}
+                                {/* <button onClick={() => console.log(singleVenue['1'])}</button> */}
+                                {/* <button onClick={() => console.log(singleVenue['1'])}>REVIEW?</button> */}
+                                {/* {singleVenue['1']?.map(review => (
+                                    <div>
+                                        {review.title}
+                                    </div>
+                                ))} */}
+                                {Object.values(venue['1'].reviews).map(review => (
+                                    <div>
+                                        <hr></hr>
+                                        {review.title}
+                                    <div>
+                                        {/* <hr></hr> */}
+                                            {review.body}
+                                    </div>
+                                    </div>
+                                ))}
+                                <div><ReviewFormModal venue_id={id}></ReviewFormModal></div>
+                            </div>
+                        </Grid>
+                        <Grid item md={3}>
+                            <div>
+                            <div>Reservations</div>
+                            <ReservationForm venue_id={id} venue={venue} reservations={reservations}></ReservationForm>
+
+                            </div>
+                        </Grid>
+                        <Grid item md={2}>
+                        </Grid>
+                    </Grid>
+                </div>
+                // <div>
+                //     <h1>{venue['0'].name}</h1>
+                //     <h2>{venue['1'].reviews.length}</h2>
+                // </div>
+            ))}
+
         </div>
     )
 }
