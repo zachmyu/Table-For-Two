@@ -4,12 +4,12 @@ const ADD_REVIEW = "review/ADD_REVIEW"
 
 const loadReviews = reviews => ({
     type: GET_REVIEWS,
-    reviews
+    payload: reviews
 })
 
 const addReview = (review) => ({
     type: ADD_REVIEW,
-    review
+    payload: review
 })
 
 
@@ -53,7 +53,9 @@ export const createReview = (review) => async (dispatch) => {
     })
     if (response.ok) {
         const data = await response.json()
-        dispatch(createReview(data))
+        console.log("!!!!!!!!!!!!", data)
+        dispatch(addReview(data))
+        console.log("++++++++++", data)
     }
 }
 
@@ -64,6 +66,10 @@ export default function reviews(state = initialState, action) {
     let updatedState = {...state}
     switch (action.type) {
         case GET_REVIEWS:
+            return {
+                reviews: action.payload
+            }
+        case ADD_REVIEW:
             return {
                 reviews: action.payload
             }

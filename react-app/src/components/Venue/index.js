@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getSingleVenue } from '../../store/venue'
 // import { getReviews } from '../../store/reviews'
 import { createReview } from '../../store/reviews'
+import { getReservations } from '../../store/reservations'
 import { NavLink, useParams, useHistory } from "react-router-dom";
 import StarsIcon from '@material-ui/icons/Stars';
 import ModeCommentOutlinedIcon from '@material-ui/icons/ModeCommentOutlined'; import Typography from '@material-ui/core/Typography';
@@ -21,6 +22,7 @@ function Venue() {
     // const venue = useSelector(state => state.venues.venue)
     const venues = useSelector(state => state.venues)
     const reviews = useSelector(state => state.reviews)
+    const reservations = useSelector(state => state.reservations)
     // const venue = venues
     // const reviews = useSelector(state => state.reviews)
     const map = Object.values(venues)
@@ -49,6 +51,10 @@ function Venue() {
         dispatch(getSingleVenue(Number(id)))
     }, [dispatch, id])
 
+    useEffect(() => {
+        dispatch(getReservations(user.id))
+    }, [dispatch])
+
     // useEffect(() => {
     //     dispatch(getReviews(Number(id)))
     // }, [dispatch, id])
@@ -59,6 +65,7 @@ function Venue() {
     console.log('PLEASE WORK', singleVenue)
     console.log('ADD A REVIEW@@@@@@@@@@', reviews)
     console.log('USEEEEEEERRRRRRR$$$$$$$$', user.id)
+    console.log('++++++++++++++++++RESERVATIONS', reservations)
     // console.log('SOMETHING GOES HERE', reviewsInfo)
 
     return (
