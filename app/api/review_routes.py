@@ -14,10 +14,15 @@ def validation_error_messages(validation_errors):
     return errorMessages
 
 
-@review_routes.route('/<int:id>')
-def review(id):
-    review = Review.query.get(id)
-    return review.to_dict()
+# @review_routes.route('/<int:id>')
+# def review(id):
+#     review = Review.query.get(id)
+#     return review.to_dict()
+
+# @review_routes.route('/<int:id>')
+# def review(id):
+#     review = Review.query.filter_by(user_id=id).all()
+#     return review.to_dict()
 
 
 @review_routes.route('/<int:id>', methods=['PUT'])

@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, jsonify
 from flask_login import current_user
 
 from app.models import Venue, Review, db
@@ -22,17 +22,31 @@ def venues():
     return {"venues": [venue.to_dict() for venue in venues]}
 
 
+# @venue_routes.route('/<int:id>')
+# def venue(id):
+#     venue = Venue.query.get(id)\
+#         .join(Review)\
+#         .filter(Review.venue_id == id)
+#     return venue.to_dict()
+
 @venue_routes.route('/<int:id>')
 def venue(id):
     venue = Venue.query.get(id)
-    return venue.to_dict()
+    review_data = Review.query.filter(Review.venue_id == id).all()
+    
+    venues = venue.to_dict()
+    reviews = [review.to_dict() for review in review_data]
+    
+    return jsonify(venues, {
+        "reviews": reviews
+    })
 
 
-@venue_routes.route('/<int:id>')
-def reviews(id):
-    reviews = Review.query.filter_by(
-        venue_id=request.args.get(id)).all()
-    return {'reviews': [review.to_dict() for review in reviews]}
+# @venue_routes.route('/<int:id>')
+# def reviews(id):
+#     reviews = Review.query.filter_by(
+#         venue_id=request.args.get(id)).all()
+#     return {'reviews': [review.to_dict() for review in reviews]}
 
 
 @venue_routes.route('/<int:id>', methods=['POST'])
