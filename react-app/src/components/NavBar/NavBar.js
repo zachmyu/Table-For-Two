@@ -14,10 +14,10 @@ import User from "../User"
 
 
 const NavBar = ({ loaded }) => {
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const sessionUser = useSelector(state => state.session.user);
-  console.log('*****************************', sessionUser)
+  // const dispatch = useDispatch();
+  // const history = useHistory();
+  const user = useSelector(state => state.session.user);
+  // console.log('*****************************', sessionUser)
 
   // const logout = (e) => {
   //   e.preventDefault();
@@ -26,22 +26,18 @@ const NavBar = ({ loaded }) => {
   // };
 
   let sessionLinks;
-  if (sessionUser) {
+  if (user) {
     sessionLinks = (
       <>
         <div className='navbar-button'>
-          <NavLink to='/users/:userId' exact={true} activeClassName='active'>
+          <NavLink to='/users/{sessionUser.id}' exact={true} activeClassName='active'>
             <AccountCircleIcon color='primary'></AccountCircleIcon>
           </NavLink>
         </div>
         <div className='navbar-button'>
-          <NavLink to='/users' exact={true} activeClassName='active'>
-            <CalendarTodayRoundedIcon></CalendarTodayRoundedIcon>
-          </NavLink>
-        </div>
-        <div className='navbar-button'>
-          <LogoutButton />
-          {/* <Button color= 'primary' variant='contained'> Poooop </Button> */}
+          {/* <NavLink to='/users' exact={true} activeClassName='active'> */}
+          <CalendarTodayRoundedIcon></CalendarTodayRoundedIcon>
+          {/* </NavLink> */}
         </div>
       </>
     );
@@ -55,12 +51,10 @@ const NavBar = ({ loaded }) => {
           <NavLink to='/sign-up' exact={true} activeClassName='active'>
             Sign Up
           </NavLink>
-        </div>
-        <div className='navbar-button'>
-          <NavLink to='/' exact={true} activeClassName='active'>
-            <DemoUser />
-          </NavLink>
-        </div>
+        </li>
+        <li className='navbar-button'>
+          <DemoUser></DemoUser>
+        </li>
       </>
     );
   }
