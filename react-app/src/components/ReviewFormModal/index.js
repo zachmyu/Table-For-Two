@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
-import { Modal } from '../../context/Modal';
+// import { Modal } from '../../context/Modal';
 import * as reviewActions from '../../store/reviews';
+import { createReview } from '../../store/reviews'
 
 function ReviewFormModal() {
     const dispatch = useDispatch();
@@ -11,38 +12,40 @@ function ReviewFormModal() {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [rating, setRating] = useState('');
+    const reviews = useSelector(state => state.review)
     const [errors, setErrors] = useState([]);
     let { id } = useParams()
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        id = parseInt(id)
-        setErrors([]);
-        setSubmission(true);
-        dispatch(reviewActions.createReview({
-            user_id: sessionUser.id,
-            venue_id: id,
-            review: review
-        }))
-            .then(setShowModal(false))
-            .then(() => history.push(`/venue/${id}`))
-            .catch(async (res) => {
-                const data = await res.json();
-                if (data && data.errors) setErrors(data.errors);
-            });
+        // id = parseInt(id)
+        // setErrors([]);
+        await dispatch(createReview({user_id: sessionUser.id, venue_id: id, title, body, rating}))
+        // dispatch(reviewActions.createReview({
+        //     user_id: sessionUser.id,
+        //     venue_id: id,
+        //     review: review
+        // }))
+        //     .then(() => history.push(`/venue/${id}`))
+        //     .catch(async (res) => {
+        //         const data = await res.json();
+        //         if (data && data.errors) setErrors(data.errors);
+        //     });
     }
 
-    useEffect(() => {
-        if (errors.length > 0) setSubmission(false);
-        if (submission && errors.length === 0) setSubmission(true);
-    }, [submission, errors])
+    // useEffect(() => {
+    //     if (errors.length > 0) setSubmission(false);
+    //     if (submission && errors.length === 0) setSubmission(true);
+    // }, [errors])
+    // useEffect(() =>{
+
+    // })
+    console.log(reviews)
 
     return (
         <>
-            <button className="button1" type="button" onClick={() => setShowModal(true)}>Add Review</button>
-            {showModal && (
-                <Modal onClose={() => setShowModal(false)}>
-                    <form className='form--container' onSubmit={handleSubmit}>
+
+                    <form className='form--container' method='POST' onSubmit={handleSubmit}>
                         <ul>
                             {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                         </ul>
@@ -103,8 +106,6 @@ function ReviewFormModal() {
                         </label>
                         <button className="button2" type="submit">Submit Review</button>
                     </form >
-                </Modal>
-            )}
         </>
     );
 }
