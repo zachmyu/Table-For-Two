@@ -25,8 +25,15 @@ export const getReservations = (user_id) => async (dispatch) => {
 export const createReservation = (reservationInfo) => async (dispatch) => {
     const response = await fetch(`/api/reservations`, {
         method: 'POST',
-        headers: {}
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(reservationInfo)
     })
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(addReservation(data))
+    }
 }
 
 
@@ -40,6 +47,10 @@ export default function reservations(state = initialState, action) {
             action.reservations.reservations.forEach(reservation => {
                 newState[reservation.id] = reservation
             })
+            return newState
+        case CREATE_RESERVATION:
+            newState = JSON.parse(JSON.stringify(state))
+            newState[action.payload.id] = action.payload
             return newState
         default:
             return state

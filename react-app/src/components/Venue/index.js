@@ -3,14 +3,16 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getSingleVenue } from '../../store/venue'
 // import { getReviews } from '../../store/reviews'
 import { createReview } from '../../store/reviews'
-import { getReservations } from '../../store/reservations'
+import { getReservations, createReservation } from '../../store/reservations'
 import { NavLink, useParams, useHistory } from "react-router-dom";
 import StarsIcon from '@material-ui/icons/Stars';
 import ModeCommentOutlinedIcon from '@material-ui/icons/ModeCommentOutlined'; import Typography from '@material-ui/core/Typography';
 import LocalAtmOutlinedIcon from '@material-ui/icons/LocalAtmOutlined';
 import NaturePeopleOutlinedIcon from '@material-ui/icons/NaturePeopleOutlined';
+import NewReservation from '../Reservations/NewReservation'
 import Grid from '@material-ui/core/Grid';
 import ReviewFormModal from '../ReviewFormModal'
+import Reservation from '../Reservations/ReservationForm'
 
 
 function Venue() {
@@ -133,7 +135,11 @@ function Venue() {
                             </div>
                         </Grid>
                         <Grid item md={3}>Reservation</Grid>
-                        <Grid item md={2}></Grid>
+                        <Grid item md={2}>
+                            <div>
+                                <NewReservation venue_id={id}></NewReservation>
+                            </div>
+                        </Grid>
                     </Grid>
                 </div>
                 // <div>
