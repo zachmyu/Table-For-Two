@@ -1,4 +1,4 @@
-a { 
+a {
     color:black ;
     text-decoration: none;
 }
@@ -11,12 +11,12 @@ ul{
     list-style: none;
     display: flex;
     justify-content:space-between;
-    align-items: center; 
+    align-items: center;
     list-style: none;
     position: sticky;
     /* background-color: rgba(147,112,75,.3); */
     height: 64px;
-    margin: 0px; 
+    margin: 0px;
 }
 .home-container{
     display: flex;
@@ -28,11 +28,15 @@ ul{
     justify-content: flex-end;
     align-content: center;
 }
+.nav-bar-container{
+    height: fit-content;
+}
+
 
 /* Buttons */
 
 .navbar-button{
    padding: 0px 7px 0px 7px;
     font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold; 
+    font-weight: bold;
 }
