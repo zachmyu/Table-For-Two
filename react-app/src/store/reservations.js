@@ -9,7 +9,7 @@ const loadReservations = reservations => ({
 
 const addReservation = reservation => ({
     type: CREATE_RESERVATION,
-    payload: reservation
+    reservation
 })
 
 
@@ -31,9 +31,11 @@ export const createReservation = (reservationInfo) => async (dispatch) => {
         body: JSON.stringify(reservationInfo)
     })
     if (response.ok) {
-        const data = await response.json()
-        dispatch(addReservation(data))
+        const newReservation = await response.json()
+        dispatch(addReservation(newReservation))
+        console.log("DATA FROM RESERVATION STORE RIGHT AFTER DISPATCH", newReservation)
     }
+    console.log('this is just the reservationInfo var on store', reservationInfo)
 }
 
 
@@ -49,9 +51,11 @@ export default function reservations(state = initialState, action) {
             })
             return newState
         case CREATE_RESERVATION:
-            newState = JSON.parse(JSON.stringify(state))
-            newState[action.payload.id] = action.payload
-            return newState
+            // newState = JSON.parse(JSON.stringify(state))
+            // newState[action.payload.id] = action.payload
+            // return newState
+            updatedState[action.reservation.id] = action.reservation
+            return updatedState
         default:
             return state
     }

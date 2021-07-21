@@ -26,15 +26,16 @@ def postReservation():
     # db.session.add(reservation)
     # db.session.commit()
     # return {}
-    data = request.json
+    # data = request.json
+    request_json = request.get_json()['reservation']
     reservation = Reservation(
-        user_id = data['user_id'],
-        venue_id = data['venue_id'],
-        reservation_datetime = data['reservation_datetime'],
-        party_size = data['party_size'],
-        duration = data['duration']
+        user_id = request_json['user_id'],
+        venue_id = request_json['venue_id'],
+        reservation_datetime = request_json['reservation_datetime'],
+        party_size = request_json['party_size'],
+        duration = request_json['duration']
     )
     db.session.add(reservation)
     db.session.commit()
-    return jsonify(reservation.to_dict)
+    return request.get_json()
 

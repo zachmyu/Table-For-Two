@@ -12,7 +12,7 @@ import NaturePeopleOutlinedIcon from '@material-ui/icons/NaturePeopleOutlined';
 import NewReservation from '../Reservations/NewReservation'
 import Grid from '@material-ui/core/Grid';
 import ReviewFormModal from '../ReviewFormModal'
-import Reservation from '../Reservations/ReservationForm'
+import ReservationForm from '../Reservations/ReservationForm'
 
 
 function Venue() {
@@ -135,11 +135,14 @@ function Venue() {
                                 <div><ReviewFormModal venue_id={id}></ReviewFormModal></div>
                             </div>
                         </Grid>
-                        <Grid item md={3}>Reservation</Grid>
-                        <Grid item md={2}>
+                        <Grid item md={3}>
                             <div>
-                                <NewReservation venue_id={id}></NewReservation>
+                            <div>Reservations</div>
+                            <ReservationForm venue_id={id} venue={venue}></ReservationForm>
+
                             </div>
+                        </Grid>
+                        <Grid item md={2}>
                         </Grid>
                     </Grid>
                 </div>

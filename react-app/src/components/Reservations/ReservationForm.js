@@ -2,6 +2,7 @@ import { useEffect, useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Calendar from '../Calendar'
 import DropDown from '../DropDown';
+import { createReservation } from '../../store/reservations';
 
 
 const options = [
@@ -29,8 +30,8 @@ const options = [
 
 const durations = [1,2,3]
 
-function ReservationForm({createReservation, venue_id}) {
-    const user = useSelector(state => state.session.user)
+function ReservationForm({venue_id, venue}) {
+    const sessionUser = useSelector(state => state.session.user)
     // const [reservation_datetime, setReservationDateTime] = useState
     const [date, setDate] = useState(new Date())
     const [people, setPeople] = useState({})
@@ -41,8 +42,9 @@ function ReservationForm({createReservation, venue_id}) {
     const map = Object.values(venues)
     const dispatch = useDispatch()
 
-    const reservation = (e) => {
+    const reservation = async (e) => {
         e.preventDefault();
+        dispatch(createReservation({user_id: sessionUser.id, venue_id, reservation_datetime: date, party_size: people, duration}))
         // const newReservation = {
         //     user_id,
         //     venue_id,
@@ -51,29 +53,30 @@ function ReservationForm({createReservation, venue_id}) {
         //     duration: Number(durations)
         // }
         // await dispatch(createReservation(newReservation))
-        (async() => {
-            const response = await fetch(`/api/reservations`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    user_id: user.id,
-                    venue_id: map[0]['0']['id'],
-                    reservation_datetime: date,
-                    party_size: people.value,
-                    duration: Number(durations)
-                })
-            })
-            setBooking(true)
-        })()
+        // (async() => {
+        //     const response = await fetch(`/api/reservations`, {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json'
+        //         },
+        //         body: JSON.stringify({
+        //             user_id: user.id,
+        //             venue_id: map[0]['0']['id'],
+        //             reservation_datetime: date,
+        //             party_size: people.value,
+        //             duration: Number(durations)
+        //         })
+        //     })
+        //     setBooking(true)
+        // })()
+
     }
 
     return (
         <div>
             <div>Make a new reservation</div>
             <hr />
-            <Calendar value={date} onChange={setDate}></Calendar>
+            <Calendar date={date} setDate={setDate}></Calendar>
             <DropDown people={people} setPeople={setPeople}></DropDown>
             <div>
                 <div>
