@@ -17,6 +17,7 @@ function ReservationForm({venue_id, venue, reservations}) {
     const map = Object.values(venues)
     const dispatch = useDispatch()
   
+    
 
     console.log('HERE WE HAVE THE VALUE OF DATE', date)
 
