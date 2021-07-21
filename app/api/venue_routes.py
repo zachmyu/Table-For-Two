@@ -49,7 +49,7 @@ def venue(id):
 #     return {'reviews': [review.to_dict() for review in reviews]}
 
 
-@venue_routes.route('/<int:id>', methods=['POST'])
+@venue_routes.route('/reviews/<int:id>', methods=['POST'])
 def new_review(id):
     venue_id = Venue.query.get(id)
     user_id = current_user.id
@@ -63,7 +63,7 @@ def new_review(id):
             body=form.data['body'],
             rating=form.data['rating']
         )
-        db.session.update(review)
+        # db.session.update(review)
         db.session.commit()
         return review.to_dict()
     return {'errors': validation_error_messages(form.errors)}, 401

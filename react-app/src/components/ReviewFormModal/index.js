@@ -14,7 +14,7 @@ function ReviewFormModal() {
     const [rating, setRating] = useState('');
     const reviews = useSelector(state => state.review)
     const [errors, setErrors] = useState([]);
-    let { id } = useParams()
+    const { id } = useParams()
 
     const handleSubmit = async (e) => {
         e.preventDefault();

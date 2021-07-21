@@ -58,6 +58,7 @@ function Venue() {
     console.log('MAP?', map)
     console.log('PLEASE WORK', singleVenue)
     console.log('ADD A REVIEW@@@@@@@@@@', reviews)
+    console.log('USEEEEEEERRRRRRR$$$$$$$$', user.id)
     // console.log('SOMETHING GOES HERE', reviewsInfo)
 
     return (
