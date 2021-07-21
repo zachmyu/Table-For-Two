@@ -6,7 +6,9 @@ import LogoutButton from '../auth/LogoutButton';
 import "./NavBar.css"
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import CalendarTodayRoundedIcon from '@material-ui/icons/CalendarTodayRounded';
+import DemoUser from '../DemoUser'
 import { Button } from "@material-ui/core"
+import User from "../User"
 // import * as SessionActions from './SessionActions'
 
 
@@ -27,7 +29,7 @@ const NavBar = ({ loaded }) => {
     sessionLinks = (
       <>
         <li className='navbar-button'>
-          <NavLink to='/users' exact={true} activeClassName='active'>
+          <NavLink to='/users/:userId' exact={true} activeClassName='active'>
             <AccountCircleIcon color= 'primary'></AccountCircleIcon>
           </NavLink>
         </li>
@@ -42,10 +44,10 @@ const NavBar = ({ loaded }) => {
         </li>
       </>
     );
-    } else {
-      sessionLinks = (
-        <>  
-            <li className='navbar-button'>
+  } else {
+    sessionLinks = (
+      <>
+        <li className='navbar-button'>
           <NavLink to='/login' exact={true} activeClassName='active'>
             Login
           </NavLink>
@@ -55,26 +57,29 @@ const NavBar = ({ loaded }) => {
             Sign Up
           </NavLink>
         </li>
-        {/* <li className='navbar-button'>
-          <NavLink to='/sign-up' exact={true} activeClassName='active'>
-            DemoUser
-          </NavLink>
-        </li> */}
-      </>
-      );
-  }
-  
-  return (
-    <nav>
-      <ul>
-        <div className='home-container'>
         <li className='navbar-button'>
           <NavLink to='/' exact={true} activeClassName='active'>
-            TableForTwo
+            <DemoUser></DemoUser>
           </NavLink>
         </li>
+      </>
+    );
+  }
+
+  return (
+    <nav className='navbar__container'>
+      <ul>
+        <NavLink className='navbar__logo' exact to="/">
+          <img src='/logo.png' className="homepageLogo" alt="homepageLogo"></img>
+        </NavLink>
+        <div className='home-container'>
+          <li className='navbar-button'>
+            {/* <NavLink to='/' exact={true} activeClassName='active'>
+              TableForTwo
+            </NavLink> */}
+          </li>
         </div>
-        <div className= 'session-container' >
+        <div className='session-container' >
           {loaded && sessionLinks}
         </div>
       </ul>
