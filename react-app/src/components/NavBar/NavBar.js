@@ -28,7 +28,7 @@ const NavBar = ({ loaded }) => {
       <>
         <li className='navbar-button'>
           <NavLink to='/users' exact={true} activeClassName='active'>
-            <AccountCircleIcon color= 'primary'></AccountCircleIcon>
+            <AccountCircleIcon color='primary'></AccountCircleIcon>
           </NavLink>
         </li>
         <li className='navbar-button'>
@@ -42,10 +42,10 @@ const NavBar = ({ loaded }) => {
         </li>
       </>
     );
-    } else {
-      sessionLinks = (
-        <>  
-            <li className='navbar-button'>
+  } else {
+    sessionLinks = (
+      <>
+        <li className='navbar-button'>
           <NavLink to='/login' exact={true} activeClassName='active'>
             Login
           </NavLink>
@@ -61,20 +61,23 @@ const NavBar = ({ loaded }) => {
           </NavLink>
         </li> */}
       </>
-      );
+    );
   }
-  
+
   return (
-    <nav>
+    <nav className='navbar__container'>
       <ul>
+        <NavLink className='navbar__logo' exact to="/">
+          <img src='/logo.png' className="homepageLogo" alt="homepageLogo"></img>
+        </NavLink>
         <div className='home-container'>
-        <li className='navbar-button'>
-          <NavLink to='/' exact={true} activeClassName='active'>
-            TableForTwo
-          </NavLink>
-        </li>
+          <li className='navbar-button'>
+            {/* <NavLink to='/' exact={true} activeClassName='active'>
+              TableForTwo
+            </NavLink> */}
+          </li>
         </div>
-        <div className= 'session-container' >
+        <div className='session-container' >
           {loaded && sessionLinks}
         </div>
       </ul>
