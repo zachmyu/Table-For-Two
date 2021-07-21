@@ -37,7 +37,7 @@ function Map( {venue} ) {
                 center={center}
                 zoom={10}>
                 {venues?.map(venue => {
-                    {console.log('?????????????????', venue.latitude, venue.longitude)}
+                    // {console.log('?????????????????', venue.latitude, venue.longitude)}
                     <Marker key='marker'
                         key={venue.id}
                         position={
