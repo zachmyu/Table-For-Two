@@ -32,7 +32,7 @@ function HomePage() {
 
     // const handleClick = (id) => {
     //     history.push(`/venues/${id}`)
-    // }
+    })
 
     return (
         <>
