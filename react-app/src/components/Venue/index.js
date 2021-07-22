@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import { getSingleVenue } from '../../store/venue'
 // import { getReviews } from '../../store/reviews'
-import { createReview } from '../../store/reviews'
+import { createReview, getReviews, updateReview, deleteReview } from '../../store/reviews'
 import { getReservations, createReservation } from '../../store/reservations'
 import { NavLink, useParams, useHistory } from "react-router-dom";
 import StarsIcon from '@material-ui/icons/Stars';
@@ -13,31 +13,26 @@ import NewReservation from '../Reservations/NewReservation'
 import Grid from '@material-ui/core/Grid';
 import ReviewFormModal from '../ReviewFormModal'
 import ReservationForm from '../Reservations/ReservationForm'
+import SendIcon from '@material-ui/icons/Send';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 
 function Venue() {
     const { id } = useParams()
     const dispatch = useDispatch();
     const history = useHistory();
-
+    const [title, setTitle] = useState('');
+    const [body, setBody] = useState('');
+    const [rating, setRating] = useState(0);
+    const [showForm, setShowForm] = useState(false)
+    const [formId, setFormId] = useState(null)
     const user = useSelector(state => state.session.user)
-    // const venue = useSelector(state => state.venues.venue)
     const venues = useSelector(state => state.venues)
     const reviews = useSelector(state => state.reviews)
     const reservations = useSelector(state => state.reservations)
-    // const venue = venues
-    // const reviews = useSelector(state => state.reviews)
     const map = Object.values(venues)
     const singleVenue = map['0']
-    // const something = singleVenue.keys(singleVenue)
-    // const reviewsInfo = map[0]['1']['reviews']
-    // const total = 0
-    // let ratingAverage = Object.values(venues).map(venue => {
-    //     let reviewsArr = Object.values(venue['1'].reviews);
-    //     reviewsArr.forEach(review => total += review.rating);
-    //     let avg = (total * 1.0) / reviewsArr.length;
-    //     return avg
-    // })
+    // const venueeee = singleVenue['0']
 
     const handleSubmit = () => {
         const reviewsInfo = map[0]['1']['reviews']
@@ -48,6 +43,7 @@ function Venue() {
         return avg
 
     }
+    // console.log('111111', venueeee)
 
     useEffect(() => {
         dispatch(getSingleVenue(Number(id)))
@@ -57,88 +53,104 @@ function Venue() {
         dispatch(getReservations(user.id))
     }, [dispatch])
 
-    // useEffect(() => {
-    //     dispatch(getReviews(Number(id)))
-    // }, [dispatch, id])
-    // console.log('THIS IS VENUE???????', venue)
-    // console.log('&&&&&&&&&&&&&&&&&&&&&&&&', reviews)
-    // console.log('VENUES', venues)
-    // console.log('MAP?', map)
-    // console.log('PLEASE WORK', singleVenue)
-    // console.log('ADD A REVIEW@@@@@@@@@@', reviews)
-    // console.log('USEEEEEEERRRRRRR$$$$$$$$', user.id)
-    // console.log('++++++++++++++++++RESERVATIONS', reservations)
-    // console.log('THIS IS THE VENUE ID', id)
-    // console.log('SOMETHING GOES HERE', reviewsInfo)
+    console.log('VALUES OF REVIEWS THUNK', reviews)
+    // console.log('0000000000000000000000', singleVenue?.id)
+
+    const editReview = async (reviewId, title, body, rating, e) => {
+        e.preventDefault();
+        await dispatch(updateReview(user.id, id, title, body, Number(rating), reviewId))
+        setTitle('')
+        setBody('')
+        setRating('')
+        setShowForm(false)
+        history.push(`/users/${user.id}`)
+    }
+
+    const openForm = (review) => {
+        setShowForm(true)
+        setTitle(review.title)
+        setBody(review.body)
+        setRating(review.rating)
+        setFormId(review.id)
+    }
+
+    const deleteSingleReview = async (reviewId) => {
+        console.log('9999999999999')
+        let alert = window.confirm('Are you sure you want to delete this review?')
+        if (alert) {
+            console.log('ALERT')
+            dispatch(deleteReview(reviewId))
+        }
+        history.push(`/users/${user.id}`)
+
+    }
 
     return (
         <div>
-            {/* <div className="venue--title"> */}
-            {/* <div className="venue--title"> */}
-            {/* <h2>{venue?.name}</h2> */}
-            {/* <button onClick={() => console.log('Value of Venuessss', venues[id])}>Click me</button>
-                <button onClick={() => console.log('Single venue', venue)}>Click ME</button> */}
-            {/* </div> */}
             {Object.values(venues).map(venue => (
                 <div>
-                    <img src={venue['0'].image_url} style={{width: '100vw', height: '50vh'}} alt="" />
-                    {/* <Typography variant="h5" component='h6' align="center">
-                        {venue['0'].name}
-                    </Typography> */}
-
-                    {/* <hr></hr> */}
+                    <img src={venue['0'].image_url} style={{ width: '100vw', height: '50vh' }} alt="" />
                     <Grid container align="center">
                         <Grid item md={2}></Grid>
-                        
+
                         <Grid item md={5} style={{ boxShadow: '10px 5px 5px gray' }}>
                             <div>
                                 <Typography variant="h1" component='h6' align="center">
                                     {venue['0'].name}
                                     <hr />
                                 </Typography>
-                            <StarsIcon fontSize='small' style={{ marginTop: '10px', paddingRight: '10px' }} ></StarsIcon>
-                            <span>
-                                {handleSubmit()}
-                                {/* <button onClick={() => console.log('AAAAAHHHHHHHHHHHH',handleSubmit())}>****************</button> */}
-                            </span>
-                            <ModeCommentOutlinedIcon fontSize='small' ></ModeCommentOutlinedIcon>
-                            <span style={{ paddingLeft: '5px', paddingRight: '10px', marginBottom: '100px' }}>
-                                {venue['1'].reviews.length} reviews
-                            </span>
-                            <LocalAtmOutlinedIcon></LocalAtmOutlinedIcon> $30 under
+                                <StarsIcon fontSize='small' style={{ marginTop: '10px', paddingRight: '10px' }} ></StarsIcon>
+                                <span>
+                                    {handleSubmit()}
+                                </span>
+                                <ModeCommentOutlinedIcon fontSize='small' ></ModeCommentOutlinedIcon>
+                                <span style={{ paddingLeft: '5px', paddingRight: '10px', marginBottom: '100px' }}>
+                                    {venue['1'].reviews.length} reviews
+                                </span>
+                                <LocalAtmOutlinedIcon></LocalAtmOutlinedIcon> $30 under
                             </div>
                             <div>
                                 {venue['0'].description}
                             </div>
                             <div>
-                                {/* {Object.values(venue).map(rating => {
-                                    <button onClick={() => console.log(rating)}>REVIEW?</button>
-                                })} */}
-                                {/* {singleVenue[]} */}
-                                {/* <button onClick={() => console.log(singleVenue['1'])}</button> */}
-                                {/* <button onClick={() => console.log(singleVenue['1'])}>REVIEW?</button> */}
-                                {/* {singleVenue['1']?.map(review => (
-                                    <div>
-                                        {review.title}
-                                    </div>
-                                ))} */}
                                 {Object.values(venue['1'].reviews).map(review => (
                                     <div>
                                         <hr></hr>
                                         {review.title}
-                                    <div>
-                                        {/* <hr></hr> */}
-                                            {review.body}
-                                    </div>
+                                        <div>                            
+                                        {review.body}
+                                        </div>
+                                        {user.id === review.user_id && (
+                                            <div>
+                                                {/* <h1>Jeff</h1> */}
+                                                <button onClick={() => openForm(review)}>Edit Review</button>
+                                                {showForm && review.id === formId ? 
+                                                <>
+                                                    <form onSubmit={(e) => editReview(review.id, title, body, Number(rating), e)} key={review.id}>
+                                                        <input type='text' value={title} onChange={(e) => setTitle(e.target.value)}></input>
+                                                        <input type='text' value={body} onChange={(e) => setBody(e.target.value)}></input>
+                                                        <input type='number' value={rating} onChange={(e) => setRating(Number(e.target.value))}></input>
+                                                        <button type='submit'>
+                                                            <SendIcon></SendIcon>
+                                                        </button>
+                                                    </form>
+                                                    <button onClick={() => deleteSingleReview(review.id)}><DeleteForeverIcon></DeleteForeverIcon></button>
+                                                </>
+                                                : null    
+                                            }
+
+                                            </div>
+                                        )}
+                                        {/* <button onClick={() => console.log('{}{}{}{}{}{}{}{}][][]', review)}>LLLLL</button> */}
                                     </div>
                                 ))}
-                                <div><ReviewFormModal venue_id={id}></ReviewFormModal></div>
+                                <div><ReviewFormModal venue_id={id} ></ReviewFormModal></div>
                             </div>
                         </Grid>
                         <Grid item md={3}>
                             <div>
-                            <div>Reservations</div>
-                            <ReservationForm venue_id={id} venue={venue} reservations={reservations}></ReservationForm>
+                                <div>Reservations</div>
+                                <ReservationForm venue_id={id} venue={venue} reservations={reservations}></ReservationForm>
 
                             </div>
                         </Grid>
@@ -146,10 +158,6 @@ function Venue() {
                         </Grid>
                     </Grid>
                 </div>
-                // <div>
-                //     <h1>{venue['0'].name}</h1>
-                //     <h2>{venue['1'].reviews.length}</h2>
-                // </div>
             ))}
 
         </div>
