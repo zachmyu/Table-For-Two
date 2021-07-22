@@ -7,6 +7,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import CalendarTodayRoundedIcon from '@material-ui/icons/CalendarTodayRounded';
 import DemoUser from '../DemoUser'
 import LoginFormModal from '../auth/LoginForm';
+import SignUpFormModal from '../auth/SignUpForm';
 import logo from './logo.png'
 import { Button } from "@material-ui/core"
 import User from "../User"
@@ -30,9 +31,9 @@ const NavBar = ({ loaded }) => {
           <CalendarTodayRoundedIcon />
 
         </div>
-        <div className='navbar-button'>
+        {/* <div className='navbar-button'>
           <LogoutButton />
-        </div>
+        </div> */}
         <div className='logout'>
           <LogoutButton />
         </div>
@@ -45,11 +46,9 @@ const NavBar = ({ loaded }) => {
           <LoginFormModal />
         </div>
         <div className='navbar-button'>
-          <NavLink to='/sign-up' exact={true} activeClassName='active'>
-            Sign Up
-          </NavLink>
+          <SignUpFormModal />
           <div className='navbar-button'>
-            <DemoUser></DemoUser>
+            <DemoUser />
           </div>
         </div>
       </>

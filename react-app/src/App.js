@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 // import LoginFormModal from './components/auth/LoginFormModal';
-import SignUpForm from './components/auth/SignUpForm';
+// import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/NavBar/NavBar';
 import Footer from './components/NavBar/Footer';
 import ProtectedRoute from './components/auth/ProtectedRoute';
@@ -54,9 +54,9 @@ function App() {
           {/* <Route path='/login' exact={true}>
                 <LoginFormModal />
               </Route> */}
-          <Route exact path='/sign-up'>
+          {/* <Route exact path='/sign-up'>
             <SignUpForm />
-          </Route>
+          </Route> */}
           <Route exact path='/'>
             <HomePage />
           </Route>
