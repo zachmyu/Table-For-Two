@@ -1,16 +1,16 @@
 // Imports
-import DemoUser from "../DemoUser";
+// import DemoUser from "../DemoUser";
 import "./HomePage.css";
 // import Calendar from "../Calendar";
 import DropDown from "../DropDown";
 
 
-import { useEffect } from "react";
+// import { useEffect } from "react";
 // import { NavLink, useParams, useHistory } from "react-router-dom";
 // import Map from "../Venue/GoogleMap"
 // import {Marker } from "@react-google-maps/api";
-import { getVenues } from '../../store/venue'
-import { useSelector, useDispatch } from 'react-redux'
+// import { getVenues } from '../../store/venue'
+// import { useSelector, useDispatch } from 'react-redux'
 import Calendar from "../Calendar";
 
 function HomePage() {
@@ -18,13 +18,13 @@ function HomePage() {
     // const venues = useSelector(state => state.venues.venues)
     // const venue = Object.values(venues)
     // const val = Object.keys(venue)
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
     // const history = useHistory()
 
-    useEffect(() => {
-        dispatch(getVenues())
-        // console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%', id)
-    }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(getVenues())
+    //     // console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%', id)
+    // }, [dispatch])
     // console.log('THIS IS THE VALUE OF VENUES', venues)
 
     // const handleClick = (id) => {
