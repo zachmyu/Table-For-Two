@@ -23,7 +23,8 @@ function HomePage() {
 
     // useEffect(() => {
     //     dispatch(getVenues())
-    //     // console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%', id)
+        // console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%', id)
+
     // }, [dispatch])
     // console.log('THIS IS THE VALUE OF VENUES', venues)
 

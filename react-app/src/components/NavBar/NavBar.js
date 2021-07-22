@@ -20,18 +20,12 @@ const NavBar = ({ loaded }) => {
   const user = useSelector(state => state.session.user);
   // console.log('*****************************', sessionUser)
 
-  // const logout = (e) => {
-  //   e.preventDefault();
-  //   dispatch(logout());
-  //   history.push('/');
-  // };
-
   let sessionLinks;
   if (user) {
     sessionLinks = (
       <>
         <div className='navbar-button'>
-          <NavLink to='/users/{sessionUser.id}' exact={true} activeClassName='active'>
+          <NavLink to={`/users/${user.id}`} exact={true} activeClassName='active'>
             <AccountCircleIcon color='primary'></AccountCircleIcon>
           </NavLink>
         </div>
@@ -43,6 +37,7 @@ const NavBar = ({ loaded }) => {
         <div className='navbar-button'>
           <LogoutButton />
         </div>
+        <LogoutButton/>
       </>
     );
   } else {
