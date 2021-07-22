@@ -1,6 +1,6 @@
 .footer-container {
     font-family: Arial, Helvetica, sans-serif;
-    background-color: turquoise;
+    /* background-color: turquoise; */
     height: 50px;
     display: flex;
     justify-content: space-around;

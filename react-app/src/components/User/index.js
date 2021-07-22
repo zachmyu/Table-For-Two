@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Modal } from '../../'
+import "./User.css"
 
 function User() {
   const [user, setUser] = useState({});
@@ -22,14 +23,12 @@ function User() {
   }
 
   return (
-    <ul>
-      <li>
-        <strong>User Id</strong> {userId}
-      </li>
-      <li>
-        <strong>Username</strong> {user.username}
-      </li>
-    </ul>
+    <>
+      <img src={user.profile_image_url} ></img>
+      <h1>{user.username}</h1>
+      <h2>Current Reservations</h2>
+      <h2>Reviews</h2>
+    </>
   );
 }
 export default User;
