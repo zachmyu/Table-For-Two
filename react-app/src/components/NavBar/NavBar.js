@@ -7,7 +7,8 @@ import "./NavBar.css"
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import CalendarTodayRoundedIcon from '@material-ui/icons/CalendarTodayRounded';
 import DemoUser from '../DemoUser'
-import LoginFormModal from '../LoginFormModal';
+import LoginFormModal from '../auth/LoginForm';
+import logo from './logo.png'
 import { Button } from "@material-ui/core"
 import User from "../User"
 // import * as SessionActions from './SessionActions'
@@ -35,9 +36,12 @@ const NavBar = ({ loaded }) => {
           </NavLink>
         </div>
         <div className='navbar-button'>
-          {/* <NavLink to='/users' exact={true} activeClassName='active'> */}
-          <CalendarTodayRoundedIcon></CalendarTodayRoundedIcon>
-          {/* </NavLink> */}
+
+          <CalendarTodayRoundedIcon />
+
+        </div>
+        <div className='navbar-button'>
+          <LogoutButton />
         </div>
       </>
     );
@@ -62,7 +66,7 @@ const NavBar = ({ loaded }) => {
   return (
     <div className='navbar__container'>
       <NavLink className='navbar__logo' exact to="/">
-        <img src='/logo.png' className="homepageLogo" alt="homepageLogo"></img>
+        <img src={logo} className="homepageLogo" alt="homepageLogo"></img>
       </NavLink>
       <div className='session-container' >
         {loaded && sessionLinks}

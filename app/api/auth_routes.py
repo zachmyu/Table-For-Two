@@ -62,7 +62,7 @@ def sign_up():
     """
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    
+
     if "image" not in request.files:
         return {'errors': ['image required']}, 400
 
@@ -79,8 +79,7 @@ def sign_up():
         return {'errors': [upload]}, 400
 
     url = upload["url"]
-    
-    
+
     # print('********************************', form.data['profileImg'])
     print('BEFORE VALIDATION')
     if form.validate_on_submit():
@@ -97,8 +96,7 @@ def sign_up():
             profile_image_url=url,
         )
         # if "image" not in request.files:
-            
-        
+
         # #   form['csrf_token'].data = request.cookies['csrf_token']
         # # if form.validate_on_submit():
         # #     profile_photo = form.data["profile_photo"]

@@ -1,7 +1,8 @@
 .footer-container {
     font-family: Arial, Helvetica, sans-serif;
-    background-color: turquoise;
-    height: 50px;
+    color: #009999;
+    background-color: #2D333F;
+    height: 40px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -10,4 +11,12 @@
     left: 0px;
     right: 0px;
     position: fixed;
+}
+
+a.footer-element{
+    color: #009999;
+}
+
+a.footer-element:hover{
+    color: #01d4d4;
 }
