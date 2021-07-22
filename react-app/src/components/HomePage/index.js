@@ -3,30 +3,32 @@
 import "./HomePage.css";
 // import Calendar from "../Calendar";
 import DropDown from "../DropDown";
+import Carousel from 'react-material-ui-carousel'
 
 
-// import { useEffect } from "react";
+import { useEffect } from "react";
 // import { NavLink, useParams, useHistory } from "react-router-dom";
 // import Map from "../Venue/GoogleMap"
 // import {Marker } from "@react-google-maps/api";
-// import { getVenues } from '../../store/venue'
-// import { useSelector, useDispatch } from 'react-redux'
+import { getVenues } from '../../store/venue'
+import { useSelector, useDispatch } from 'react-redux'
 import Calendar from "../Calendar";
 
 function HomePage() {
     // const { id } = useParams()
-    // const venues = useSelector(state => state.venues.venues)
+    const venues = useSelector(state => state.venues.venues)
     // const venue = Object.values(venues)
     // const val = Object.keys(venue)
-    // const dispatch = useDispatch()
+    const dispatch = useDispatch()
     // const history = useHistory()
 
-    // useEffect(() => {
-    //     dispatch(getVenues())
+    useEffect(() => {
+        dispatch(getVenues())
         // console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%', id)
 
     // }, [dispatch])
     // console.log('THIS IS THE VALUE OF VENUES', venues)
+
 
     // const handleClick = (id) => {
     //     history.push(`/venues/${id}`)
@@ -34,17 +36,29 @@ function HomePage() {
 
     return (
         <>
-            <div className='Splash-container'>
-
-                <h1 id='date'>A date for any occasion</h1>
-                <div className='booking-container'>
-                    {/* <DemoUser></DemoUser> */}
-                    <Calendar id='calender' />
-                    <DropDown />
-                    <button>Let's go </button>
-                </div>
-
+        <div className='Splash-container'>
+            <h1 id= 'date'>A date for any occasion</h1>
+            <div className='booking-container'>
+                {/* <DemoUser></DemoUser> */}
+                <Calendar id='calender'/>
+                <DropDown/>
+                <button>Let's go </button>
             </div>
+
+            
+        </div>
+        <div>
+            <Carousel>
+                {venues?.map(venue => (
+                    // <button onClick={() => console.log("poop", venue)}>pooooooooooooooooooop</button>
+                    <div>
+                        <a href={`/venues/${venue.id}`}>
+                            <img src={venue.image_url} style={{width: '20%', height: '20%'}}></img>
+                        </a>
+                    </div>
+                ))}
+            </Carousel>
+        </div>
             {/* <h2>Netflix and Chill</h2>
             {venues?.map(venue => (
                 // { console.log('After mapping') }

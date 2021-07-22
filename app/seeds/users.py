@@ -1,9 +1,6 @@
 from app.models import db, User
 from werkzeug.security import generate_password_hash
 
-# Adds a demo user, you can add other users here if you want
-
-
 def seed_users():
     pw = generate_password_hash("table42User!")
 
