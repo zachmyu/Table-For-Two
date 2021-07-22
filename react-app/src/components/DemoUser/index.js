@@ -18,7 +18,7 @@ const  DemoUser = () => {
         password: 'password',
     };
 
-    const data = await dispatch(login('demo-user@demo.com', 'password'));
+    const data = await dispatch(login('demo-user@demodata.com', 'table42User!'));
     if (data) {
       setErrors(data);
     }
