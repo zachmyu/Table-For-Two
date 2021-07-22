@@ -26,39 +26,39 @@ function HomePage() {
         dispatch(getVenues())
         // console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%', id)
 
-    // }, [dispatch])
-    // console.log('THIS IS THE VALUE OF VENUES', venues)
+        // }, [dispatch])
+        // console.log('THIS IS THE VALUE OF VENUES', venues)
 
 
-    // const handleClick = (id) => {
-    //     history.push(`/venues/${id}`)
-    // }
+        // const handleClick = (id) => {
+        //     history.push(`/venues/${id}`)
+    })
 
     return (
         <>
-        <div className='Splash-container'>
-            <h1 id= 'date'>A date for any occasion</h1>
-            <div className='booking-container'>
-                {/* <DemoUser></DemoUser> */}
-                <Calendar id='calender'/>
-                <DropDown/>
-                <button>Let's go </button>
-            </div>
+            <div className='Splash-container'>
+                <h1 id='date'>A date for any occasion</h1>
+                <div className='booking-container'>
+                    {/* <DemoUser></DemoUser> */}
+                    <Calendar id='calender' />
+                    <DropDown />
+                    <button>Let's go </button>
+                </div>
 
-            
-        </div>
-        <div>
-            <Carousel>
-                {venues?.map(venue => (
-                    // <button onClick={() => console.log("poop", venue)}>pooooooooooooooooooop</button>
-                    <div>
-                        <a href={`/venues/${venue.id}`}>
-                            <img src={venue.image_url} style={{width: '20%', height: '20%'}}></img>
-                        </a>
-                    </div>
-                ))}
-            </Carousel>
-        </div>
+
+            </div>
+            <div>
+                <Carousel>
+                    {venues?.map(venue => (
+                        // <button onClick={() => console.log("poop", venue)}>pooooooooooooooooooop</button>
+                        <div>
+                            <a href={`/venues/${venue.id}`}>
+                                <img src={venue.image_url} style={{ width: '20%', height: '20%' }}></img>
+                            </a>
+                        </div>
+                    ))}
+                </Carousel>
+            </div>
             {/* <h2>Netflix and Chill</h2>
             {venues?.map(venue => (
                 // { console.log('After mapping') }
