@@ -22,10 +22,10 @@ function HomePage(){
     const dispatch = useDispatch()
     const history = useHistory()
 
-    useEffect(() => {
-        dispatch(getVenues())
+    // useEffect(() => {
+    //     dispatch(getVenues())
         // console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%', id)
-    }, [dispatch])
+    // }, [dispatch])
     // console.log('THIS IS THE VALUE OF VENUES', venues)
 
     // const handleClick = (id) => {
