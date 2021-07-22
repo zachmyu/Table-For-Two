@@ -5,9 +5,13 @@ function Footer() {
 
     return (
         <div className="footer-container">
-            <h4>Created By: </h4>
-            <div className="footer-element">
-                <a href="https://github.com/amberbancroft"><i className="fab fa-github"></i> Amber Bancroft</a>
+            <div>
+                <h4>Created By: </h4>
+            </div>
+            <div>
+                <a className="footer-element"
+                    href="https://github.com/amberbancroft">
+                    <i className="fab fa-github"></i> Amber Bancroft</a>
             </div>
             <div>
                 <a className="footer-element"
