@@ -19,7 +19,7 @@ const NavBar = ({ loaded }) => {
       <>
         <div className='navbar-button'>
           <NavLink to={`/users/${user.id}`} exact={true} activeClassName='active'>
-            <AccountCircleIcon color='primary'></AccountCircleIcon>
+            <AccountCircleIcon></AccountCircleIcon>
           </NavLink>
         </div>
         <div className='navbar-button'>
@@ -54,7 +54,6 @@ const NavBar = ({ loaded }) => {
     <div className='navbar__container'>
       <div className='home-container' >
         {/* <NavLink className='navbar__logo' exact to="/"> */}
-          
           <a href='/'>
             <img src='/logo.png'  alt="homepageLogo"></img>
           </a>

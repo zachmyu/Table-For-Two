@@ -1,11 +1,21 @@
+body{
+    background-color: rgb(247, 247, 247);
+    margin: 0px;
+}
 .header-container{
     display: flex;
     align-items: center;
-    
+    background-color: white;
+    border-bottom: rgb(247, 247, 247) solid .5px;
+    padding-left: 60px;
 }
 
 #profile_img{
     padding: 15px 0px 15px 10px;
     width: 100px;
     border-radius: 50%;
+}
+
+.h2-container{
+    background-color: white;
 }
