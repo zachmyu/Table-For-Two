@@ -38,7 +38,7 @@ def review_edit(id):
     #         body=form.data['body'],
     #         rating=form.data['rating']
     #     )
-    #     db.session.update(review)
+    #     db.session.add(review)
     #     db.session.commit()
     #     return review.to_dict()
     # return {'errors': validation_error_messages(form.errors)}, 401
@@ -50,9 +50,8 @@ def review_edit(id):
         db.session.commit()
         print('THIS THING WORKS')
         return edit_review.to_dict()
-    else:
-        print("^^^^^^^^^^^^^^^^^^ Nope did not validate", form.errors)
-        return {}
+    print("^^^^^^^^^^^^^^^^^^ Nope did not validate", form.errors)
+    return {'errors': form.errors}
 
 @review_routes.route('/venues/<int:id>', methods=['POST'])
 def new_review(id):
@@ -67,7 +66,7 @@ def new_review(id):
     # db.session.update(review)
     db.session.add(review)
     db.session.commit()
-    return review.to_dict()
+    return {'review': review.to_dict()}
     # return {'errors': validation_error_messages(form.errors)}, 401
     
 @review_routes.route('/<int:id>', methods=['DELETE'])
@@ -75,5 +74,5 @@ def delete_review_by_id(id):
     delete_review = Review.query.get(id)
     db.session.delete(delete_review)
     db.session.commit()
-    return str(delete_review)    
+    return {'delete_review': delete_review.to_dict()}    
 

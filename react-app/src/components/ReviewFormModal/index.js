@@ -23,6 +23,8 @@ function ReviewFormModal({ venue_id, reviewId }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         dispatch(createReview({ user_id: sessionUser.id, venue_id, title, body, rating }))
+        history.push(`/users/${sessionUser.id}`)
+
     }
 
     const ratingHelper = (num) => {

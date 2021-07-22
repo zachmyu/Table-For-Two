@@ -87,20 +87,20 @@ export const createReview = review => async (dispatch) => {
     // return review
 }
 
-export const updateReview = (title, body, rating, reviewId) => async (dispatch) => {
+export const updateReview = (user_id, venue_id, title, body, rating, reviewId) => async (dispatch) => {
     const response = await fetch(`/api/reviews/venues/${reviewId}`, {
         method: "PUT",
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({title, body, rating})
+        body: JSON.stringify({user_id, venue_id, title, body, rating})
     })
     if (response.ok) {
         const updatedReview = await response.json()
         dispatch(updateSingleReview(updatedReview))
         console.log('THIS WILL PRINT ONLY IF THE RESPONSE IS OK', updatedReview)
     }
-    console.log('THIS WILL PRINT EVEN IF THE RESPONSE IS NOT OKAY, review, body, rating', title, body, rating)
+    console.log('THIS WILL PRINT EVEN IF THE RESPONSE IS NOT OKAY, title, body, rating', title, body, rating)
 }
 
 export const deleteReview = reviewId => async (dispatch) => {
@@ -111,6 +111,7 @@ export const deleteReview = reviewId => async (dispatch) => {
         dispatch(deleteSingleReview(reviewId))
         console.log('deleted a review response.ok')
     }
+    console.log('THis is from the deleteReview in store', reviewId)
 }
 
 
@@ -119,10 +120,17 @@ const initialState = {}
 export default function reviews(state = initialState, action) {
     let updatedState = {...state}
     switch (action.type) {
-        case GET_REVIEWS:
-            return {
-                reviews: action.payload
-            }
+        case GET_REVIEWS:{
+            const newState = {}
+            action.reviews.forEach(review => {
+                newState[review.id] = review
+            })
+            return newState
+        }
+            // return {
+            //     reviews: action.payload
+            // }
+            
         case ADD_REVIEW:
             updatedState[action.review.id] = action.review
             return updatedState

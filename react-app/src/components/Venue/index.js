@@ -32,6 +32,7 @@ function Venue() {
     const reservations = useSelector(state => state.reservations)
     const map = Object.values(venues)
     const singleVenue = map['0']
+    // const venueeee = singleVenue['0']
 
     const handleSubmit = () => {
         const reviewsInfo = map[0]['1']['reviews']
@@ -42,6 +43,7 @@ function Venue() {
         return avg
 
     }
+    // console.log('111111', venueeee)
 
     useEffect(() => {
         dispatch(getSingleVenue(Number(id)))
@@ -51,19 +53,17 @@ function Venue() {
         dispatch(getReservations(user.id))
     }, [dispatch])
 
-    useEffect(() => {
-        dispatch(getReviews(user.id))
-    }, [dispatch])
     console.log('VALUES OF REVIEWS THUNK', reviews)
     // console.log('0000000000000000000000', singleVenue?.id)
 
     const editReview = async (reviewId, title, body, rating, e) => {
         e.preventDefault();
-        await dispatch(updateReview(title, body, Number(rating), reviewId))
+        await dispatch(updateReview(user.id, id, title, body, Number(rating), reviewId))
         setTitle('')
         setBody('')
         setRating('')
         setShowForm(false)
+        history.push(`/users/${user.id}`)
     }
 
     const openForm = (review) => {
@@ -75,10 +75,14 @@ function Venue() {
     }
 
     const deleteSingleReview = async (reviewId) => {
-        let alert = window.alert('Are you sure you want to delete this review?')
+        console.log('9999999999999')
+        let alert = window.confirm('Are you sure you want to delete this review?')
         if (alert) {
+            console.log('ALERT')
             dispatch(deleteReview(reviewId))
         }
+        history.push(`/users/${user.id}`)
+
     }
 
     return (
@@ -121,15 +125,17 @@ function Venue() {
                                                 {/* <h1>Jeff</h1> */}
                                                 <button onClick={() => openForm(review)}>Edit Review</button>
                                                 {showForm && review.id === formId ? 
+                                                <>
                                                     <form onSubmit={(e) => editReview(review.id, title, body, Number(rating), e)} key={review.id}>
                                                         <input type='text' value={title} onChange={(e) => setTitle(e.target.value)}></input>
                                                         <input type='text' value={body} onChange={(e) => setBody(e.target.value)}></input>
-                                                        <input type='number' value={body} onChange={(e) => setRating(Number(e.target.value))}></input>
-                                                        <button type='submit' onSubmit={(e) => editReview(review.id, title, body, Number(rating), e)}>
+                                                        <input type='number' value={rating} onChange={(e) => setRating(Number(e.target.value))}></input>
+                                                        <button type='submit'>
                                                             <SendIcon></SendIcon>
                                                         </button>
-                                                        <button onClick={() => deleteSingleReview(review.id)}><DeleteForeverIcon></DeleteForeverIcon></button>
                                                     </form>
+                                                    <button onClick={() => deleteSingleReview(review.id)}><DeleteForeverIcon></DeleteForeverIcon></button>
+                                                </>
                                                 : null    
                                             }
 
