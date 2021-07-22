@@ -1,0 +1,11 @@
+.header-container{
+    display: flex;
+    align-items: center;
+    
+}
+
+#profile_img{
+    padding: 15px 0px 15px 10px;
+    width: 100px;
+    border-radius: 50%;
+}

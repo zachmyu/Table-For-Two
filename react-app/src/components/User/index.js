@@ -24,10 +24,14 @@ function User() {
 
   return (
     <>
-      <img src={user.profile_image_url} ></img>
-      <h1>{user.username}</h1>
-      <h2>Current Reservations</h2>
-      <h2>Reviews</h2>
+      <div className="header-container">
+        <img id='profile_img' src={user.profile_image_url} ></img>
+        <h1>{user.username}</h1>
+      </div>
+      <div className="content-container">
+        <h2>Current Reservations</h2>
+        <h2>Reviews</h2>
+      </div>
     </>
   );
 }
