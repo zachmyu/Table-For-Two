@@ -17,8 +17,8 @@ import Calendar from "../Calendar";
 function HomePage(){
     const { id } = useParams()
     const venues = useSelector(state => state.venues.venues)
-    const venue = Object.values(venues)
-    const val = Object.keys(venue)
+    // const venue = Object.values(venues)
+    // const val = Object.keys(venue)
     const dispatch = useDispatch()
     const history = useHistory()
 
