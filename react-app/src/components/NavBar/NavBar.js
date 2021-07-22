@@ -3,21 +3,18 @@ import React from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import LogoutButton from '../auth/LogoutButton';
-import "./NavBar.css"
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import CalendarTodayRoundedIcon from '@material-ui/icons/CalendarTodayRounded';
 import DemoUser from '../DemoUser'
-import LoginFormModal from '../LoginFormModal';
+import LoginFormModal from '../auth/LoginForm';
+import logo from './logo.png'
 import { Button } from "@material-ui/core"
 import User from "../User"
-// import * as SessionActions from './SessionActions'
+import "./NavBar.css"
 
 
 const NavBar = ({ loaded }) => {
-  // const dispatch = useDispatch();
-  // const history = useHistory();
   const user = useSelector(state => state.session.user);
-  // console.log('*****************************', sessionUser)
 
   let sessionLinks;
   if (user) {
@@ -25,15 +22,20 @@ const NavBar = ({ loaded }) => {
       <>
         <div className='navbar-button'>
           <NavLink to={`/users/${user.id}`} exact={true} activeClassName='active'>
-            <AccountCircleIcon color='primary'></AccountCircleIcon>
+            <AccountCircleIcon></AccountCircleIcon>
           </NavLink>
         </div>
         <div className='navbar-button'>
-          {/* <NavLink to='/users' exact={true} activeClassName='active'> */}
-          <CalendarTodayRoundedIcon></CalendarTodayRoundedIcon>
-          {/* </NavLink> */}
+
+          <CalendarTodayRoundedIcon />
+
         </div>
-        <LogoutButton/>
+        <div className='navbar-button'>
+          <LogoutButton />
+        </div>
+        <div className='logout'>
+          <LogoutButton />
+        </div>
       </>
     );
   } else {
@@ -57,7 +59,7 @@ const NavBar = ({ loaded }) => {
   return (
     <div className='navbar__container'>
       <NavLink className='navbar__logo' exact to="/">
-        <img src='/logo.png' className="homepageLogo" alt="homepageLogo"></img>
+        <img src={logo} className="homepageLogo" alt="homepageLogo"></img>
       </NavLink>
       <div className='session-container' >
         {loaded && sessionLinks}

@@ -24,12 +24,13 @@ export const authenticate = () => async (dispatch) => {
     if (data.errors) {
       return;
     }
-  
+
     dispatch(setUser(data));
   }
 }
 
 export const login = (email, password) => async (dispatch) => {
+  console.log("STUUUUUUUUUUUFFFFF", email, password)
   const response = await fetch('/api/auth/login', {
     method: 'POST',
     headers: {
@@ -40,8 +41,8 @@ export const login = (email, password) => async (dispatch) => {
       password
     })
   });
-  
-  
+
+
   if (response.ok) {
     const data = await response.json();
     dispatch(setUser(data))
@@ -85,7 +86,7 @@ export const signUp = (firstName, lastName, username, email, password, profileIm
   //     profile_image_url: profileImg
   //   }),
   // });
-  
+
   const formData = new FormData();
 
   formData.append('firstName', firstName);
@@ -109,7 +110,7 @@ export const signUp = (firstName, lastName, username, email, password, profileIm
     return data
   }
   dispatch(setUser(data))
-  return 
+  return
 }
 
 

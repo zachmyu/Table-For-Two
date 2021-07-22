@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import * as sessionActions from '../../store/session';
+import * as sessionActions from '../../../store/session';
 import './LoginForm.css';
 
 function LoginForm() {
@@ -12,7 +12,7 @@ function LoginForm() {
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors([]);
-        return dispatch(sessionActions.login({ email, password })).catch(
+        return dispatch(sessionActions.login(email, password)).catch(
             async (res) => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors);
@@ -23,7 +23,7 @@ function LoginForm() {
     const demoLogin = () => {
         setEmail('demo@mcdemoface.com');
         setPassword('password');
-        sessionActions.login(email, password);
+        return dispatch(sessionActions.login(email, password))
     }
 
     return (
