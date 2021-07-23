@@ -179,8 +179,8 @@ const SignUpForm = () => {
                 accept="image/*"
                 onChange={updateImage}
             />
+            <button className="button3" type="submit">Submit</button>
             {/* <button type="submit">Submit</button> */}
-            <Button color="primary" type="submit" variant="contained">Submit</Button>
             {/* {(imageLoading) && <p>Loading...</p>} */}
             {/* <button type='submit'>Sign Up</button> */}
         </form>

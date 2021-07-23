@@ -38,14 +38,14 @@ const NavBar = ({ loaded }) => {
   } else {
     sessionLinks = (
       <>
-        <div className='navbar-button'>
+        <div className='navbar-button-container'>
           <LoginFormModal />
         </div>
-        <div className='navbar-button'>
+        <div className='navbar-button-container'>
           <SignUpFormModal />
-          <div className='navbar-button'>
-            <DemoUser />
-          </div>
+        </div>
+        <div className='navbar-button-container'>
+          <DemoUser />
         </div>
       </>
     );
