@@ -1,21 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import { getSingleVenue } from '../../store/venue'
-import { createReview, getReviews, updateReview, deleteReview } from '../../store/reviews'
-import { getReservations, createReservation } from '../../store/reservations'
-import { NavLink, useParams, useHistory } from "react-router-dom";
+import { updateReview, deleteReview } from '../../store/reviews'
+import { useParams, useHistory } from "react-router-dom";
 import StarsIcon from '@material-ui/icons/Stars';
-import ModeCommentOutlinedIcon from '@material-ui/icons/ModeCommentOutlined';
-import Typography from '@material-ui/core/Typography';
-import LocalAtmOutlinedIcon from '@material-ui/icons/LocalAtmOutlined';
-// import NaturePeopleOutlinedIcon from '@material-ui/icons/NaturePeopleOutlined';
-// import NewReservation from '../Reservations/NewReservation'
-import Grid from '@material-ui/core/Grid';
-import './Venue.css'
-import ReviewFormModal from '../ReviewFormModal'
+import ReviewFormModal from '../ReviewFormModal/ReviewCreateForm'
 import ReservationForm from '../Reservations/ReservationForm'
-import SendIcon from '@material-ui/icons/Send';
+import ModeCommentOutlinedIcon from '@material-ui/icons/ModeCommentOutlined';
+import LocalAtmOutlinedIcon from '@material-ui/icons/LocalAtmOutlined';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import SendIcon from '@material-ui/icons/Send';
+import './Venue.css'
 
 
 
@@ -29,15 +24,8 @@ function Venue() {
     const [showForm, setShowForm] = useState(false)
     const [formId, setFormId] = useState(null)
     const user = useSelector(state => state.session.user)
-
-    // const reviews = useSelector(state => state.reviews)
     const reservations = useSelector(state => state.reservations)
-    // const venues = useSelector(state => state.venues)
-    // const reviews = useSelector(state => state.reviews)
-    // const reservations = useSelector(state => state.reservations)
-    // const map = Object.values(venues)
     const venue = useSelector(state => state?.venues.current)
-
     const reviewsInfo = venue ? Object.values(venue?.reviews) : null
 
     useEffect(async () => {
