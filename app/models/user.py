@@ -39,5 +39,6 @@ class User(db.Model, UserMixin):
             'last_name': self.last_name,
             'username': self.username,
             'profile_image_url': self.profile_image_url,
-            'email': self.email
+            'email': self.email,
+            "reservations": {reservation.id: reservation.to_dict() for reservation in self.reservations}
         }
