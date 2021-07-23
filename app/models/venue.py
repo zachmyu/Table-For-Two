@@ -25,6 +25,8 @@ class Venue(db.Model, UserMixin):
     user = db.relationship('User', back_populates='venues')
     date_type = db.relationship('Date_type', back_populates='venues')
     reviews = db.relationship('Review', back_populates='venue')
+    reservations = db.relationship('Reservation', back_populates='venue')
+    favorites = db.relationship("Favorite", back_populates="venue")
 
     def to_dict(self):
         return {

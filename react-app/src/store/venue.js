@@ -4,7 +4,7 @@ const GET_SINGLE_VENUE = "venue/GET_SINGLE_VENUE"
 
 const loadVenues = (venues) => ({
     type: GET_VENUES,
-    venues
+    payload: venues,
 })
 
 const loadSingleVenue = (venue) => ({
@@ -14,11 +14,12 @@ const loadSingleVenue = (venue) => ({
 
 
 export const getVenues = () => async(dispatch) => {
-    const response = await fetch("/api/venues")
+    const response = await fetch('/api/venues')
 
     if (response.ok) {
         const venues = await response.json()
-        dispatch(loadVenues(venues))
+        await dispatch(loadVenues(venues))
+        return response
     }
 }
 
@@ -43,10 +44,17 @@ export default function venues(state = initialState, action) {
         //     })
         //     return newState
         // }
-        case GET_VENUES: {
+        // case GET_VENUES: {
+        //     // const newState = {}
+        //     return {...state, ...action.venues}
+        // }
+        case GET_VENUES:
             // const newState = {}
-            return {...state, ...action.venues}
-        }
+            let newState = {}
+            action.payload.venues.forEach(venue => {
+                newState[venue.id] = venue
+            })
+            return newState
         case GET_SINGLE_VENUE: {
             updatedState[action.venue.id] = action.venue
             return updatedState
