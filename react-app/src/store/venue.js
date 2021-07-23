@@ -13,13 +13,8 @@ const loadSingleVenue = (venue) => ({
 })
 
 
-<<<<<<< HEAD
 export const getVenues = () => async (dispatch) => {
     const response = await fetch("/api/venues")
-=======
-export const getVenues = () => async(dispatch) => {
-    const response = await fetch('/api/venues')
->>>>>>> main
 
     if (response.ok) {
         const venues = await response.json()
