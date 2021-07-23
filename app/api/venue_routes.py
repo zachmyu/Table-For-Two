@@ -29,10 +29,11 @@ def venues():
 #         .filter(Review.venue_id == id)
 #     return venue.to_dict()
 
+
 @venue_routes.route('/<int:id>')
 def venue(id):
-    venue = Venue.query.get(id)
-    review_data = Review.query.filter(Review.venue_id == id).all()
+    venue = Venue.query.get(id) #reservation
+    review_data = Review.query.filter(Review.venue_id == id).all() #venue
     
     venues = venue.to_dict()
     reviews = [review.to_dict() for review in review_data]

@@ -49,12 +49,14 @@ function Venue() {
         dispatch(getSingleVenue(Number(id)))
     }, [dispatch, id])
 
-    useEffect(() => {
-        dispatch(getReservations(user.id))
-    }, [dispatch])
-
+    
+    // useEffect(() => {
+    //     dispatch(getReservations(user?.id))
+    // }, [dispatch])
+    console.log('MAP', map)
     console.log('VALUES OF REVIEWS THUNK', reviews)
     // console.log('0000000000000000000000', singleVenue?.id)
+    console.log("THIS IS VENUES", venues)
 
     const editReview = async (reviewId, title, body, rating, e) => {
         e.preventDefault();
@@ -85,10 +87,16 @@ function Venue() {
 
     }
 
+    // if (!user) {
+    //     alert('You must login')
+    //     history.push('/')
+    // }
+    console.log('***************', venues)
     return (
         <div>
             {Object.values(venues).map(venue => (
                 <div>
+                    <button onClick={() =>console.log(venue)}>CLICK</button>
                     <img src={venue['0'].image_url} style={{ width: '100vw', height: '50vh' }} alt="" />
                     <Grid container align="center">
                         <Grid item md={2}></Grid>
@@ -115,6 +123,7 @@ function Venue() {
                             <div>
                                 {Object.values(venue['1'].reviews).map(review => (
                                     <div>
+                                        <button onClick={() =>console.log(review)}>HEY!</button>
                                         <hr></hr>
                                         {review.title}
                                         <div>                            

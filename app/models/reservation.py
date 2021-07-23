@@ -13,6 +13,10 @@ class Reservation(db.Model, UserMixin):
     reservation_datetime = db.Column(db.DateTime, nullable=False)
     party_size = db.Column(db.Integer, nullable=False)
     duration = db.Column(db.Float, nullable=False)
+    
+    user = db.relationship('User', back_populates='reservations')
+    venue = db.relationship('Venue', back_populates='reservations')
+    
 
     def to_dict(self):
         return {

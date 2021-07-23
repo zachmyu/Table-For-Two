@@ -16,7 +16,7 @@ import Calendar from "../Calendar";
 
 function HomePage() {
     // const { id } = useParams()
-    const venues = useSelector(state => state.venues.venues)
+    const venues = useSelector(state => state.venues)
     // const venue = Object.values(venues)
     // const val = Object.keys(venue)
     const dispatch = useDispatch()
@@ -26,13 +26,13 @@ function HomePage() {
         dispatch(getVenues())
         // console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%', id)
 
-    // }, [dispatch])
-    // console.log('THIS IS THE VALUE OF VENUES', venues)
+    }, [dispatch])
+    // // console.log('THIS IS THE VALUE OF VENUES', venues)
 
 
-    // const handleClick = (id) => {
-    //     history.push(`/venues/${id}`)
-    })
+    // // const handleClick = (id) => {
+    // //     history.push(`/venues/${id}`)
+    // })
 
     return (
         <>
@@ -49,7 +49,7 @@ function HomePage() {
         </div>
         <div>
             <Carousel>
-                {venues?.map(venue => (
+                {Object.values(venues)?.map(venue => (
                     // <button onClick={() => console.log("poop", venue)}>pooooooooooooooooooop</button>
                     <div>
                         <a href={`/venues/${venue.id}`}>
@@ -58,6 +58,7 @@ function HomePage() {
                     </div>
                 ))}
             </Carousel>
+            <button onClick={() => console.log('venues', venues)}>CLICK</button>
         </div>
             {/* <h2>Netflix and Chill</h2>
             {venues?.map(venue => (
