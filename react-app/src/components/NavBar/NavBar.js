@@ -1,15 +1,15 @@
 // Imports
 import React from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import LogoutButton from '../auth/LogoutButton';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import CalendarTodayRoundedIcon from '@material-ui/icons/CalendarTodayRounded';
 import DemoUser from '../DemoUser'
 import LoginFormModal from '../auth/LoginForm';
+import SignUpFormModal from '../auth/SignUpForm';
 import logo from './logo.png'
-import { Button } from "@material-ui/core"
-import User from "../User"
+
 import "./NavBar.css"
 
 
@@ -30,9 +30,6 @@ const NavBar = ({ loaded }) => {
           <CalendarTodayRoundedIcon />
 
         </div>
-        <div className='navbar-button'>
-          <LogoutButton />
-        </div>
         <div className='logout'>
           <LogoutButton />
         </div>
@@ -41,16 +38,14 @@ const NavBar = ({ loaded }) => {
   } else {
     sessionLinks = (
       <>
-        <div className='navbar-button'>
+        <div className='navbar-button-container'>
           <LoginFormModal />
         </div>
-        <div className='navbar-button'>
-          <NavLink to='/sign-up' exact={true} activeClassName='active'>
-            Sign Up
-          </NavLink>
-          <div className='navbar-button'>
-            <DemoUser></DemoUser>
-          </div>
+        <div className='navbar-button-container'>
+          <SignUpFormModal />
+        </div>
+        <div className='navbar-button-container'>
+          <DemoUser />
         </div>
       </>
     );

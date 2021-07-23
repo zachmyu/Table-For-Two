@@ -13,7 +13,7 @@ ul{
     position: sticky;
     height: 64px;
     margin: 0px;
-    
+
 }
 .home-container{
     display: flex;
@@ -25,7 +25,7 @@ ul{
     justify-content: flex-end;
     align-content: center;
     background-color: white;
-    
+
 }
 .navbar__container{
     display: flex;
@@ -36,12 +36,7 @@ ul{
 
 
 
-/* Buttons */
-.navbar-button{
-    padding: 0px 7px 0px 7px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
-}
+
 
 /* janky fix, fix later */
 .logout{

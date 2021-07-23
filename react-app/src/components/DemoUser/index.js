@@ -5,18 +5,13 @@ import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
 
 // Initializing DemoUser component
-const  DemoUser = () => {
-    const [errors, setErrors] = useState([]);
-    const user = useSelector(state => state.session.user);
-    const dispatch = useDispatch();
+const DemoUser = () => {
+  const [errors, setErrors] = useState([]);
+  const user = useSelector(state => state.session.user);
+  const dispatch = useDispatch();
 
   const onLogin = async (e) => {
     e.preventDefault();
-
-    const demo_user = {
-        email: 'demo-user@demo.com', 
-        password: 'password',
-    };
 
     const data = await dispatch(login('demo-user@demodata.com', 'table42User!'));
     if (data) {
@@ -28,17 +23,17 @@ const  DemoUser = () => {
     return <Redirect to='/' />;
   }
 
-    return(
+  return (
 
-        <form onSubmit={ onLogin }>
-            <div className= 'form'>
-                {errors.map((error, ind) => (
-                <div key={ind}>{error}</div>
-                ))}
-            </div>
-            <button type='submit' className="demo-btn"> Demo User </button>
-        </form>
-    )
+    <form onSubmit={onLogin}>
+      <div className='form'>
+        {errors.map((error, ind) => (
+          <div key={ind}>{error}</div>
+        ))}
+      </div>
+      <button type='submit' className="button3"> Demo User </button>
+    </form>
+  )
 }
 
 // Exporting

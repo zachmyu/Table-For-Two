@@ -16,7 +16,7 @@ import { getVenues } from '../../store/venue'
 import { useSelector, useDispatch } from 'react-redux'
 import Calendar from "../Calendar";
 
-function HomePage({setResults}) {
+function HomePage({ setResults }) {
     // const { id } = useParams()
     const venues = useSelector(state => state.venues)
     const venueArray = Object.values(venues)
@@ -36,7 +36,7 @@ function HomePage({setResults}) {
     }, [dispatch])
     // // console.log('THIS IS THE VALUE OF VENUES', venues)
     console.log("PLS PRINT", venueArray)
-    // let 
+    // let
     // // const handleClick = (id) => {
     // //     history.push(`/venues/${id}`)
     // })
@@ -53,35 +53,33 @@ function HomePage({setResults}) {
 
     return (
         <>
-        <div className='Splash-container'>
-            <h1 id= 'date'>A date for any occasion</h1>
-            <div className='booking-container'>
-                {/* <DemoUser></DemoUser> */}
-                <Calendar id='calender'/>
-                <DropDown/>
-                <button>Let's go </button>
+            <div className='Splash-container'>
+                <h1 id='date'>A date for any occasion</h1>
+                <div className='booking-container'>
+                    {/* <DemoUser></DemoUser> */}
+                    <Calendar id='calender' />
+                    <DropDown />
+                    <button>Let's go </button>
+                </div>
             </div>
-
-            
-        </div>
-        <div>
-            <Carousel>
-                {Object.values(venues)?.map(venue => (
-                    // <button onClick={() => console.log("poop", venue)}>pooooooooooooooooooop</button>
-                    <div>
-                        <a href={`/venues/${venue.id}`}>
-                            <img src={venue.image_url} style={{width: '20%', height: '20%'}}></img>
-                        </a>
-                    </div>
-                ))}
-            </Carousel>
+            <div>
+                <Carousel>
+                    {venues?.map(venue => (
+                        // <button onClick={() => console.log("poop", venue)}>pooooooooooooooooooop</button>
+                        <div>
+                            <a href={`/venues/${venue.id}`}>
+                                <img src={venue.image_url} style={{ width: '20%', height: '20%' }}></img>
+                            </a>
+                        </div>
+                    ))}
+                </Carousel>
                 <input type='text' onChange={(e) => setSearch(e.target.value)} onKeyUp={(e) => {
                     if (e.key === "Enter") {
                         return handleClick()
                     }
                 }}></input>
                 <button onClick={() => console.log('venues', venueForSearchBar)}>CLICKFORSEARCH</button>
-        </div>
+            </div>
             {/* <h2>Netflix and Chill</h2>
             {venues?.map(venue => (
                 // { console.log('After mapping') }
