@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 
-from app.models import Favorite, db
+from app.models import Favorite, db, Venue
 
 favorite_routes = Blueprint('favorites', __name__)
 
@@ -17,11 +17,18 @@ def favorite(id):
     favorites = Favorite.query.filter_by(user_id=id).all()
     # favorite_data = [favorite.to_dict() for favorite in favorites]
     return jsonify({"favorites": [favorite.to_dict() for favorite in favorites]})
+    # favorite = Favorite.query.filter_by(user_id=id).all()
+    # venue_data = Venue.query.join(Favorite).filter(Favorite.venue_id == id)
+    # # favorites = favorite.to_dict()
+    # venues = [venue.to_dict() for venue in venue_data]
+    # return jsonify({favorite, {
+    #     "venues": venues
+    # }})
 
 
 @favorite_routes.route('/<int:id>', methods=['DELETE'])
 def delete_favorite_by_id(id):
-    delete_favorite = Favorite.query.filter.get(id)
+    delete_favorite = Favorite.query.get(id)
     db.session.delete(delete_favorite)
     db.session.commit()
     return {"delete_favorite", delete_favorite.to_dict()}

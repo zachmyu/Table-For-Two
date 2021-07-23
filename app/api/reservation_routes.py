@@ -16,6 +16,12 @@ def reservation(id):
     print('&&&&&&&&&&&&*&&&&&&', Venue)
     return jsonify(reservation_data, {"venues": venues})
 
+    # venue = Venue.query.join(Reservation).filter(Venue.id==Reservation.venue_id).first()
+    #  venues = venue.to_dict()
+    #  print('********************', venues)
+    #  print('&&&&&&&&&&&&*&&&&&&', Venue)
+    #  return jsonify(reservation_data, {"venues": venues})
+
 # def reservation(id):
 #     reservation = Reservation.query.filter_by(user_id=id).all()
 #     venue_data = Reservation.join(Venue)

@@ -8,9 +8,9 @@ const loadFavorites = favorite => ({
 })
 
 
-const addFavorites = favorites => ({
+const addFavorites = favorite => ({
     type: CREATE_FAVORITE,
-    favorites
+    favorite
 })
 
 const deleteSingleFavorite = favorite => ({

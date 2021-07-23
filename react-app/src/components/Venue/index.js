@@ -16,6 +16,9 @@ import ReservationForm from '../Reservations/ReservationForm'
 import SendIcon from '@material-ui/icons/Send';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import { getFavorites, createFavorites, deleteFavorites } from '../../store/favorite'
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+
 
 
 function Venue({ venueResult }) {
@@ -34,9 +37,19 @@ function Venue({ venueResult }) {
     const reservations = useSelector(state => state.reservations)
     const map = Object.values(venues)
     const singleVenue = map['0']
+    const faveObj = Object.values(favorites)
+    const keyOfObj = faveObj['0']
+    const faveToUse = keyOfObj?.favorites
+    // const faveToUse = Object.values(favorites['0'])
+    const thing = faveToUse?.find(favorite => favorite?.user_id == user?.id && favorite?.venue_id == id)?.id
+    // const faveId = Object.values(favorites).find(favorite => favorite?.user_id == user?.id && favorite?.venue_id == id)
+    // const deleteFave = parseInt(faveId?.id, 10)
+    // console.log('^^^^^^^^^^^^^^^^^^^', faveId)
     // const venueeee = singleVenue['0']
     // console.log("VENUERESULT", venueResult)
-
+    console.log('ikiijijijijijkii', faveObj)
+    console.log('keyOfObj', keyOfObj)
+    // console.log('THING TO USE', faveId)
     const handleSubmit = () => {
         const reviewsInfo = map[0]['1']['reviews']
         // return reviewsInfo
@@ -93,6 +106,18 @@ function Venue({ venueResult }) {
         }
         history.push(`/users/${user.id}`)
 
+    }
+
+    const handleFavorites = async (e) => {
+        e.preventDefault();
+        await dispatch(createFavorites({user_id: user.id, venue_id: id}))
+        history.push(`/users/${user.id}`)
+
+    }
+
+    const unFave = async (thing) => {
+        // e.preventDefault();
+        await dispatch(deleteFavorites(thing))
     }
 
     // if (!user) {
@@ -167,6 +192,22 @@ function Venue({ venueResult }) {
                         <Grid item md={3}>
                             <div>
                                 <div>Reservations</div>
+                                <div>
+                                    <button type='button' onClick={handleFavorites}><FavoriteIcon></FavoriteIcon></button>
+                                </div>
+                                <div>
+                                    {faveToUse?.find(favorite => favorite?.user_id == user?.id && favorite?.venue_id == id) && (
+                                        <div>
+                                            <button type='button' onClick={() => unFave(faveToUse.find(favorite => favorite?.user_id == user?.id && favorite?.venue_id == id)?.venue_id)}><FavoriteBorderIcon></FavoriteBorderIcon></button>
+                                            <button onClick={() => console.log('UGGGGHHHHHH', faveToUse?.find(favorite => favorite?.user_id == user?.id && favorite?.venue_id == id)?.id)}>dihsdidhj</button>
+                                            {/* <form onSubmit={() => unFave(favorite => favorite?.user_id == user?.id && favorite?.venue_id == id)?.venue_id}>
+                                                <button ></button>
+                                            </form> */}
+
+                                        </div>
+
+                                    )}
+                                </div>
                                 <ReservationForm venue_id={id} venue={venue} reservations={reservations}></ReservationForm>
 
                             </div>
