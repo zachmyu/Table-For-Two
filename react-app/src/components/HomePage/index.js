@@ -62,7 +62,7 @@ function HomePage({ setResults }) {
                     <button>Let's go </button>
                 </div>
             </div>
-            <div>
+            {/* <div>
                 <Carousel>
                     {venues?.map(venue => (
                         // <button onClick={() => console.log("poop", venue)}>pooooooooooooooooooop</button>
@@ -79,7 +79,7 @@ function HomePage({ setResults }) {
                     }
                 }}></input>
                 <button onClick={() => console.log('venues', venueForSearchBar)}>CLICKFORSEARCH</button>
-            </div>
+            </div> */}
             {/* <h2>Netflix and Chill</h2>
             {venues?.map(venue => (
                 // { console.log('After mapping') }

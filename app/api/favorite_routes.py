@@ -4,6 +4,7 @@ from app.models import Favorite, db, Venue
 
 favorite_routes = Blueprint('favorites', __name__)
 
+
 def validation_error_messages(validation_errors):
     errorMessages = []
     for field in validation_errors:
@@ -31,15 +32,15 @@ def delete_favorite_by_id(id):
     delete_favorite = Favorite.query.get(id)
     db.session.delete(delete_favorite)
     db.session.commit()
-    return {"delete_favorite", delete_favorite.to_dict()}
-    
+    return {"delete_favorite": delete_favorite.to_dict()}
+
 
 @favorite_routes.route('/', methods=['POST'])
 def postFavorite():
     request_json = request.get_json()
     favorite = Favorite(
-        user_id = request_json['user_id'],
-        venue_id = request_json['venue_id']
+        user_id=request_json['user_id'],
+        venue_id=request_json['venue_id']
     )
     db.session.add(favorite)
     db.session.commit()

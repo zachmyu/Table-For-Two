@@ -148,7 +148,7 @@ function Venue({ venueResult }) {
                 <div>
                     {faveToUse?.find(favorite => favorite?.user_id == user?.id && favorite?.venue_id == id) && (
                         <div>
-                            <button type='button' onClick={() => unFave(faveToUse.find(favorite => favorite?.user_id == user?.id && favorite?.venue_id == id)?.venue_id)}><FavoriteBorderIcon></FavoriteBorderIcon></button>
+                            <button type='button' onClick={() => unFave(faveToUse.find(favorite => favorite?.user_id == user?.id && favorite?.venue_id == id)?.id)}><FavoriteBorderIcon></FavoriteBorderIcon></button>
                             <button onClick={() => console.log('UGGGGHHHHHH', faveToUse?.find(favorite => favorite?.user_id == user?.id && favorite?.venue_id == id)?.id)}>dihsdidhj</button>
                         </div>
                     )}
