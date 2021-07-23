@@ -13,7 +13,7 @@ const loadSingleVenue = (venue) => ({
 })
 
 
-export const getVenues = () => async(dispatch) => {
+export const getVenues = () => async (dispatch) => {
     const response = await fetch("/api/venues")
 
     if (response.ok) {
@@ -23,7 +23,7 @@ export const getVenues = () => async(dispatch) => {
 }
 
 
-export const getSingleVenue = (id) => async(dispatch) => {
+export const getSingleVenue = (id) => async (dispatch) => {
     const response = await fetch(`/api/venues/${id}`)
     if (response.ok) {
         const venue = await response.json()
@@ -34,7 +34,8 @@ export const getSingleVenue = (id) => async(dispatch) => {
 const initialState = {}
 
 export default function venues(state = initialState, action) {
-    let updatedState = {...state}
+    let updatedState = { ...state }
+    let newState;
     switch (action.type) {
         // case GET_VENUES: {
         //     const newState = {}
@@ -45,11 +46,21 @@ export default function venues(state = initialState, action) {
         // }
         case GET_VENUES: {
             // const newState = {}
-            return {...state, ...action.venues}
+            return { ...state, ...action.venues }
         }
+        // case GET_SINGLE_VENUE: {
+        //     updatedState[action.venue.id] = action.venue
+        //     return updatedState
+        // }
         case GET_SINGLE_VENUE: {
-            updatedState[action.venue.id] = action.venue
-            return updatedState
+            newState = {
+                ...state,
+            }
+            newState.current = action.venue
+            // newState[action.venue.id] = { ...action.venue }
+
+            // updatedState
+            return newState
         }
         default:
             return state
