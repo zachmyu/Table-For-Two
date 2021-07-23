@@ -2,11 +2,13 @@
 // import DemoUser from "../DemoUser";
 import "./HomePage.css";
 // import Calendar from "../Calendar";
+import { NavLink, useHistory } from "react-router-dom";
+
 import DropDown from "../DropDown";
 import Carousel from 'react-material-ui-carousel'
 
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 // import { NavLink, useParams, useHistory } from "react-router-dom";
 // import Map from "../Venue/GoogleMap"
 // import {Marker } from "@react-google-maps/api";
@@ -14,25 +16,40 @@ import { getVenues } from '../../store/venue'
 import { useSelector, useDispatch } from 'react-redux'
 import Calendar from "../Calendar";
 
-function HomePage() {
+function HomePage({setResults}) {
     // const { id } = useParams()
     const venues = useSelector(state => state.venues)
+    const venueArray = Object.values(venues)
     // const venue = Object.values(venues)
     // const val = Object.keys(venue)
+    const [search, setSearch] = useState('')
+    let [value, setValue] = useState([])
     const dispatch = useDispatch()
-    // const history = useHistory()
+    const history = useHistory()
+    const [data, setData] = useState([]);
+
 
     useEffect(() => {
         dispatch(getVenues())
         // console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%', id)
-
+        // setValue(venueArray)
     }, [dispatch])
     // // console.log('THIS IS THE VALUE OF VENUES', venues)
-
-
+    console.log("PLS PRINT", venueArray)
+    // let 
     // // const handleClick = (id) => {
     // //     history.push(`/venues/${id}`)
     // })
+    let venueForSearchBar = []
+    const handleClick = () => {
+        const venueFilter = venueArray.filter((venue) => venue.name.toLowerCase().includes(search.toLowerCase()))
+        venueForSearchBar.push(venueFilter)
+        setResults(venueForSearchBar)
+        setSearch('')
+        console.log('from handleclick', venueForSearchBar)
+        // console.log('from result', result)
+        return history.push("/search")
+    }
 
     return (
         <>
@@ -58,7 +75,12 @@ function HomePage() {
                     </div>
                 ))}
             </Carousel>
-            <button onClick={() => console.log('venues', venues)}>CLICK</button>
+                <input type='text' onChange={(e) => setSearch(e.target.value)} onKeyUp={(e) => {
+                    if (e.key === "Enter") {
+                        return handleClick()
+                    }
+                }}></input>
+                <button onClick={() => console.log('venues', venueForSearchBar)}>CLICKFORSEARCH</button>
         </div>
             {/* <h2>Netflix and Chill</h2>
             {venues?.map(venue => (

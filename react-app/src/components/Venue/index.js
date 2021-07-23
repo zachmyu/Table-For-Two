@@ -15,9 +15,10 @@ import ReviewFormModal from '../ReviewFormModal'
 import ReservationForm from '../Reservations/ReservationForm'
 import SendIcon from '@material-ui/icons/Send';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import { getFavorites, createFavorites, deleteFavorites } from '../../store/reviews'
 
 
-function Venue() {
+function Venue({ venueResult }) {
     const { id } = useParams()
     const dispatch = useDispatch();
     const history = useHistory();
@@ -29,10 +30,12 @@ function Venue() {
     const user = useSelector(state => state.session.user)
     const venues = useSelector(state => state.venues)
     const reviews = useSelector(state => state.reviews)
+    const favorites = useSelector(state => state.favorites)
     const reservations = useSelector(state => state.reservations)
     const map = Object.values(venues)
     const singleVenue = map['0']
     // const venueeee = singleVenue['0']
+    // console.log("VENUERESULT", venueResult)
 
     const handleSubmit = () => {
         const reviewsInfo = map[0]['1']['reviews']
@@ -49,6 +52,11 @@ function Venue() {
         dispatch(getSingleVenue(Number(id)))
     }, [dispatch, id])
 
+    useEffect(() => {
+        dispatch(getFavorites(id))
+    })
+
+    console.log('~!!!!!!@@@~~~~', likes)
     
     // useEffect(() => {
     //     dispatch(getReservations(user?.id))
@@ -96,15 +104,15 @@ function Venue() {
         <div>
             {Object.values(venues).map(venue => (
                 <div>
-                    <button onClick={() =>console.log(venue)}>CLICK</button>
-                    <img src={venue['0'].image_url} style={{ width: '100vw', height: '50vh' }} alt="" />
+                    <button onClick={() =>console.log(venueResult)}>CLICK</button>
+                    <img src={venue['0']?.image_url} style={{ width: '100vw', height: '50vh' }} alt="" />
                     <Grid container align="center">
                         <Grid item md={2}></Grid>
 
                         <Grid item md={5} style={{ boxShadow: '10px 5px 5px gray' }}>
                             <div>
                                 <Typography variant="h1" component='h6' align="center">
-                                    {venue['0'].name}
+                                    {venue['0']?.name}
                                     <hr />
                                 </Typography>
                                 <StarsIcon fontSize='small' style={{ marginTop: '10px', paddingRight: '10px' }} ></StarsIcon>
@@ -113,12 +121,12 @@ function Venue() {
                                 </span>
                                 <ModeCommentOutlinedIcon fontSize='small' ></ModeCommentOutlinedIcon>
                                 <span style={{ paddingLeft: '5px', paddingRight: '10px', marginBottom: '100px' }}>
-                                    {venue['1'].reviews.length} reviews
+                                    {venue['1']?.reviews.length} reviews
                                 </span>
                                 <LocalAtmOutlinedIcon></LocalAtmOutlinedIcon> $30 under
                             </div>
                             <div>
-                                {venue['0'].description}
+                                {venue['0']?.description}
                             </div>
                             <div>
                                 {Object.values(venue['1'].reviews).map(review => (
