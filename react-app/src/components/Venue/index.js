@@ -15,7 +15,7 @@ import ReviewFormModal from '../ReviewFormModal'
 import ReservationForm from '../Reservations/ReservationForm'
 import SendIcon from '@material-ui/icons/Send';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-import { getFavorites, createFavorites, deleteFavorites } from '../../store/reviews'
+import { getFavorites, createFavorites, deleteFavorites } from '../../store/favorite'
 
 
 function Venue({ venueResult }) {
@@ -53,10 +53,10 @@ function Venue({ venueResult }) {
     }, [dispatch, id])
 
     useEffect(() => {
-        dispatch(getFavorites(id))
+        dispatch(getFavorites(user.id))
     })
 
-    console.log('~!!!!!!@@@~~~~', likes)
+    console.log('~!!!!!!@@@~~~~', favorites)
     
     // useEffect(() => {
     //     dispatch(getReservations(user?.id))

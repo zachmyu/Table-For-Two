@@ -15,6 +15,7 @@ import Venue from './components/Venue'
 import { authenticate } from './store/session';
 import HomePage from './components/HomePage'
 import Search from './components/Search'
+import VenueSearch from './components/VenueSearch'
 import { getVenues } from '../src/store/venue'
 
 function App() {
@@ -57,6 +58,9 @@ function App() {
           {/* <Route path='/login' exact={true}>
                 <LoginFormModal />
               </Route> */}
+            <Route exact path='/venues'>
+              <VenueSearch></VenueSearch>
+            </Route>
           <Route exact path='/sign-up' >
             <SignUpForm />
           </Route>

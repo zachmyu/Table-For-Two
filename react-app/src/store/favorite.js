@@ -2,15 +2,15 @@ const GET_FAVORITES = 'favorites/GET_FAVORITE'
 const CREATE_FAVORITE = 'favorites/CREATE_FAVORITE'
 const DELETE_FAVORITE = 'favorites/DELETE_FAVORITE'
 
-const loadFavorites = favorites => ({
+const loadFavorites = favorite => ({
     type: GET_FAVORITES,
-    favorites
+    favorite
 })
 
 
-const addFavorites = favorite => ({
+const addFavorites = favorites => ({
     type: CREATE_FAVORITE,
-    favorite
+    favorites
 })
 
 const deleteSingleFavorite = favorite => ({
@@ -18,14 +18,7 @@ const deleteSingleFavorite = favorite => ({
     favorite
 })
 
-export const getFavorites = (user_id) => async (dispatch) => {
-    const response = await fetch(`/api/favorites/${user_id}`)
 
-    if (response.ok) {
-        const favorites = await response.json()
-        dispatch(loadFavorites(favorites))
-    }
-}
 
 
 export const createFavorites = (favoriteInfo) => async (dispatch) => {
@@ -57,14 +50,38 @@ export const deleteFavorites = (favoriteId) => async (dispatch) => {
 
 }
 
+export const getFavorites = (user_id) => async (dispatch) => {
+    const response = await fetch(`/api/favorites/${user_id}`)
+
+    if (response.ok) {
+        const favorites = await response.json()
+        dispatch(loadFavorites(favorites))
+    }
+}
 
 const initialState = {}
 
 export default function favorites(state = initialState, action) {
-    let updatedState = {...state}
+    let updatedState = { ...state }
+    let newState;
     switch (action.type) {
-        case GET_FAVORITES:
-            return {...state, ...action.favorites}
+        case GET_FAVORITES: {
+            //     return {...state, ...action.favorites}
+            // let newState = {}
+            // action.payload.favorites.forEach(favorite => {
+            //     newState[favorite.id] = favorite
+            // })
+            // return newState
+            updatedState[action.favorite.id] = action.favorite
+            return updatedState
+            // newState = {}
+            // action.favorites.forEach(favorite => {
+            //     newState[favorite.id] = favorite
+            // })
+            // return newState
+        }
+
+
         case CREATE_FAVORITE:
             updatedState[action.favorite.id] = action.favorite
             return updatedState
