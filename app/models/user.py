@@ -18,6 +18,8 @@ class User(db.Model, UserMixin):
     images = db.relationship("Image", back_populates="user")
     venues = db.relationship("Venue", back_populates="user")
     reviews = db.relationship("Review", back_populates="user")
+    reservations = db.relationship("Reservation", back_populates="user")
+    favorites = db.relationship("Favorite", back_populates="user")
 
     @property
     def password(self):

@@ -14,10 +14,14 @@ import GoogleMap from './components/Venue/GoogleMap'
 import Venue from './components/Venue'
 import { authenticate } from './store/session';
 import HomePage from './components/HomePage'
+import Search from './components/Search'
+import VenueSearch from './components/VenueSearch'
+import { getVenues } from '../src/store/venue'
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
+  const [results, setResults] = useState([])
 
   useEffect(() => {
     (async () => {
@@ -54,11 +58,17 @@ function App() {
           {/* <Route path='/login' exact={true}>
                 <LoginFormModal />
               </Route> */}
-          {/* <Route exact path='/sign-up'>
+          <Route exact path='/venues'>
+            <VenueSearch></VenueSearch>
+          </Route>
+          {/* <Route exact path='/sign-up' >
             <SignUpForm />
           </Route> */}
-          <Route exact path='/'>
-            <HomePage />
+          <Route path='/search' exact={true}>
+            <Search results={results} />
+          </Route>
+          <Route exact path='/' >
+            <HomePage setResults={setResults} />
           </Route>
           <ProtectedRoute exact path='/users'>
             <UsersList />

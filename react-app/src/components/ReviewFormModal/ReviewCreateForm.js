@@ -48,6 +48,8 @@ function ReviewFormModal({ venue_id, reviewId }) {
         setRating('')
         setShowForm(false)
     }
+
+
     console.log(reviews)
 
     return (

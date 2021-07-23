@@ -14,7 +14,8 @@ import './Venue.css'
 
 
 
-function Venue() {
+
+function Venue({ venueResult }) {
     const { id } = useParams()
     const dispatch = useDispatch();
     const history = useHistory();
@@ -27,10 +28,18 @@ function Venue() {
     const reservations = useSelector(state => state.reservations)
     const venue = useSelector(state => state?.venues.current)
     const reviewsInfo = venue ? Object.values(venue?.reviews) : null
+    const faveObj = Object.values(favorites)
+    const keyOfObj = faveObj['0']
+    const faveToUse = keyOfObj?.favorites
+    const thing = faveToUse?.find(favorite => favorite?.user_id == user?.id && favorite?.venue_id == id)?.id
 
     useEffect(async () => {
         await dispatch(getSingleVenue(id))
     }, [dispatch, id])
+
+    useEffect(() => {
+        dispatch(getFavorites(user.id))
+    }, [dispatch, user.id])
 
     const handleRating = () => {
         let total = 0
@@ -39,7 +48,7 @@ function Venue() {
         return avg
     }
 
-    const editReview = (reviewId, title, body, rating, e) => {
+    const editReview = async (reviewId, title, body, rating, e) => {
         e.preventDefault();
         dispatch(updateReview(user.id, id, title, body, Number(rating), reviewId))
         setTitle('')
@@ -59,9 +68,21 @@ function Venue() {
     const deleteSingleReview = async (reviewId) => {
         let alert = window.confirm('Are you sure you want to delete this review?')
         if (alert) {
-            dispatch(deleteReview(reviewId))
+            await dispatch(deleteReview(reviewId))
         }
         history.push(`/venues/${id}`)
+    }
+
+    const handleFavorites = async (e) => {
+        e.preventDefault();
+        await dispatch(createFavorites({ user_id: user.id, venue_id: id }))
+        history.push(`/users/${user.id}`)
+
+    }
+
+    const unFave = async (thing) => {
+        // e.preventDefault();
+        await dispatch(deleteFavorites(thing))
     }
 
     let reviewChange;
@@ -117,6 +138,17 @@ function Venue() {
         makeReservation = (
             <>
                 <h3>Reservations</h3>
+                <div>
+                    <button type='button' onClick={handleFavorites}><FavoriteIcon></FavoriteIcon></button>
+                </div>
+                <div>
+                    {faveToUse?.find(favorite => favorite?.user_id == user?.id && favorite?.venue_id == id) && (
+                        <div>
+                            <button type='button' onClick={() => unFave(faveToUse.find(favorite => favorite?.user_id == user?.id && favorite?.venue_id == id)?.venue_id)}><FavoriteBorderIcon></FavoriteBorderIcon></button>
+                            <button onClick={() => console.log('UGGGGHHHHHH', faveToUse?.find(favorite => favorite?.user_id == user?.id && favorite?.venue_id == id)?.id)}>dihsdidhj</button>
+                        </div>
+                    )}
+                </div>
                 <ReservationForm venue_id={id} venue={venue} reservations={reservations}></ReservationForm>
             </>
         )
