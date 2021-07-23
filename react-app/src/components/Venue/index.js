@@ -111,7 +111,7 @@ function Venue() {
     } else {
         reviewChange = (
             <div className='container_venue-comments'>
-                {reviewsInfo.map(review => (
+                {reviewsInfo?.map(review => (
                     <div className='container_venue-comments'>
                         <hr />
                         <h3>Title: {review.title}</h3>
