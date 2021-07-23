@@ -10,7 +10,10 @@ import ModeCommentOutlinedIcon from '@material-ui/icons/ModeCommentOutlined';
 import LocalAtmOutlinedIcon from '@material-ui/icons/LocalAtmOutlined';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import SendIcon from '@material-ui/icons/Send';
+import { getFavorites, createFavorites, deleteFavorites } from '../../store/favorite'
 import './Venue.css'
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
 
 
@@ -25,6 +28,7 @@ function Venue({ venueResult }) {
     const [showForm, setShowForm] = useState(false)
     const [formId, setFormId] = useState(null)
     const user = useSelector(state => state.session.user)
+    const favorites = useSelector(state => state.favorites)
     const reservations = useSelector(state => state.reservations)
     const venue = useSelector(state => state?.venues.current)
     const reviewsInfo = venue ? Object.values(venue?.reviews) : null
