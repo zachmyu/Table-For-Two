@@ -3,6 +3,8 @@ import { useParams, useHistory } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import { useSelector, useDispatch } from 'react-redux'
 import { getReservations, createReservation, updateReservation, deleteReservation} from '../../store/reservations'
+import { getFavorites, createFavorites, deleteFavorites } from '../../store/favorite'
+
 
 
 // import { Modal } from '../../'
@@ -21,7 +23,13 @@ function User() {
   const [formId, setFormId] = useState(null)
   const dispatch = useDispatch();
   const history = useHistory()
+  const favorites = useSelector(state => state.favorites)
 
+  useEffect(() => {
+    dispatch(getFavorites(userId))
+  }, [dispatch, userId])
+
+  console.log('XXXXXXXXXXX', favorites)
 
   useEffect(() => {
      dispatch(getReservations(userId))
@@ -43,6 +51,7 @@ function User() {
   if (!user) {
     return null;
   } 
+
 
   const editReservation = async (reservationId, reservation_datetime, party_size, duration, e) => {
     e.preventDefault();
@@ -93,6 +102,19 @@ function User() {
               </div>
             ))}
             <h2 className="h2-container">Reviews</h2>
+            <h2>Favorites</h2>
+            {Object.values(favorites).map(favorite => (
+              <div>
+                {favorite?.favorites?.map(singleFavorite => (
+                  <div>
+                    <button onClick={() => console.log(singleFavorite)}>singleFavorite Click</button>
+
+                  </div>
+                )) }
+                <button onClick={() => console.log(favorite)}>Favorite Click</button>
+              </div>
+            ))}
+
         </Grid>
         <Grid item md={3}></Grid>
       </Grid>

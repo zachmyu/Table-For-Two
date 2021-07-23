@@ -54,7 +54,7 @@ function Venue({ venueResult }) {
 
     useEffect(() => {
         dispatch(getFavorites(user.id))
-    })
+    }, [dispatch, user.id])
 
     console.log('~!!!!!!@@@~~~~', favorites)
     

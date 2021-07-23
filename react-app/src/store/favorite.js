@@ -72,13 +72,16 @@ export default function favorites(state = initialState, action) {
             //     newState[favorite.id] = favorite
             // })
             // return newState
-            updatedState[action.favorite.id] = action.favorite
-            return updatedState
+            // updatedState[action.favorite.id] = action.favorite
+            // return updatedState
             // newState = {}
             // action.favorites.forEach(favorite => {
             //     newState[favorite.id] = favorite
             // })
             // return newState
+            let newState = {}
+            newState[action.favorite.id] = action.favorite
+            return newState
         }
 
 
