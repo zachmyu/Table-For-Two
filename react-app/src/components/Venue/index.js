@@ -10,12 +10,8 @@ import ModeCommentOutlinedIcon from '@material-ui/icons/ModeCommentOutlined';
 import LocalAtmOutlinedIcon from '@material-ui/icons/LocalAtmOutlined';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import SendIcon from '@material-ui/icons/Send';
-import { getFavorites, createFavorites, deleteFavorites } from '../../store/favorite'
+import { createFavorites, deleteFavorites } from '../../store/favorite'
 import './Venue.css'
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-
-
 
 
 function Venue({ venueResult }) {
@@ -27,23 +23,21 @@ function Venue({ venueResult }) {
     const [rating, setRating] = useState(0);
     const [showForm, setShowForm] = useState(false)
     const [formId, setFormId] = useState(null)
+    const [buttonUnFave, setButtonUnFave] = useState('button-unfave')
+    const [buttonAddFave, setButtonAddFave] = useState('button-addfave')
+    const [oneClickBtn, setOneClickBtn] = useState(false)
+
     const user = useSelector(state => state.session.user)
-    const favorites = useSelector(state => state.favorites)
     const reservations = useSelector(state => state.reservations)
     const venue = useSelector(state => state?.venues.current)
+    const userFavorites = user ? Object.values(user?.favorites) : null
     const reviewsInfo = venue ? Object.values(venue?.reviews) : null
-    const faveObj = Object.values(favorites)
-    const keyOfObj = faveObj['0']
-    const faveToUse = keyOfObj?.favorites
-    const thing = faveToUse?.find(favorite => favorite?.user_id == user?.id && favorite?.venue_id == id)?.id
+    const faveFind = userFavorites.find(favorite => favorite?.venue_id == id)
 
-    useEffect(async () => {
-        await dispatch(getSingleVenue(id))
-    }, [dispatch, id])
 
     useEffect(() => {
-        dispatch(getFavorites(user.id))
-    }, [dispatch, user.id])
+        dispatch(getSingleVenue(id))
+    }, [dispatch, id])
 
     const handleRating = () => {
         let total = 0
@@ -77,16 +71,40 @@ function Venue({ venueResult }) {
         history.push(`/venues/${id}`)
     }
 
-    const handleFavorites = async (e) => {
+    const addFave = async (e) => {
         e.preventDefault();
+        setButtonAddFave('button-addfave-clicked')
+        setOneClickBtn(true)
         await dispatch(createFavorites({ user_id: user.id, venue_id: id }))
-        history.push(`/users/${user.id}`)
-
+        history.push(`/venues/${id}`)
     }
 
-    const unFave = async (thing) => {
-        // e.preventDefault();
-        await dispatch(deleteFavorites(thing))
+    const unFave = async (favId) => {
+        await dispatch(deleteFavorites(favId))
+        setButtonUnFave('button-unfave-clicked')
+        setOneClickBtn(true)
+        history.push(`/venues/${id}`)
+    }
+
+    let favoriteButton;
+    if (faveFind) {
+        favoriteButton = (
+            <div>
+                <button type='button' disabled={oneClickBtn} id={buttonUnFave} onClick={() => (
+                    unFave(userFavorites.find(favorite => (
+                        favorite?.venue_id == id
+                    ))?.id)
+                )}><i class="fas fa-heart"></i></button >
+            </div >
+        )
+    } else {
+        favoriteButton = (
+            <>
+                <button type='button' disabled={oneClickBtn} id={buttonAddFave} onClick={
+                    addFave
+                }><i class="fas fa-heart"></i></button>
+            </>
+        )
     }
 
     let reviewChange;
@@ -143,14 +161,11 @@ function Venue({ venueResult }) {
             <>
                 <h3>Reservations</h3>
                 <div>
-                    <button type='button' onClick={handleFavorites}><FavoriteIcon></FavoriteIcon></button>
+
                 </div>
-                <div>
-                    {faveToUse?.find(favorite => favorite?.user_id == user?.id && favorite?.venue_id == id) && (
-                        <div>
-                            <button type='button' onClick={() => unFave(faveToUse.find(favorite => favorite?.user_id == user?.id && favorite?.venue_id == id)?.id)}><FavoriteBorderIcon></FavoriteBorderIcon></button>
-                        </div>
-                    )}
+                <div classNames='reservation-favorites'>
+
+                    {favoriteButton}
                 </div>
                 <ReservationForm venue_id={id} venue={venue} reservations={reservations}></ReservationForm>
             </>
