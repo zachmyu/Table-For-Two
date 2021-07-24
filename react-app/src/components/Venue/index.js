@@ -89,21 +89,31 @@ function Venue({ venueResult }) {
     let favoriteButton;
     if (faveFind) {
         favoriteButton = (
-            <div>
-                <button type='button' disabled={oneClickBtn} id={buttonUnFave} onClick={() => (
-                    unFave(userFavorites.find(favorite => (
-                        favorite?.venue_id == id
-                    ))?.id)
-                )}><i class="fas fa-heart"></i></button >
-            </div >
+            <div classNames='reservation-favorites'>
+                <span classNames='fav-title'>Remove from your favorites? ☹</span>
+                <button type='button'
+                    disabled={oneClickBtn}
+                    id={buttonUnFave}
+                    onClick={() => (
+                        unFave(userFavorites.find(favorite => (
+                            favorite?.venue_id == id
+                        ))?.id)
+                    )}>
+                    <i class="fas fa-heart" />
+                </button >
+            </div>
         )
     } else {
         favoriteButton = (
-            <>
-                <button type='button' disabled={oneClickBtn} id={buttonAddFave} onClick={
-                    addFave
-                }><i class="fas fa-heart"></i></button>
-            </>
+            <div classNames='reservation-favorites'>
+                <span classNames='fav-title'>Add to your favorites!</span>
+                <button type='button'
+                    disabled={oneClickBtn}
+                    id={buttonAddFave}
+                    onClick={addFave}>
+                    <i class="fas fa-heart" />
+                </button>
+            </div>
         )
     }
 
@@ -159,15 +169,14 @@ function Venue({ venueResult }) {
     if (user) {
         makeReservation = (
             <>
-                <h3>Reservations</h3>
+                {favoriteButton}
                 <div>
-
+                    <h3>Reservations</h3>
+                    <ReservationForm venue_id={id}
+                        venue={venue}
+                        reservations={reservations}>
+                    </ReservationForm>
                 </div>
-                <div classNames='reservation-favorites'>
-
-                    {favoriteButton}
-                </div>
-                <ReservationForm venue_id={id} venue={venue} reservations={reservations}></ReservationForm>
             </>
         )
     } else {
@@ -205,7 +214,6 @@ function Venue({ venueResult }) {
                             <div id="venueElement-reservation">{makeReservation}</div>
                             <div id="venueElement-maps">Google Maps Placeholder</div>
                             <div id="venueElement-info">Various Information Placeholder</div>
-                            <div id="venueElement-favorite">Favorite This Venue Placeholder</div>
                         </div>
                     </div>
                 </>
