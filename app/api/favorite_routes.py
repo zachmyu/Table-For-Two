@@ -16,7 +16,7 @@ def validation_error_messages(validation_errors):
 @favorite_routes.route('/<int:id>')
 def favorite(id):
     favorites = Favorite.query.filter_by(user_id=id).all()
-    return jsonify({"favorites": [favorite.to_dict() for favorite in favorites]})
+    return {"favorites": [favorite.to_dict() for favorite in favorites]}
 
 
 @favorite_routes.route('/<int:id>', methods=['DELETE'])
