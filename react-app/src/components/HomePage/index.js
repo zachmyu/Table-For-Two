@@ -50,14 +50,16 @@ function HomePage({ setResults }) {
             </div>
             <div className='splash-venues-container'>
                 {venueArray.map(venue => (
-                    <div className='splash-venue-card'>
-                        <img src={venue.image_url} className='splash-venue-pix' id={venue.id} alt='{venue.name}' />
-                        <div className='splash-venue-description'>
-                            <div className='splash-venue-title'><h3>{venue.name}</h3></div>
-                            <div className='splash-venue-location'>{venue.city} {venue.state}</div>
-                            <div className='splash-venue-hours'>Hours: {venue.operation_hours}</div>
+                    <a href={`/venues/${venue.id}`}>
+                        <div className='splash-venue-card'>
+                            <img src={venue.image_url} className='splash-venue-pix' id={venue.id} alt='{venue.name}' />
+                            <div className='splash-venue-description'>
+                                <div className='splash-venue-title'><h3>{venue.name}</h3></div>
+                                <div className='splash-venue-location'>{venue.city} {venue.state}</div>
+                                <div className='splash-venue-hours'>Hours: {venue.operation_hours}</div>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 ))}
             </div>
         </>
