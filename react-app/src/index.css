@@ -1,10 +1,14 @@
+.component {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 
 /* Buttons */
 .button1 {
     width: 240px;
     height: 40px;
     color: #009999;
-    border-radius: 10px;
+    border-radius: 5px;
     background-color: #2D333F;
     font-size: large;
     font-weight: bold;
@@ -19,7 +23,7 @@
     width: 240px;
     height: 40px;
     color: #2D333F;
-    border-radius: 10px;
+    border-radius: 5px;
     background-color: #009999;
     font-size: large;
     font-weight: bold;

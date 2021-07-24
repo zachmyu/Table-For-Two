@@ -1,4 +1,3 @@
-// import Select from 'react-select'
 import React from 'react';
 import Select from 'react-select';
 
@@ -27,12 +26,13 @@ const options = [
 
 function DropDown({ people, setPeople }) {
     return (
-        <div>
-            <Select value={people}
+        <>
+            <Select id='dropdown'
+                value={people}
                 onChange={setPeople}
                 options={options} >
             </Select>
-        </div>
+        </>
     )
 }
 

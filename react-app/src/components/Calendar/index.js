@@ -12,7 +12,8 @@ function Calendar({ reservation_datetime, setReservationDateTime }) {
             onChange={setReservationDateTime}
             value={DateMomentUtils}
             date={DateMomentUtils}>
-            <DateTimePicker date={DateMomentUtils}
+            <DateTimePicker id='calender'
+                date={DateMomentUtils}
                 value={reservation_datetime}
                 onChange={setReservationDateTime}
                 style={{ color: "green" }} />
