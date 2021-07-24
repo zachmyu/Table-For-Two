@@ -18,8 +18,6 @@ function ReviewFormModal({ venue_id, reviewId }) {
     const [showForm, setShowForm] = useState(false)
     venue_id = Number(venue_id)
 
-    console.log('VALUES OF REVIEWS THUNK', reviews)
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         dispatch(createReview({ user_id: sessionUser.id, venue_id, title, body, rating }))
@@ -49,16 +47,13 @@ function ReviewFormModal({ venue_id, reviewId }) {
         setShowForm(false)
     }
 
-
-    console.log(reviews)
-
     return (
         <>
             {/* {Object.values(venues).map(venue => (
                 <div>
                     {Object.values(venue['1'].reviews).map(review => (
                         <div>
-                            
+
                         </div>
                     ))}
                 </div>

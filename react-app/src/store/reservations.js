@@ -45,9 +45,7 @@ export const createReservation = (reservationInfo) => async (dispatch) => {
     if (response.ok) {
         const newReservation = await response.json()
         dispatch(addReservation(newReservation))
-        console.log("DATA FROM RESERVATION STORE RIGHT AFTER DISPATCH", newReservation)
     }
-    console.log('this is just the reservationInfo var on store', reservationInfo)
 }
 
 export const updateReservation = (user_id, venue_id, reservation_datetime, party_size, duration, reservationId) => async (dispatch) => {
@@ -61,9 +59,7 @@ export const updateReservation = (user_id, venue_id, reservation_datetime, party
     if (response.ok) {
         const updateReservation = await response.json()
         dispatch(updateSingleReservation(updateReservation))
-        console.log('IF THIS PRINTS THE RESPONSE IS OK WHEN UPDATING A RESERVATION', updateReservation)
     }
-    console.log('THIS IS HERE TO SEE IF THE INFO AT LEAST GETS TO THE THUNK FOR UPDATE', updateReservation)
 }
 
 export const deleteReservation = reservationId => async (dispatch) => {
@@ -72,16 +68,14 @@ export const deleteReservation = reservationId => async (dispatch) => {
     })
     if (response.ok) {
         dispatch(deleteSingleReservation(reservationId))
-        console.log('THIS IS HERE TO SEE IF THE RESPONSE IS OK WHEN DELETING A RESERVATION')
     }
-    console.log('THIS WILL PRINT THIS MESSAGE IF THE INFO FROM DELETING IS GETTING TO THE THUNK', reservationId)
 }
 
 
 const initialState = {}
 
 export default function reservations(state = initialState, action) {
-    let updatedState = {...state}
+    let updatedState = { ...state }
     switch (action.type) {
         case GET_RESERVATIONS:
             // let newState = {}
@@ -89,7 +83,7 @@ export default function reservations(state = initialState, action) {
             //     newState[reservation.id] = reservation
             // })
             // return newState
-            return {...state, ...action.reservations}
+            return { ...state, ...action.reservations }
         case CREATE_RESERVATION:
             // newState = JSON.parse(JSON.stringify(state))
             // newState[action.payload.id] = action.payload

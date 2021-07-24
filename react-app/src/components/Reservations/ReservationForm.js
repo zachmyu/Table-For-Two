@@ -1,4 +1,4 @@
-import { useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Calendar from '../Calendar'
 import DropDown from '../DropDown';
@@ -6,9 +6,9 @@ import DropDown from '../DropDown';
 import { createReservation } from '../../store/reservations';
 
 
-const durations = [1,2,3]
+const durations = [1, 2, 3]
 
-function ReservationForm({venue_id, venue, reservations}) {
+function ReservationForm({ venue_id, venue, reservations }) {
     const sessionUser = useSelector(state => state.session.user)
     const [reservation_datetime, setReservationDateTime] = useState(new Date());
     const [people, setPeople] = useState(2)
@@ -17,33 +17,23 @@ function ReservationForm({venue_id, venue, reservations}) {
     const venues = useSelector(state => state.venues)
     const map = Object.values(venues)
     const dispatch = useDispatch()
-  
-
-    // const [time, setTime] = useState({ date: format(date, 'H') })
-    console.log('HERE WE HAVE THE VALUE OF DATE', reservation_datetime)
 
     const reservation = async (e) => {
         e.preventDefault();
-        dispatch(createReservation({ user_id: sessionUser.id, venue_id, reservation_datetime, party_size: Number(people), duration: Number(duration)}))
-      
-
+        dispatch(createReservation({ user_id: sessionUser.id, venue_id, reservation_datetime, party_size: Number(people), duration: Number(duration) }))
     }
-    // console.log('==========This is time=========', time)
 
     return (
         <div>
             <div>Make a new reservation</div>
             <hr />
             <Calendar reservation_datetime={reservation_datetime} setReservationDateTime={setReservationDateTime}></Calendar>
-            {/* <DropDown people={people} setPeople={setPeople}></DropDown> */}
             <div>
-
-                <select 
+                <select
                     onChange={(e) => {
                         Number(setPeople(Number(e.target.value)))
                     }}
-                    value={people}
-                >
+                    value={people}>
                     <option selected="" value="1">For 1</option>
                     <option value="2">For 2</option>
                     <option value="3">For 3</option>
@@ -64,7 +54,6 @@ function ReservationForm({venue_id, venue, reservations}) {
                     <option value="18">For 18</option>
                     <option value="19">For 19</option>
                     <option value="20">For 20</option>
-
                 </select>
             </div>
             <div>

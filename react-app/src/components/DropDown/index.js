@@ -1,7 +1,6 @@
 // import Select from 'react-select'
-import React, { useState } from 'react';
+import React from 'react';
 import Select from 'react-select';
-
 
 const options = [
     { value: '1', label: '1 Person' },
@@ -26,14 +25,13 @@ const options = [
     { value: '20', label: '20 People' }
 ]
 
-
-function DropDown({people, setPeople}){
-    // const [people, setPeople] = useState(options[0].value)
-    
+function DropDown({ people, setPeople }) {
     return (
-        // <button onClick={() => console.log('++++++++++++++++++++', people)} type="button">People</button>
         <div>
-            <Select value={people} onChange={setPeople} options={options} ></Select>
+            <Select value={people}
+                onChange={setPeople}
+                options={options} >
+            </Select>
         </div>
     )
 }

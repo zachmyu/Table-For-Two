@@ -1,4 +1,4 @@
-import React, { useState, useEffect }from 'react'
+import React, { useState, useEffect } from 'react'
 import { NavLink, useParams, useHistory } from "react-router-dom";
 
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
@@ -6,7 +6,7 @@ import { getVenues, getSingleVenue } from '../../../store/venue'
 import { useSelector, useDispatch } from 'react-redux'
 //AIzaSyBUxfH8gj9gvfMEvpu4C0xDtNs3QW7doS8
 
-function Map( {venue} ) {
+function Map({ venue }) {
     const venues = useSelector(state => state.venues.venues)
     const dispatch = useDispatch()
     const history = useHistory()
@@ -15,8 +15,7 @@ function Map( {venue} ) {
         dispatch(getVenues())
         dispatch(getSingleVenue())
     }, [dispatch])
-    // console.log('THIS IS THE VALUE OF VENUES', venues)
-    
+
     const containerStyle = {
         width: '400px',
         height: '400px'
@@ -32,12 +31,11 @@ function Map( {venue} ) {
 
     return (
         <LoadScript googleMapsApiKey={`${process.env.REACT_APP_GOOGLE_KEY}`}>
-            <GoogleMap 
+            <GoogleMap
                 mapContainerStyle={containerStyle}
                 center={center}
                 zoom={10}>
                 {venues?.map(venue => {
-                    // {console.log('?????????????????', venue.latitude, venue.longitude)}
                     <Marker key='marker'
                         key={venue.id}
                         position={
@@ -48,10 +46,8 @@ function Map( {venue} ) {
                         }
                         clickable={true}
                         onClick={() => handleClick(venue.id)}
-    
-                        >
-                        
-                        </Marker>
+                    >
+                    </Marker>
                 })}
             </GoogleMap>
         </LoadScript>
