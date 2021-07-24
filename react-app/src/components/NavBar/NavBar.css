@@ -1,0 +1,44 @@
+a {
+    color:black ;
+    text-decoration: none;
+}
+/* Basic setup */
+
+ul{
+    list-style: none;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    list-style: none;
+    position: sticky;
+    height: 64px;
+    margin: 0px;
+
+}
+.home-container{
+    display: flex;
+    justify-content: flex-start;
+    align-content: center;
+}
+.session-container {
+    display: flex;
+    justify-content: flex-end;
+    align-content: center;
+    background-color: white;
+
+}
+.navbar__container{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: rgb(247, 247, 247) solid .5px;
+    background-color: white;
+}
+
+
+
+
+
+/* janky fix, fix later */
+.logout{
+    background-color: white;
+}

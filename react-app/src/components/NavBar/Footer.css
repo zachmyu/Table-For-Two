@@ -1,0 +1,28 @@
+.footer-container {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #009999;
+    /* background-color: #2D333F; */
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 30px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    position: fixed;
+    border-top: grey solid 1px;
+    background-color: white;
+}
+
+.footer-element{
+    padding:0px 10px;
+}
+
+a.footer-element{
+    color: #009999;
+}
+
+a.footer-element:hover{
+    color: #01d4d4;
+}

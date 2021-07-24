@@ -1,4 +1,63 @@
-/* TODO Add site wide styles */
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities; */
+
+/* Buttons */
+.button1 {
+    width: 240px;
+    height: 40px;
+    color: #009999;
+    border-radius: 10px;
+    background-color: #2D333F;
+    font-size: large;
+    font-weight: bold;
+    margin: 5px;
+}
+
+.button1:hover {
+    background-color: #424242;
+}
+
+.button2 {
+    width: 240px;
+    height: 40px;
+    color: #2D333F;
+    border-radius: 10px;
+    background-color: #009999;
+    font-size: large;
+    font-weight: bold;
+    margin: 5px;
+}
+
+.button2:hover {
+    background-color: #01d4d4;
+}
+
+.button3 {
+    width: 100px;
+    height: 30px;
+    color: #009999;
+    border-radius: 10px;
+    background-color: #2D333F;
+    font-size: 12px;
+    font-weight: bold;
+    margin: 10px;
+}
+
+.button3:hover {
+    background-color: #424242;
+}
+
+.form {
+    margin-top: 14px;
+}
+
+.navbar-button-container {
+    display:flex;
+    align-content: center;
+}
+
+.navbar-button{
+    background: none;
+    border: none;
+    padding: 5px 7px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}

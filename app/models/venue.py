@@ -21,8 +21,12 @@ class Venue(db.Model, UserMixin):
     operation_hours = db.Column(db.String(255), nullable=False)
     latitude = db.Column(db.Float, nullable=False)
     longitude = db.Column(db.Float, nullable=False)
+
     user = db.relationship('User', back_populates='venues')
     date_type = db.relationship('Date_type', back_populates='venues')
+    reviews = db.relationship('Review', back_populates='venue')
+    reservations = db.relationship('Reservation', back_populates='venue')
+    favorites = db.relationship("Favorite", back_populates="venue")
 
     def to_dict(self):
         return {
@@ -30,6 +34,7 @@ class Venue(db.Model, UserMixin):
             'creator_id': self.creator_id,
             'username': self.name,
             'name': self.name,
+            'price': self.price,
             'date_type_id': self.date_type_id,
             'description': self.description,
             'image_url': self.image_url,
@@ -41,4 +46,5 @@ class Venue(db.Model, UserMixin):
             'operation_hours': self.operation_hours,
             "latitude": self.latitude,
             "longitude": self.longitude,
+            "reviews": {review.id: review.to_dict() for review in self.reviews}
         }

@@ -1,30 +1,27 @@
 from app.models import db, User
 from werkzeug.security import generate_password_hash
 
-# Adds a demo user, you can add other users here if you want
-
-
 def seed_users():
-    pw = generate_password_hash("password")
+    pw = generate_password_hash("table42User!")
 
     DemoUser = User(first_name="Demo",
                     last_name="User",
                     username="demouser",
                     profile_image_url="image.com/1",
                     email="demo-user@demo.com",
-                    hashed_password=pw)
+                    hashed_password=generate_password_hash("password"))
     DemoLovato = User(first_name="Demo",
                       last_name="Lovato",
                       username="demolovato",
                       profile_image_url="image.com/1",
                       email="demo@mcdemoface.com",
-                      hashed_password=pw)
+                      hashed_password=generate_password_hash("password"))
     DemoMoore = User(first_name="Demo",
                      last_name="Moore",
                      username="demomoore",
                      profile_image_url="image.com/1",
                      email="demomoore@mcdemoface.com",
-                     hashed_password=pw)
+                     hashed_password=generate_password_hash("password"))
     AdamSandler = User(first_name="Adam",
                        last_name="Sandler",
                        username="HappyMadison",
@@ -290,11 +287,11 @@ def seed_users():
                        email="randallpark@hollywoodstar.com",
                        hashed_password=pw)
     RobertDeNiro = User(first_name="Robert",
-                         last_name="De Niro",
-                         username="Someone",
-                         profile_image_url="image.com/1",
-                         email="robertdeniro@hollywoodstar.com",
-                         hashed_password=pw)
+                        last_name="De Niro",
+                        username="Someone",
+                        profile_image_url="image.com/1",
+                        email="robertdeniro@hollywoodstar.com",
+                        hashed_password=pw)
     RobertDowneyJr = User(first_name="Robert",
                           last_name="Downey Jr.",
                           username="RealIronMan",

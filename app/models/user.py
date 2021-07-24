@@ -17,6 +17,9 @@ class User(db.Model, UserMixin):
     
     images = db.relationship("Image", back_populates="user")
     venues = db.relationship("Venue", back_populates="user")
+    reviews = db.relationship("Review", back_populates="user")
+    reservations = db.relationship("Reservation", back_populates="user")
+    favorites = db.relationship("Favorite", back_populates="user")
 
     @property
     def password(self):
@@ -36,5 +39,6 @@ class User(db.Model, UserMixin):
             'last_name': self.last_name,
             'username': self.username,
             'profile_image_url': self.profile_image_url,
-            'email': self.email
+            'email': self.email,
+            "reservations": {reservation.id: reservation.to_dict() for reservation in self.reservations}
         }
