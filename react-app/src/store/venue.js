@@ -4,7 +4,7 @@ const GET_SINGLE_VENUE = "venue/GET_SINGLE_VENUE"
 
 const loadVenues = (venues) => ({
     type: GET_VENUES,
-    payload: venues,
+    venues,
 })
 
 const loadSingleVenue = (venue) => ({
@@ -38,21 +38,22 @@ export default function venues(state = initialState, action) {
     let updatedState = { ...state }
     let newState;
     switch (action.type) {
-        // case GET_VENUES: {
-        //     const newState = {}
-        //     action.venues.forEach(venue => {
-        //         newState[venue.id] = venue
-        //     })
-        //     return newState
-        // }
+        case GET_VENUES: {
+            const allVenues = {};
+            action.venues.venues.forEach(venue => {
+                allVenues[venue.id] = venue;
+            });
+            newState = { ...allVenues }
+            return newState;
+        }
         // case GET_VENUES: {
         //     // const newState = {}
         //     return {...state, ...action.venues}
         // }
-        case GET_VENUES: {
-            // const newState = {}
-            return { ...state, ...action.venues }
-        }
+        // case GET_VENUES: {
+        //     // const newState = {}
+        //     return { ...state, ...action.venues }
+        // }
         case GET_SINGLE_VENUE: {
             newState = { ...state }
             newState.current = action.venue

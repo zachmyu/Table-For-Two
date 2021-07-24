@@ -10,7 +10,7 @@ const durations = [1,2,3]
 
 function ReservationForm({venue_id, venue, reservations}) {
     const sessionUser = useSelector(state => state.session.user)
-    const [date, setDate] = useState(new Date())
+    const [reservation_datetime, setReservationDateTime] = useState(new Date());
     const [people, setPeople] = useState(2)
     const [booking, setBooking] = useState(false)
     const [duration, setDuration] = useState(1.0)
@@ -20,11 +20,11 @@ function ReservationForm({venue_id, venue, reservations}) {
   
 
     // const [time, setTime] = useState({ date: format(date, 'H') })
-    console.log('HERE WE HAVE THE VALUE OF DATE', date)
+    console.log('HERE WE HAVE THE VALUE OF DATE', reservation_datetime)
 
     const reservation = async (e) => {
         e.preventDefault();
-        dispatch(createReservation({ user_id: sessionUser.id, venue_id, reservation_datetime: date, party_size: Number(people), duration: Number(duration)}))
+        dispatch(createReservation({ user_id: sessionUser.id, venue_id, reservation_datetime, party_size: Number(people), duration: Number(duration)}))
       
 
     }
@@ -34,7 +34,7 @@ function ReservationForm({venue_id, venue, reservations}) {
         <div>
             <div>Make a new reservation</div>
             <hr />
-            <Calendar date={date} setDate={setDate}></Calendar>
+            <Calendar reservation_datetime={reservation_datetime} setReservationDateTime={setReservationDateTime}></Calendar>
             {/* <DropDown people={people} setPeople={setPeople}></DropDown> */}
             <div>
 

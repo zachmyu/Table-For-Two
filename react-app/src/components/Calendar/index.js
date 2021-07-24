@@ -11,14 +11,14 @@ import {
 import 'react-datepicker/dist/react-datepicker.css'
 import './Calender.css'
 
-function Calendar({ date, setDate }) {
+function Calendar({ reservation_datetime, setReservationDateTime }) {
     const [selectedDate, handleDateChange] = useState(null);
 
     return (
-        <MuiPickersUtilsProvider utils={DateMomentUtils} onChange={setDate} value={DateMomentUtils} date={DateMomentUtils}>
+        <MuiPickersUtilsProvider utils={DateMomentUtils} onChange={setReservationDateTime} value={DateMomentUtils} date={DateMomentUtils}>
         {/* <DatePicker value={selectedDate} onChange={handleDateChange} />
         <TimePicker value={selectedDate} onChange={handleDateChange} /> */}
-            <DateTimePicker date={DateMomentUtils} value={date} onChange={setDate}  style={{color: "green"}}/>
+            <DateTimePicker date={DateMomentUtils} value={reservation_datetime} onChange={setReservationDateTime}  style={{color: "green"}}/>
     </MuiPickersUtilsProvider>
         // <DatePicker  selected={date} onSelect={setDate} onChange={setDate}></DatePicker>
     )
