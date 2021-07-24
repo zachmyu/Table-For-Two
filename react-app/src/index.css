@@ -5,10 +5,10 @@
 
 /* Buttons */
 .button1 {
-    width: 240px;
-    height: 40px;
+    width: 300px;
+    height: 60px;
     color: #009999;
-    border-radius: 5px;
+    border-radius: 3px;
     background-color: #2D333F;
     font-size: large;
     font-weight: bold;
@@ -20,10 +20,10 @@
 }
 
 .button2 {
-    width: 240px;
-    height: 40px;
+    width: 300px;
+    height: 60px;
     color: #2D333F;
-    border-radius: 5px;
+    border-radius: 3px;
     background-color: #009999;
     font-size: large;
     font-weight: bold;

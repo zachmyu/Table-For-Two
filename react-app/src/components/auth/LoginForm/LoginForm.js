@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../../store/session';
 import './LoginForm.css';
 
@@ -21,19 +21,19 @@ function LoginForm() {
     };
 
     const demoLogin = () => {
-        setEmail('demo@mcdemoface.com');
-        setPassword('password');
+        setEmail('demo-user@demodata.com');
+        setPassword('table42User!');
         return dispatch(sessionActions.login(email, password))
     }
 
     return (
         <form className='form-container' onSubmit={handleSubmit}>
-            <ul>
+            <ul className="form-errors">
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
             </ul>
-            <h1>Please Sign in </h1>
-            <label className="form--element--container">
-                Email
+            <h2>Please Sign in </h2>
+            <hr />
+            <label className="login--element--container">
                 <input
                     className="login--element"
                     type="text"
@@ -44,7 +44,6 @@ function LoginForm() {
                 />
             </label>
             <label className="login--element--container">
-                Password
                 <input
                     className="login--element"
                     type="password"
