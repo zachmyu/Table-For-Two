@@ -49,7 +49,7 @@ function App() {
 					<Route exact path='/venues/:id'>
 						<Venue></Venue>
 					</Route>
-					<Route path='/search' exact={true}>
+					<Route exact path='/search'>
 						<Search results={results} />
 					</Route>
 					<Route exact path='/' >

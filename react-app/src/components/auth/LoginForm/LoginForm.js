@@ -33,7 +33,7 @@ function LoginForm() {
             </ul>
             <h2>Please Sign in </h2>
             <hr />
-            <label className="login--element--container">
+            <div className="login--element--container">
                 <input
                     className="login--element"
                     type="text"
@@ -42,8 +42,8 @@ function LoginForm() {
                     onChange={(e) => setEmail(e.target.value)}
                     required
                 />
-            </label>
-            <label className="login--element--container">
+            </div>
+            <div className="login--element--container">
                 <input
                     className="login--element"
                     type="password"
@@ -52,7 +52,7 @@ function LoginForm() {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 />
-            </label>
+            </div>
             <div className="login__button--container">
                 <button className="button2" type="submit">Log In</button>
                 <button className="button1" onClick={() => demoLogin()}>Demo User</button>

@@ -13,20 +13,10 @@
     height: 5px;
 }
 
-/* .login--element--container{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 40px;
-    font-size: 20px;
-} */
-
 .login--element{
     height: 50px;
     width: 250px;
     margin: 10px 20px;
     padding: 0 20px;
     font-size: 20px;
-
 }

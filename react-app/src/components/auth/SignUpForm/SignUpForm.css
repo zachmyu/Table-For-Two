@@ -1,0 +1,42 @@
+.signUpForm-container{
+    display: flex;
+    flex-direction: column;
+    margin: 10px 10px;
+    width: 400px;
+    height: 650px;
+    padding: 10px;
+    text-align: center;
+}
+
+.form-errors{
+    height: 5px;
+}
+
+.signUpForm--element{
+    height: 50px;
+    width: 250px;
+    margin: 5px 20px;
+    padding: 0 20px;
+    font-size: 20px;
+}
+
+.profImgContainer--element{
+    height: 90px;
+    width: 250px;
+    margin: 5px 56px;
+    padding: 0 20px;
+    font-size: 20px;
+    border: gray solid 1px;
+}
+
+.profImgUpload--element{
+    height: 40px;
+    width: 200px;
+    margin: 5px 5px;
+    padding: 0 20px;
+    font-size: 15px;
+}
+
+#profPicTitle {
+    margin: 10px 5px;
+}
