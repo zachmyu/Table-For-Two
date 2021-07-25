@@ -71,7 +71,7 @@ export const logout = () => async (dispatch) => {
 
 
 
-export const signUp = (firstName, lastName, username, email, password, profileImg) => async (dispatch) => {
+export const signUp = (firstName, lastName, username, email, password, profile_image_url) => async (dispatch) => {
 	const formData = new FormData();
 
 	formData.append('firstName', firstName);
