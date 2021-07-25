@@ -9,6 +9,8 @@ ALLOWED_EXTENSIONS = {"pdf", "png", "jpg", "jpeg", "gif", "jfif"}
 BUCKET_NAME = os.environ.get("S3_BUCKET")
 S3_LOCATION = f"https://mylovetable.s3.amazonaws.com/"
 
+# aws_access_key_id=Config.S3_KEY,
+# aws_secret_access_key=Config.S3_SECRET_ACCESS_KEY
 s3 = boto3.client(
    "s3",
    aws_access_key_id=os.environ.get("S3_KEY"),

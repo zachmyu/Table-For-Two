@@ -10,9 +10,9 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.String(100), nullable=False)
     last_name = db.Column(db.String(100), nullable=False)
     username = db.Column(db.String(40), nullable=False, unique=True)
-    profile_image_url = db.Column(db.String(1000))
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    profile_image_url = db.Column(db.String(1000))
     # profileImg = db.Column(db.String, nullable=False)
     
     images = db.relationship("Image", back_populates="user")
@@ -38,7 +38,7 @@ class User(db.Model, UserMixin):
             'first_name': self.first_name,
             'last_name': self.last_name,
             'username': self.username,
-            'profile_image_url': self.profile_image_url,
             'email': self.email,
+            'profile_image_url': self.profile_image_url,
             "reservations": {reservation.id: reservation.to_dict() for reservation in self.reservations}
         }

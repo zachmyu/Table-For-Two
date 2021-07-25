@@ -79,9 +79,16 @@ def sign_up():
         return {'errors': [upload]}, 400
 
     url = upload["url"]
-
+    print('##########ESTO ES image########', image)
+    print('$$$$$$$ESTO ES image.filename$$$$$$$$$$$', image.filename)
+    print('@@@@@@@@@ESTO ES upload@@@@@@@', upload)
+    print('@@@@@@@@@ESTO ES upload.url??????', upload['url'])
+    print('&&&&&&&&&&&&&&', url)
+    print('ﬂ^^^^^^ﬂ^^^^^^^^^ this is form.data', form.data)
+    print('<><><><><><><><><><> this is User Model', User)
+    print('LASSSSSS THIS IS SIGNUP FORM', form)
     # print('********************************', form.data['profileImg'])
-    print('BEFORE VALIDATION')
+    print('BEFORE VALIDATION==========================================')
     if form.validate_on_submit():
         # profile_image_url = form.data['profile_image_url']
         # print('######################', form.data['profile_image_url'])
@@ -107,6 +114,7 @@ def sign_up():
         # #         is_owner=True,
         # #         profile_photo=profile_photo["url"]
         # print('000000000000000000000000000000000000', profile_image_url)
+        print('AFTER VALIDATE###############################')
         db.session.add(user)
         db.session.commit()
         login_user(user)

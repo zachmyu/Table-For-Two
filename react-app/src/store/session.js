@@ -71,7 +71,7 @@ export const logout = () => async (dispatch) => {
 };
 
 
-export const signUp = (firstName, lastName, username, email, password, profileImg) => async (dispatch) => {
+export const signUp = (first_name, last_name, username, email, password, profile_image_url) => async (dispatch) => {
   // const response = await fetch('/api/auth/signup', {
   //   method: 'POST',
   //   headers: {
@@ -89,28 +89,32 @@ export const signUp = (firstName, lastName, username, email, password, profileIm
 
   const formData = new FormData();
 
-  formData.append('firstName', firstName);
-  formData.append('lastName', lastName);
-  formData.append('username', username);
-  formData.append('email', email);
-  formData.append('password', password);
+  formData.append("first_name", first_name);
+  formData.append("last_name", last_name);
+  formData.append("username", username);
+  formData.append("email", email);
+  formData.append("password", password);
+  // formData.append("password", password);
 
-  if (profileImg) formData.append("image", profileImg);
+  if (profile_image_url) formData.append("image", profile_image_url);
 
   const response = await fetch('/api/auth/signup', {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'enctype': 'multipart/form-data',
+      "enctype": "multipart/form-data",
     },
     body: formData,
   })
 
   const data = await response.json();
+  console.log('Toihsdisodnajdabd', data)
   if (data.errors) {
     return data
   }
+  console.log('AFTER THE DATA>ERRORS', data)
   dispatch(setUser(data))
-  return
+  console.log('AFTER SETUSER DATA', data)
+  return data
 }
 
 
