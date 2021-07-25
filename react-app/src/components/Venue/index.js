@@ -32,7 +32,7 @@ function Venue({ venueResult }) {
     const venue = useSelector(state => state?.venues.current)
     const userFavorites = user ? Object.values(user?.favorites) : null
     const reviewsInfo = venue ? Object.values(venue?.reviews) : null
-    const faveFind = userFavorites.find(favorite => favorite?.venue_id == id)
+    const faveFind = userFavorites?.find(favorite => favorite?.venue_id == id)
 
 
     useEffect(() => {
