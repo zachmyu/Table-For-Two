@@ -71,11 +71,11 @@ export const logout = () => async (dispatch) => {
 
 
 
-export const signUp = (firstName, lastName, username, email, password, profile_image_url) => async (dispatch) => {
+export const signUp = (first_name, last_name, username, email, password, profile_image_url) => async (dispatch) => {
 	const formData = new FormData();
 
-	formData.append('firstName', firstName);
-	formData.append('lastName', lastName);
+	formData.append('first_name', first_name);
+	formData.append('last_name', last_name);
 	formData.append('username', username);
 	formData.append('email', email);
 	formData.append('password', password);
@@ -95,7 +95,7 @@ export const signUp = (firstName, lastName, username, email, password, profile_i
 		return data
 	}
 	dispatch(setUser(data))
-	return
+	return data
 }
 
 
