@@ -27,4 +27,4 @@ class SignUpForm(FlaskForm):
         'username', validators=[DataRequired(), username_exists])
     email = StringField('email', validators=[DataRequired(), user_exists])
     password = StringField('password', validators=[DataRequired()])
-    profile_image_url = StringField('profile_image_url', validators=[DataRequired()])
+    # profile_image_url = StringField('profile_image_url', validators=[DataRequired()])

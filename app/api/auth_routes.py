@@ -79,7 +79,6 @@ def sign_up():
         return {'errors': [upload]}, 400
 
     url = upload["url"]
-
     if form.validate_on_submit():
         user = User(
             first_name=form.data['first_name'],

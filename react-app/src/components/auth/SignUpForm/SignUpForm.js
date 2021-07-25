@@ -10,13 +10,13 @@ const SignUpForm = () => {
     // const [image, setImage] = useState(null)
     // const [imageLoading, setImageLoading] = useState(false);
     const [errors, setErrors] = useState([]);
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastname] = useState('');
+    const [first_name, setFirstName] = useState('');
+    const [last_name, setLastname] = useState('');
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [repeatPassword, setRepeatPassword] = useState('');
-    const [profileImg, setProfileImg] = useState('');
+    const [profile_image_url, setProfileImg] = useState('');
     const user = useSelector(state => state.session.user);
     const dispatch = useDispatch();
 
@@ -24,9 +24,11 @@ const SignUpForm = () => {
     const onSignUp = async (e) => {
         e.preventDefault();
         if (password === repeatPassword) {
-            const data = await dispatch(signUp(firstName, lastName, username, email, password, profileImg));
-            if (data) {
-                setErrors(data)
+            const data = await dispatch(signUp(first_name, last_name, username, email, password, profile_image_url));
+            console.log('Aqui esta data en signUpForm', data)
+            
+            if (data.errors) {
+                setErrors(data.errors)
             }
         }
     };
@@ -39,7 +41,7 @@ const SignUpForm = () => {
     if (user) {
         return history.push('/');
     }
-
+    console.log("{}{}{}{}{}{}{}{}{SASA{}{S}{A}A{SA}S{A", errors)
     return (
         <form onSubmit={onSignUp} className='p-10'>
             <ul>
@@ -49,10 +51,10 @@ const SignUpForm = () => {
             <div>
                 <label>First Name</label>
                 <input
-                    name='firstName'
+                    name='first_name'
                     type='text'
                     placeholder='First Name *'
-                    value={firstName}
+                    value={first_name}
                     onChange={(e) => setFirstName(e.target.value)}
                     required
                 ></input>
@@ -60,10 +62,10 @@ const SignUpForm = () => {
             <div>
                 <label>Last Name</label>
                 <input
-                    name='firstName'
+                    name='last_name'
                     type='text'
                     placeholder='Last Name *'
-                    value={lastName}
+                    value={last_name}
                     onChange={(e) => setLastname(e.target.value)}
                     required
                 ></input>
@@ -91,6 +93,11 @@ const SignUpForm = () => {
                 ></input>
             </div>
             <div>
+                <input
+                    type="file"
+                    // accept="image/*"
+                    onChange={updateImage}
+                />
                 <label>Password</label>
                 <input
                     name='password'
@@ -112,11 +119,7 @@ const SignUpForm = () => {
                     required
                 ></input>
             </div>
-            <input
-                type="file"
-                accept="image/*"
-                onChange={updateImage}
-            />
+            
             <div className="login__button--container">
                 <button className="button2" type="submit">Submit</button>
                 {/* <DemoUser /> */}
