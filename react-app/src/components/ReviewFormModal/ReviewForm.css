@@ -30,7 +30,8 @@
     font-size: 20px;
     overflow: auto;
     overflow-wrap: break-word;
-    resize: none
+    resize: none;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .review-radio-container{

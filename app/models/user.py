@@ -41,5 +41,6 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'profile_image_url': self.profile_image_url,
             "reservations": {reservation.id: reservation.to_dict() for reservation in self.reservations},
-            "favorites": {favorite.id: favorite.to_dict() for favorite in self.favorites}
+            "favorites": {favorite.id: favorite.to_dict() for favorite in self.favorites},
+            "reviews": {review.id: review.to_dict() for review in self.reviews}
         }
