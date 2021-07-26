@@ -3,18 +3,14 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getSingleVenue } from '../../store/venue'
 import { updateReview, deleteReview } from '../../store/reviews'
 import { useParams, useHistory } from "react-router-dom";
-import StarsIcon from '@material-ui/icons/Stars';
 import ReviewFormModal from '../ReviewFormModal/ReviewCreateForm'
 import ReservationForm from '../Reservations/ReservationForm'
-import ModeCommentOutlinedIcon from '@material-ui/icons/ModeCommentOutlined';
-import LocalAtmOutlinedIcon from '@material-ui/icons/LocalAtmOutlined';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-import SendIcon from '@material-ui/icons/Send';
 import { createFavorites, deleteFavorites } from '../../store/favorite'
 import './Venue.css'
+import '../ReviewFormModal/ReviewForm.css'
 
 
-function Venue({ venueResult }) {
+function Venue() {
     const { id } = useParams()
     const dispatch = useDispatch();
     const history = useHistory();
@@ -41,8 +37,8 @@ function Venue({ venueResult }) {
 
     const handleRating = () => {
         let total = 0
-        reviewsInfo.forEach(review => total += review.rating)
-        let avg = (total * 1.0) / reviewsInfo.length
+        reviewsInfo?.forEach(review => total += review?.rating)
+        let avg = Math.round((total / reviewsInfo.length) * 10) / 10
         return avg
     }
 
@@ -56,7 +52,7 @@ function Venue({ venueResult }) {
     }
 
     const openForm = (review) => {
-        setShowForm(true)
+        setShowForm(!showForm)
         setTitle(review.title)
         setBody(review.body)
         setRating(review.rating)
@@ -68,7 +64,7 @@ function Venue({ venueResult }) {
         if (alert) {
             await dispatch(deleteReview(reviewId))
         }
-        history.push(`/venues/${id}`)
+        // history.push(`/venues/${id}`)
     }
 
     const addFave = async (e) => {
@@ -84,6 +80,10 @@ function Venue({ venueResult }) {
         setButtonUnFave('button-unfave-clicked')
         setOneClickBtn(true)
         history.push(`/venues/${id}`)
+    }
+
+    const ratingHelper = (num) => {
+        setRating(num)
     }
 
     let favoriteButton;
@@ -131,23 +131,64 @@ function Venue({ venueResult }) {
                                 <button className='button3' onClick={() => openForm(review)}>Edit Review</button>
                                 {showForm && review.id === formId ?
                                     <>
-                                        <form onSubmit={(e) => editReview(review.id, title, body, Number(rating), e)} key={review.id}>
-                                            <input type='text' value={title} onChange={(e) => setTitle(e.target.value)}></input>
-                                            <input type='text' value={body} onChange={(e) => setBody(e.target.value)}></input>
-                                            <input type='number' value={rating} onChange={(e) => setRating(Number(e.target.value))}></input>
-                                            <button className='button3' type='submit'><SendIcon /></button>
+                                        <h3>Edit your review for this venue</h3>
+                                        <form className='review-container'
+                                            onSubmit={(e) =>
+                                                editReview(review.id, title, body, Number(rating), e)}
+                                            key={review.id}>
+                                            <div className='review-element-container'>
+                                                <input
+                                                    className='review-element'
+                                                    type='text'
+                                                    value={title}
+                                                    placeholder='Title'
+                                                    onChange={(e) =>
+                                                        setTitle(e.target.value)}
+                                                    required>
+                                                </input>
+                                            </div>
+                                            <div className='review-element-container'>
+                                                <input
+                                                    className='review-text-element'
+                                                    type='text'
+                                                    placeholder='Update your review!'
+                                                    value={body}
+                                                    onChange={(e) =>
+                                                        setBody(e.target.value)}
+                                                    required>
+                                                </input>
+                                            </div>
+                                            <div className='review-radio-container'>
+                                                <h3>Rating</h3>
+                                                {[1, 2, 3, 4, 5].map(i => (
+                                                    <div className='review-radio-select'>
+                                                        {i}
+                                                        <input
+                                                            type="radio"
+                                                            key={i}
+                                                            value={i}
+                                                            checked={i === rating}
+                                                            onClick={() => ratingHelper(i)}>
+                                                        </input>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                            <div className='review-button-container'>
+                                                <button className='button2' type='submit'>Update Review</button>
+                                                <button className='button1' onClick={() => deleteSingleReview(review.id)}>Delete Review</button>
+                                            </div>
                                         </form>
-                                        <button className='button3' onClick={() => deleteSingleReview(review.id)}><DeleteForeverIcon></DeleteForeverIcon></button>
                                     </>
                                     : null
                                 }
                             </div>
                         )}
                     </>
-                ))}
+                ))
+                }
                 <hr />
                 <div><ReviewFormModal venue_id={id} /></div>
-            </div>
+            </div >
         )
     } else {
         reviewChange = (
@@ -170,7 +211,7 @@ function Venue({ venueResult }) {
         makeReservation = (
             <>
                 {favoriteButton}
-                <div>
+                <div className='container-reservation'>
                     <h3>Reservations</h3>
                     <ReservationForm venue_id={id}
                         venue={venue}
@@ -193,17 +234,28 @@ function Venue({ venueResult }) {
             {venue &&
                 <>
                     <div className='container__venue-title'>
-                        <img src={venue.image_url} style={{ width: '100vw', height: '50vh' }} alt={venue.name} />
+                        <img src={venue.image_url}
+                            className='venue-picture' />
                     </div>
                     <div className='container__venue'>
                         <div className='container_venue-left'>
                             <div className='container_venue-summary'>
                                 <h1 className='venue-title'>{venue.name}</h1>
                                 <hr />
-                                <StarsIcon fontSize='small' style={{ marginTop: '10px', paddingRight: '10px' }} />
-                                <span> <ModeCommentOutlinedIcon fontSize='small' />{(Object.values(venue.reviews)).length} reviews</span>
-                                <span>{handleRating()}</span>
-                                <LocalAtmOutlinedIcon />Price Per Couple: {venue.price}
+                            </div>
+                            <div className='container_venue-details'>
+                                <div className='venue-details-element'>
+                                    <i class="fas fa-star"></i>
+                                    <span>{handleRating()}</span>
+                                </div>
+                                <div className='venue-details-element'>
+                                    <i class="far fa-comment-alt"> </i>
+                                    <span>{(Object.values(venue.reviews)).length} reviews</span>
+                                </div>
+                                <div className='venue-details-element'>
+                                    <i class="fas fa-money-bill-wave"></i>
+                                    <span>Price Per Couple: ${venue.price}</span>
+                                </div>
                             </div>
                             <div className='container_venue-summary'>
                                 {venue.description}
@@ -212,8 +264,8 @@ function Venue({ venueResult }) {
                         </div>
                         <div className='container_venue-right'>
                             <div id="venueElement-reservation">{makeReservation}</div>
-                            <div id="venueElement-maps">Google Maps Placeholder</div>
-                            <div id="venueElement-info">Various Information Placeholder</div>
+                            {/* <div id="venueElement-maps">Google Maps Placeholder</div> */}
+                            {/* <div id="venueElement-info">Various Information Placeholder</div> */}
                         </div>
                     </div>
                 </>

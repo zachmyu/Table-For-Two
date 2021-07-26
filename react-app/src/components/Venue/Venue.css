@@ -1,3 +1,9 @@
+.venue-picture {
+    width: 100%;
+    height: 50vh;
+    object-fit: cover;
+    box-sizing: border-box;
+}
 
 .container__venue {
     display: flex;
@@ -17,7 +23,6 @@
     height: fit-content;
     padding: 50px 20px;
     border: black solid 1px;
-    /* position: -webkit-sticky; */
     background-color: #f9ffff;
     position: sticky;
     margin-top: 100px;
@@ -29,8 +34,36 @@
     align-items: center;
 }
 
+.container_venue-details {
+    display: flex;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    width: 100%;
+}
+
 .container_venue-summary {
     padding: 20px 0;
+}
+
+.venue-details-element{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 240px;
+    font-size: 20px;
+    margin-right: 40px;
+}
+
+.fa-star{
+    color: gold;
+}
+
+.fa-comment-alt{
+    color: blue;
+}
+
+.fa-money-bill-wave{
+    color: green;
 }
 
 #button-unfave{
@@ -91,4 +124,19 @@
     font-size: 24px;
     font-weight: bold;
     -webkit-text-stroke: 2px rgb(255, 124, 124);
+}
+
+.container-reservation{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 290px;
+    font-size: 20px
+}
+
+.reservation-element select{
+    margin: 10px 0;
+    width: 80px;
+    height: 30px;
+
 }
