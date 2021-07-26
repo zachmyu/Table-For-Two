@@ -21,7 +21,7 @@ const NavBar = ({ loaded }) => {
 		sessionLinks = (
 			<>
 				<div className='navbar-button'>
-					<NavLink to={`/users/${user.id}`} exact={true} activeClassName='active'>
+					<NavLink to={`/users/${user.id}`} exact={true} activeClassName='active' className='navbar-button'>
 						<AccountCircleIcon></AccountCircleIcon>
 					</NavLink>
 				</div>

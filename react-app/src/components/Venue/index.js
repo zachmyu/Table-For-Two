@@ -147,15 +147,15 @@ function Venue() {
                                                 </input>
                                             </div>
                                             <div className='review-element-container'>
-                                                <input
+                                                <textarea
                                                     className='review-text-element'
-                                                    type='text'
-                                                    placeholder='Update your review!'
                                                     value={body}
+                                                    placeholder='Update your review!'
                                                     onChange={(e) =>
                                                         setBody(e.target.value)}
-                                                    required>
-                                                </input>
+                                                    required
+                                                />
+
                                             </div>
                                             <div className='review-radio-container'>
                                                 <h3>Rating</h3>

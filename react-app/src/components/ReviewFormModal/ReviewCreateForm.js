@@ -44,7 +44,7 @@ function ReviewFormModal({ venue_id, reviewId }) {
         <>
             <form className='review-container' onSubmit={handleSubmit}>
                 <h3>Add a review for this venue</h3>
-                <div className="signUpForm--element--container">
+                <div className="review-element-container">
                     <input
                         className="review-element"
                         placeholder='Title'
@@ -53,7 +53,7 @@ function ReviewFormModal({ venue_id, reviewId }) {
                         required
                     />
                 </div>
-                <div className="signUpForm--element--container">
+                <div className="review-element-container">
                     <textarea
                         className="review-text-element"
                         value={body}
