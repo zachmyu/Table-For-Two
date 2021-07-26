@@ -14,7 +14,7 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     profile_image_url = db.Column(db.String(1000))
     # profileImg = db.Column(db.String, nullable=False)
-    
+
     images = db.relationship("Image", back_populates="user")
     venues = db.relationship("Venue", back_populates="user")
     reviews = db.relationship("Review", back_populates="user")
@@ -40,5 +40,6 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email,
             'profile_image_url': self.profile_image_url,
-            "reservations": {reservation.id: reservation.to_dict() for reservation in self.reservations}
+            "reservations": {reservation.id: reservation.to_dict() for reservation in self.reservations},
+            "favorites": {favorite.id: favorite.to_dict() for favorite in self.favorites}
         }

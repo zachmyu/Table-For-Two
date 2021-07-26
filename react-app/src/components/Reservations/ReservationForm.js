@@ -1,50 +1,35 @@
-import { useEffect, useState} from 'react';
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Calendar from '../Calendar'
-import DropDown from '../DropDown';
-// import { format } from 'date-fns'
 import { createReservation } from '../../store/reservations';
 
 
-const durations = [1,2,3]
+const durations = [1, 2, 3]
 
-function ReservationForm({venue_id, venue, reservations}) {
+function ReservationForm({ venue_id, venue, reservations }) {
     const sessionUser = useSelector(state => state.session.user)
     const [reservation_datetime, setReservationDateTime] = useState(new Date());
     const [people, setPeople] = useState(2)
-    const [booking, setBooking] = useState(false)
     const [duration, setDuration] = useState(1.0)
-    const venues = useSelector(state => state.venues)
-    const map = Object.values(venues)
     const dispatch = useDispatch()
-  
-
-    // const [time, setTime] = useState({ date: format(date, 'H') })
-    console.log('HERE WE HAVE THE VALUE OF DATE', reservation_datetime)
 
     const reservation = async (e) => {
         e.preventDefault();
-        dispatch(createReservation({ user_id: sessionUser.id, venue_id, reservation_datetime, party_size: Number(people), duration: Number(duration)}))
-      
-
+        dispatch(createReservation({ user_id: sessionUser.id, venue_id, reservation_datetime, party_size: Number(people), duration: Number(duration) }))
     }
-    // console.log('==========This is time=========', time)
 
     return (
-        <div>
-            <div>Make a new reservation</div>
-            <hr />
+        <>
+            <span>Make a new reservation!</span>
             <Calendar reservation_datetime={reservation_datetime} setReservationDateTime={setReservationDateTime}></Calendar>
-            {/* <DropDown people={people} setPeople={setPeople}></DropDown> */}
-            <div>
-
-                <select 
+            <div className='reservation-element'>
+                <span>People: </span>
+                <select
                     onChange={(e) => {
                         Number(setPeople(Number(e.target.value)))
                     }}
-                    value={people}
-                >
-                    <option selected="" value="1">For 1</option>
+                    value={people}>
+                    <option defaultValue="" value="1">For 1</option>
                     <option value="2">For 2</option>
                     <option value="3">For 3</option>
                     <option value="4">For 4</option>
@@ -64,20 +49,18 @@ function ReservationForm({venue_id, venue, reservations}) {
                     <option value="18">For 18</option>
                     <option value="19">For 19</option>
                     <option value="20">For 20</option>
-
                 </select>
             </div>
-            <div>
-                <div>
-                    <select value={duration} onChange={e => Number(setDuration(Number(e.target.value)))}>
-                        {durations.map((duration) => (
-                            <option key={duration} value={Number(duration)}>{duration}</option>
-                        ))}
-                    </select>
-                </div>
-                <button onClick={reservation}>Make a reservation</button>
+            <div className='reservation-element'>
+                <span>Duration:  </span>
+                <select value={duration} onChange={e => Number(setDuration(Number(e.target.value)))}>
+                    {durations.map((duration) => (
+                        <option key={duration} value={Number(duration)}>{duration} Hour(s)</option>
+                    ))}
+                </select>
             </div>
-        </div>
+            <button className='button1' onClick={reservation}>Make a reservation</button>
+        </>
     )
 
 }

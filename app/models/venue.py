@@ -46,5 +46,6 @@ class Venue(db.Model, UserMixin):
             'operation_hours': self.operation_hours,
             "latitude": self.latitude,
             "longitude": self.longitude,
-            "reviews": {review.id: review.to_dict() for review in self.reviews}
+            "reviews": {review.id: review.to_dict() for review in self.reviews},
+            "favorites": {favorite.id: favorite.to_dict() for favorite in self.favorites}
         }

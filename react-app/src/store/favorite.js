@@ -32,9 +32,7 @@ export const createFavorites = (favoriteInfo) => async (dispatch) => {
     if (response.ok) {
         const newFavorite = await response.json()
         dispatch(addFavorites(newFavorite))
-        console.log("DATA FROM FAVORITE STORE RIGHT AFTER DISPATCH", newFavorite)
     }
-    console.log('this is just the favoriteInfo var on store', favoriteInfo)
 }
 
 
@@ -44,10 +42,7 @@ export const deleteFavorites = (favoriteId) => async (dispatch) => {
     })
     if (response.ok) {
         dispatch(deleteSingleFavorite(favoriteId))
-        console.log('THIS IS HERE TO SEE IF THE RESPONSE IS OK WHEN DELETING A FAVORITE')
     }
-    console.log('THIS WILL PRINT THIS MESSAGE IF THE INFO FROM DELETING IS GETTING TO THE THUNK FOR FAVORITES', favoriteId)
-
 }
 
 export const getFavorites = (user_id) => async (dispatch) => {
@@ -63,22 +58,9 @@ const initialState = {}
 
 export default function favorites(state = initialState, action) {
     let updatedState = { ...state }
-    let newState;
+    // let newState;
     switch (action.type) {
         case GET_FAVORITES: {
-            //     return {...state, ...action.favorites}
-            // let newState = {}
-            // action.payload.favorites.forEach(favorite => {
-            //     newState[favorite.id] = favorite
-            // })
-            // return newState
-            // updatedState[action.favorite.id] = action.favorite
-            // return updatedState
-            // newState = {}
-            // action.favorites.forEach(favorite => {
-            //     newState[favorite.id] = favorite
-            // })
-            // return newState
             let newState = {}
             newState[action.favorite.id] = action.favorite
             return newState

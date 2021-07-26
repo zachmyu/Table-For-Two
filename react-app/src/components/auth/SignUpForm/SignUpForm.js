@@ -2,13 +2,11 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom';
 import { signUp } from '../../../store/session';
-// import DemoUser from '../../DemoUser'
-import { Button } from '@material-ui/core'
+import './SignUpForm.css';
 
 const SignUpForm = () => {
+    const dispatch = useDispatch();
     const history = useHistory();
-    // const [image, setImage] = useState(null)
-    // const [imageLoading, setImageLoading] = useState(false);
     const [errors, setErrors] = useState([]);
     const [first_name, setFirstName] = useState('');
     const [last_name, setLastname] = useState('');
@@ -18,17 +16,14 @@ const SignUpForm = () => {
     const [repeatPassword, setRepeatPassword] = useState('');
     const [profile_image_url, setProfileImg] = useState('');
     const user = useSelector(state => state.session.user);
-    const dispatch = useDispatch();
-
 
     const onSignUp = async (e) => {
         e.preventDefault();
         if (password === repeatPassword) {
             const data = await dispatch(signUp(first_name, last_name, username, email, password, profile_image_url));
-            console.log('Aqui esta data en signUpForm', data)
-            
-            if (data.errors) {
-                setErrors(data.errors)
+
+            if (data?.errors) {
+                setErrors(data?.errors)
             }
         }
     };
@@ -41,16 +36,16 @@ const SignUpForm = () => {
     if (user) {
         return history.push('/');
     }
-    console.log("{}{}{}{}{}{}{}{}{SASA{}{S}{A}A{SA}S{A", errors)
+
     return (
-        <form onSubmit={onSignUp} className='p-10'>
-            <ul>
+        <form className='signUpForm-container' onSubmit={onSignUp}>
+            <ul className="form-errors">
                 {errors?.map((error, ind) => <li key={ind}>{error}</li>)}
             </ul>
-            <h1>Welcome to Table For Two!</h1>
-            <div>
-                <label>First Name</label>
+            <h2>Welcome to Table For Two!</h2>
+            <div className="signUpForm--element--container">
                 <input
+                    className="signUpForm--element"
                     name='first_name'
                     type='text'
                     placeholder='First Name *'
@@ -59,9 +54,9 @@ const SignUpForm = () => {
                     required
                 ></input>
             </div>
-            <div>
-                <label>Last Name</label>
+            <div className="signUpForm--element--container">
                 <input
+                    className="signUpForm--element"
                     name='last_name'
                     type='text'
                     placeholder='Last Name *'
@@ -70,9 +65,9 @@ const SignUpForm = () => {
                     required
                 ></input>
             </div>
-            <div>
-                <label>User Name</label>
+            <div className="signUpForm--element--container">
                 <input
+                    className="signUpForm--element"
                     name='username'
                     type='text'
                     placeholder='Username *'
@@ -81,9 +76,9 @@ const SignUpForm = () => {
                     required
                 ></input>
             </div>
-            <div>
-                <label>Email</label>
+            <div className="signUpForm--element--container">
                 <input
+                    className="signUpForm--element"
                     name='email'
                     type='text'
                     placeholder='Email *'
@@ -92,14 +87,9 @@ const SignUpForm = () => {
                     required
                 ></input>
             </div>
-            <div>
+            <div className="signUpForm--element--container">
                 <input
-                    type="file"
-                    // accept="image/*"
-                    onChange={updateImage}
-                />
-                <label>Password</label>
-                <input
+                    className="signUpForm--element"
                     name='password'
                     type='password'
                     placeholder='Enter Password *'
@@ -108,9 +98,9 @@ const SignUpForm = () => {
                     required
                 ></input>
             </div>
-            <div>
-                <label>Repeat Password</label>
+            <div className="signUpForm--element--container">
                 <input
+                    className="signUpForm--element"
                     name='repeat_password'
                     type='password'
                     placeholder='Re-enter Password *'
@@ -119,15 +109,17 @@ const SignUpForm = () => {
                     required
                 ></input>
             </div>
-            
+            <div className="profImgContainer--element">
+                <h4 id='profPicTitle'>Upload a Profile Picture</h4>
+                <input
+                    className="profImgUpload--element"
+                    type="file"
+                    onChange={updateImage}
+                />
+            </div>
             <div className="login__button--container">
                 <button className="button2" type="submit">Submit</button>
-                {/* <DemoUser /> */}
             </div>
-            {/* <button type="submit">Submit</button> */}
-            {/* <Button color="primary" type="submit" variant="contained">Submit</Button> */}
-            {/* {(imageLoading) && <p>Loading...</p>} */}
-            {/* <button type='submit'>Sign Up</button> */}
         </form>
     );
 };
