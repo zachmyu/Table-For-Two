@@ -1,8 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Calendar from '../Calendar'
-import DropDown from '../DropDown';
-// import { format } from 'date-fns'
 import { createReservation } from '../../store/reservations';
 
 
@@ -12,10 +10,7 @@ function ReservationForm({ venue_id, venue, reservations }) {
     const sessionUser = useSelector(state => state.session.user)
     const [reservation_datetime, setReservationDateTime] = useState(new Date());
     const [people, setPeople] = useState(2)
-    const [booking, setBooking] = useState(false)
     const [duration, setDuration] = useState(1.0)
-    const venues = useSelector(state => state.venues)
-    const map = Object.values(venues)
     const dispatch = useDispatch()
 
     const reservation = async (e) => {

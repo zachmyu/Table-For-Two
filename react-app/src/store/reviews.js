@@ -75,7 +75,7 @@ export const deleteReview = reviewId => async (dispatch) => {
 const initialState = {}
 
 export default function reviews(state = initialState, action) {
-    let updatedState = { ...state }
+    // let updatedState = { ...state }
     switch (action.type) {
         case GET_REVIEWS: {
             const newState = {}

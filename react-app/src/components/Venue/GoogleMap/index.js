@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react'
-import { NavLink, useParams, useHistory } from "react-router-dom";
+import React, { useEffect } from 'react'
+import { useHistory } from "react-router-dom";
 
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import { getVenues, getSingleVenue } from '../../../store/venue'
 import { useSelector, useDispatch } from 'react-redux'
-//AIzaSyBUxfH8gj9gvfMEvpu4C0xDtNs3QW7doS8
 
 function Map({ venue }) {
     const venues = useSelector(state => state.venues.venues)
@@ -35,8 +34,8 @@ function Map({ venue }) {
                 mapContainerStyle={containerStyle}
                 center={center}
                 zoom={10}>
-                {venues?.map(venue => {
-                    <Marker key='marker'
+                {venues?.map(venue => (
+                    <Marker
                         key={venue.id}
                         position={
                             {
@@ -48,7 +47,7 @@ function Map({ venue }) {
                         onClick={() => handleClick(venue.id)}
                     >
                     </Marker>
-                })}
+                ))}
             </GoogleMap>
         </LoadScript>
     )

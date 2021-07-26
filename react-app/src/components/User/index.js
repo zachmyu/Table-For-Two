@@ -2,39 +2,26 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import { useSelector, useDispatch } from 'react-redux'
-import { getReservations, createReservation, updateReservation, deleteReservation } from '../../store/reservations'
-import { getFavorites, createFavorites, deleteFavorites } from '../../store/favorite'
+import { updateReservation } from '../../store/reservations'
+// import { updateReservation, deleteReservation } from '../../store/reservations'
 import { getVenues } from '../../store/venue'
 import Calendar from '../Calendar'
 
-
-
-// import { Modal } from '../../'
 import "./User.css"
 
 function User() {
 	const [user, setUser] = useState({});
 	const { userId } = useParams();
-	const reservations = useSelector(state => state.reservations)
 	const sessionUser = useSelector(state => state.session.user.reservations)
-	let reservationsArray = Object.values(reservations)
 	const [reservation_datetime, setReservationDateTime] = useState(new Date());
 	const [party_size, setPartySize] = useState(2)
-	const [booking, setBooking] = useState(false)
 	const [duration, setDuration] = useState(1.0)
-	const [showForm, setShowForm] = useState(false)
-	const [formId, setFormId] = useState(null)
 	const venues = useSelector(state => state?.venues)
 	const dispatch = useDispatch();
 	const history = useHistory()
-	const favorites = useSelector(state => state.favorites)
-
-	useEffect(async () => {
-		await dispatch(getVenues())
-	}, [dispatch])
 
 	useEffect(() => {
-		dispatch(getReservations(userId))
+		dispatch(getVenues())
 	}, [dispatch])
 
 	useEffect(() => {
@@ -61,19 +48,20 @@ function User() {
 		history.push(`/users/${user.id}`)
 	}
 
-	const deleteSingleReservation = async (reservationId) => {
-		let alert = window.confirm('Are you sure you want to delete this reservation?')
-		if (alert) {
-			dispatch(deleteReservation(reservationId))
-		}
-		history.push(`/users/${user.id}`)
-	}
+	// const deleteSingleReservation = async (reservationId) => {
+	// 	let alert = window.confirm('Are you sure you want to delete this reservation?')
+	// 	if (alert) {
+	// 		dispatch(deleteReservation(reservationId))
+	// 	}
+	// 	history.push(`/users/${user.id}`)
+	// }
+
 	const durations = [1, 2, 3]
 
 	return (
 		<>
 			<div className="header-container">
-				<img id='profile_img' src={user.profile_image_url} ></img>
+				<img id='profile_img' src={user.profile_image_url} alt={user.username}></img>
 				<h1>{user.username}</h1>
 			</div>
 			<Grid container align="center">
@@ -84,9 +72,9 @@ function User() {
 						<div>
 							{Object.values(venues).map(venue => (
 								<div>
-									{reservation.venue_id == venue.id && (
+									{reservation.venue_id === venue.id && (
 										<div>
-											<img src={venue.image_url}></img>
+											<img src={venue.image_url} alt={venue.name}></img>
 											<a href={`/venues/${venue.id}`}>
 												{venue.name}
 											</a>

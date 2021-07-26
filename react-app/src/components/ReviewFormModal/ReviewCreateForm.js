@@ -1,20 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 // import { Modal } from '../../context/Modal';
-import * as reviewActions from '../../store/reviews';
-import { createReview, updateReview } from '../../store/reviews'
+import { createReview } from '../../store/reviews'
 
 function ReviewFormModal({ venue_id, reviewId }) {
     const dispatch = useDispatch();
     const history = useHistory()
-    const venues = useSelector(state => state.venues)
     const sessionUser = useSelector((state) => state.session.user)
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [rating, setRating] = useState(0);
-    const reviews = useSelector(state => state.review)
-    const [showForm, setShowForm] = useState(false)
     venue_id = Number(venue_id)
 
     const handleSubmit = async (e) => {
@@ -43,27 +39,9 @@ function ReviewFormModal({ venue_id, reviewId }) {
             </div>
         ))
     }
-    const editReview = async (reviewId, title, body, rating, e) => {
-        e.preventDefault();
-        await dispatch(updateReview(title, body, rating, reviewId))
-        setTitle('')
-        setBody('')
-        setRating('')
-        setShowForm(false)
-    }
 
     return (
         <>
-            {/* {Object.values(venues).map(venue => (
-                <div>
-                    {Object.values(venue['1'].reviews).map(review => (
-                        <div>
-
-                        </div>
-                    ))}
-                </div>
-            ))} */}
-
             <form className='review-container' onSubmit={handleSubmit}>
                 <h3>Add a review for this venue</h3>
                 <div className="signUpForm--element--container">

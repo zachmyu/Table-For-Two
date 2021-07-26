@@ -28,7 +28,7 @@ function Venue() {
     const venue = useSelector(state => state?.venues.current)
     const userFavorites = user ? Object.values(user?.favorites) : null
     const reviewsInfo = venue ? Object.values(venue?.reviews) : null
-    const faveFind = userFavorites?.find(favorite => favorite?.venue_id == id)
+    const faveFind = userFavorites?.find(favorite => favorite?.venue_id === id)
 
 
     useEffect(() => {
@@ -95,7 +95,7 @@ function Venue() {
                     id={buttonUnFave}
                     onClick={() => (
                         unFave(userFavorites.find(favorite => (
-                            favorite?.venue_id == id
+                            favorite?.venue_id === id
                         ))?.id)
                     )}>
                     <i class="fas fa-heart" />
@@ -234,6 +234,7 @@ function Venue() {
                 <>
                     <div className='container__venue-title'>
                         <img src={venue.image_url}
+                            alt={venue.name}
                             className='venue-picture' />
                     </div>
                     <div className='container__venue'>

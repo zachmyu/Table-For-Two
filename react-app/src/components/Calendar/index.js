@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import DateMomentUtils from '@date-io/moment'; // choose your lib
 import {
     DateTimePicker, MuiPickersUtilsProvider,
