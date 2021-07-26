@@ -1,8 +1,7 @@
 const GET_REVIEWS = "review/GET_REVIEWS"
-const GET_SINGLE_REVIEW = "review/GET_SINGLE_REVIEW"
-const ADD_REVIEW = "review/ADD_REVIEW"
-const UPDATE_REVIEW = "review/UPDATE_REVIEW"
-const DELETE_REVIEW = "review/DELETE_REVIEW"
+const ADD_REVIEW = "venue/ADD_REVIEW"
+const UPDATE_REVIEW = "venue/UPDATE_REVIEW"
+const DEL_REVIEW = "venue/DEL_SINGLE_REVIEW"
 
 const loadReviews = reviews => ({
     type: GET_REVIEWS,
@@ -21,9 +20,10 @@ const updateSingleReview = (review) => ({
 })
 
 const deleteSingleReview = (review) => ({
-    type: DELETE_REVIEW,
+    type: DEL_REVIEW,
     review
 })
+
 
 export const getReviews = (id) => async (dispatch) => {
     const response = await fetch(`/api/reviews/${id}`)
@@ -49,7 +49,7 @@ export const createReview = review => async (dispatch) => {
 }
 
 export const updateReview = (user_id, venue_id, title, body, rating, reviewId) => async (dispatch) => {
-    const response = await fetch(`/api/reviews/venues/${reviewId}`, {
+    const response = await fetch(`/api/reviews/${reviewId}`, {
         method: "PUT",
         headers: {
             'Content-Type': 'application/json'
@@ -84,17 +84,17 @@ export default function reviews(state = initialState, action) {
             })
             return newState
         }
-        case ADD_REVIEW:
-            updatedState[action.review.id] = action.review
-            return updatedState
-        case UPDATE_REVIEW: {
-            updatedState[action.review.id] = action.review
-            return updatedState
-        }
-        case DELETE_REVIEW: {
-            delete updatedState[action.review]
-            return updatedState
-        }
+        // case ADD_REVIEW:
+        //     updatedState[action.review.id] = action.review
+        //     return updatedState
+        // case UPDATE_REVIEW: {
+        //     updatedState[action.review.id] = action.review
+        //     return updatedState
+        // }
+        // case DELETE_REVIEW: {
+        //     delete updatedState[action.review]
+        //     return updatedState
+        // }
         default:
             return state
     }

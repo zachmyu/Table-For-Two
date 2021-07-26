@@ -1,5 +1,8 @@
 const GET_VENUES = "venue/GET_VENUES"
 const GET_SINGLE_VENUE = "venue/GET_SINGLE_VENUE"
+const DEL_REVIEW = "venue/DEL_SINGLE_REVIEW"
+const ADD_REVIEW = "venue/DEL_REVIEW"
+const UPDATE_REVIEW = "venue/UPDATE_REVIEW"
 
 
 const loadVenues = (venues) => ({
@@ -11,7 +14,6 @@ const loadSingleVenue = (venue) => ({
     type: GET_SINGLE_VENUE,
     venue
 })
-
 
 export const getVenues = () => async (dispatch) => {
     const response = await fetch("/api/venues")
@@ -46,21 +48,24 @@ export default function venues(state = initialState, action) {
             newState = { ...allVenues }
             return newState;
         }
-        // case GET_VENUES: {
-        //     // const newState = {}
-        //     return {...state, ...action.venues}
-        // }
-        // case GET_VENUES: {
-        //     // const newState = {}
-        //     return { ...state, ...action.venues }
-        // }
         case GET_SINGLE_VENUE: {
             newState = { ...state }
             newState.current = action.venue
-            // newState[action.venue.id] = { ...action.venue }
-
-            // updatedState
             return newState
+        }
+        case ADD_REVIEW: {
+            // updatedState.current[action.review.id] = action.review
+            updatedState.current.reviews[action.review] = action.review
+            return updatedState
+        }
+        case UPDATE_REVIEW: {
+            updatedState.current[action.review.id] = action.review
+            return updatedState
+        }
+
+        case DEL_REVIEW: {
+            delete updatedState.current.reviews[action.review]
+            return updatedState
         }
 
         default:

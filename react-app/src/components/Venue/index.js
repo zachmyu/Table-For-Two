@@ -64,7 +64,6 @@ function Venue() {
         if (alert) {
             await dispatch(deleteReview(reviewId))
         }
-        // history.push(`/venues/${id}`)
     }
 
     const addFave = async (e) => {
@@ -194,7 +193,7 @@ function Venue() {
         reviewChange = (
             <div className='container_venue-comments'>
                 {reviewsInfo?.map(review => (
-                    <div className='container_venue-comments'>
+                    <div className='container_venue-comments' id={review.id}>
                         <hr />
                         <h3>Title: {review.title}</h3>
                         <div>{review.body}</div>
