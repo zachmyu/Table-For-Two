@@ -172,7 +172,7 @@ function User() {
 					</>
 				))}
 			</div>
-			<div className="user-favorites">
+			{/* <div className="user-favorites">
 				<h2> Your Favorited Places </h2>
 				{Object.values(sessionUser.favorites).map(favorite => (
 					<h5>{favorite.venue_id}</h5>
@@ -183,7 +183,7 @@ function User() {
 				{Object.values(sessionUser.reviews).map(review => (
 					<h5>{review.title}</h5>
 				))}
-			</div>
+			</div> */}
 		</div>
 	);
 }

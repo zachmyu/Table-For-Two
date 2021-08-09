@@ -22,7 +22,7 @@ def venues():
     return {"venues": [venue.to_dict() for venue in venues]}
 
 
-@venue_routes.route('/<int:id>')
+@venue_routes.route('/<int:id>/')
 def venue(id):
     venue = Venue.query.get(id)
     return venue.to_dict()

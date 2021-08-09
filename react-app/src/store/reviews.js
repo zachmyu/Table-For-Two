@@ -26,7 +26,7 @@ const deleteSingleReview = (review) => ({
 
 
 export const getReviews = (id) => async (dispatch) => {
-    const response = await fetch(`/api/reviews/${id}`)
+    const response = await fetch(`/api/reviews/${id}/`)
 
     if (response.ok) {
         const reviews = await response.json()
@@ -35,7 +35,7 @@ export const getReviews = (id) => async (dispatch) => {
 }
 
 export const createReview = review => async (dispatch) => {
-    const response = await fetch(`/api/reviews/venues/${review.venue_id}`, {
+    const response = await fetch(`/api/reviews/venues/${review.venue_id}/`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -49,7 +49,7 @@ export const createReview = review => async (dispatch) => {
 }
 
 export const updateReview = (user_id, venue_id, title, body, rating, reviewId) => async (dispatch) => {
-    const response = await fetch(`/api/reviews/${reviewId}`, {
+    const response = await fetch(`/api/reviews/${reviewId}/`, {
         method: "PUT",
         headers: {
             'Content-Type': 'application/json'
@@ -63,7 +63,7 @@ export const updateReview = (user_id, venue_id, title, body, rating, reviewId) =
 }
 
 export const deleteReview = reviewId => async (dispatch) => {
-    const response = await fetch(`/api/reviews/${reviewId}`, {
+    const response = await fetch(`/api/reviews/${reviewId}/`, {
         method: "DELETE"
     })
     if (response.ok) {

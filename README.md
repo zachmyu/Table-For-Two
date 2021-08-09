@@ -53,7 +53,7 @@ The frontend is created using Python, React, and CSS. The backend is created wit
 
 ![Database schema](/readme-assets/Table-For-Two-schema.jpeg)
 
-##### Pixel8 Sequelize database schema
+##### Table-For-Two SQLAlchemy database schema
 
 ## Frontend Overview
 
