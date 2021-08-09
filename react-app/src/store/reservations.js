@@ -26,7 +26,7 @@ const deleteSingleReservation = (reservation) => ({
 
 
 export const getReservations = (user_id) => async (dispatch) => {
-    const response = await fetch(`/api/reservations/${user_id}`)
+    const response = await fetch(`/api/reservations/${user_id}/`)
 
     if (response.ok) {
         const reservations = await response.json()
@@ -49,7 +49,7 @@ export const createReservation = (reservationInfo) => async (dispatch) => {
 }
 
 export const updateReservation = (user_id, venue_id, reservation_datetime, party_size, duration, reservationId) => async (dispatch) => {
-    const response = await fetch(`/api/reservations/${reservationId}`, {
+    const response = await fetch(`/api/reservations/${reservationId}/`, {
         method: "PUT",
         headers: {
             'Content-Type': 'application/json'
@@ -63,7 +63,7 @@ export const updateReservation = (user_id, venue_id, reservation_datetime, party
 }
 
 export const deleteReservation = reservationId => async (dispatch) => {
-    const response = await fetch(`/api/reservations/${reservationId}`, {
+    const response = await fetch(`/api/reservations/${reservationId}/`, {
         method: "DELETE"
     })
     if (response.ok) {

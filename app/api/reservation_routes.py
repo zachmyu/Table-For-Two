@@ -29,7 +29,7 @@ def postReservation():
     return request.get_json()
 
 
-@reservation_routes.route('/<int:id>', methods=['PUT'])
+@reservation_routes.route('/<int:id>/', methods=['PUT'])
 def updateReservation(id):
     form = ReservationForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -41,7 +41,7 @@ def updateReservation(id):
     return {'errors': form.errors}
 
 
-@reservation_routes.route('/<int:id>', methods=['DELETE'])
+@reservation_routes.route('/<int:id>/', methods=['DELETE'])
 def delete_reservation_by_id(id):
     delete_reservation = Reservation.query.filter.get(id)
     db.session.delete(delete_reservation)

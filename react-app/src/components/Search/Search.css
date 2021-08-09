@@ -1,0 +1,14 @@
+.search-container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 600px;
+    margin-left: 80px;
+}
+
+.search-venue-pix{
+    width: 500px;
+    height: 500px;
+    object-fit: cover;
+    box-sizing: border-box;
+}

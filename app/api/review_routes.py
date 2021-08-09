@@ -42,7 +42,7 @@ def new_review(id):
     return {'review': review.to_dict()}
 
 
-@review_routes.route('/<int:id>', methods=['DELETE'])
+@review_routes.route('/<int:id>/', methods=['DELETE'])
 def delete_review_by_id(id):
     delete_review = Review.query.get(id)
     db.session.delete(delete_review)

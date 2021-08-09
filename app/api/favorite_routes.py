@@ -13,13 +13,13 @@ def validation_error_messages(validation_errors):
     return errorMessages
 
 
-@favorite_routes.route('/<int:id>')
+@favorite_routes.route('/<int:id>/')
 def favorite(id):
     favorites = Favorite.query.filter_by(user_id=id).all()
     return {"favorites": [favorite.to_dict() for favorite in favorites]}
 
 
-@favorite_routes.route('/<int:id>', methods=['DELETE'])
+@favorite_routes.route('/<int:id>/', methods=['DELETE'])
 def delete_favorite_by_id(id):
     delete_favorite = Favorite.query.get(id)
     db.session.delete(delete_favorite)

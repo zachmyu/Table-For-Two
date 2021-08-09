@@ -37,7 +37,7 @@ export const createFavorites = (favoriteInfo) => async (dispatch) => {
 
 
 export const deleteFavorites = (favoriteId) => async (dispatch) => {
-    const response = await fetch(`/api/favorites/${favoriteId}`, {
+    const response = await fetch(`/api/favorites/${favoriteId}/`, {
         method: 'DELETE'
     })
     if (response.ok) {
@@ -46,7 +46,7 @@ export const deleteFavorites = (favoriteId) => async (dispatch) => {
 }
 
 export const getFavorites = (user_id) => async (dispatch) => {
-    const response = await fetch(`/api/favorites/${user_id}`)
+    const response = await fetch(`/api/favorites/${user_id}/`)
 
     if (response.ok) {
         const favorites = await response.json()
