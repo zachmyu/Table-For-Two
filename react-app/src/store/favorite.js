@@ -72,7 +72,7 @@ export const deleteRating = favoriteId => async dispatch => {
 }
 
 const initialState = {}
-const favoritesReducer = (state = initialState, action) => {
+const favorite = (state = initialState, action) => {
     let newState;
     switch (action.type) {
         case GET_FAVORITE:
@@ -99,4 +99,4 @@ const favoritesReducer = (state = initialState, action) => {
     }
 }
 
-export default favoritesReducer;
+export default favorite;

@@ -1,19 +1,17 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import session from './session'
-import favorite from './favorite'
-import reservation from './reservation'
-import review from './review'
-import user from './user'
-import venue from './venue'
+import venues from './venue'
+import reviews from './reviews'
+import reservations from './reservations'
+import favorites from './favorite'
 
 const rootReducer = combineReducers({
   session,
-  venue,
-  review,
-  reservation,
-  favorite,
-  user,
+  venues,
+  reviews,
+  reservations,
+  favorites,
 });
 
 
