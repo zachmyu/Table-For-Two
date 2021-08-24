@@ -28,132 +28,75 @@ export const getOneFavorite = favoriteId => async dispatch => {
     const data = await res.json();
 
     if (res.ok) {
-        dispatch(loadOneRating(data))
-    } else {
-        throw res
+        dispatch(loadOneFavorite(data))
     }
 }
 
-export const getAllUserRatings = userId => async dispatch => {
-    const res = await fetch(`/api/ratings/users/${userId}/`);
+export const getAllUserFavorites = userId => async dispatch => {
+    const res = await fetch(`/api/favorites/users/${userId}/`);
     const data = await res.json();
 
     if (res.ok) {
-        dispatch(loadAllRatings(data))
-    } else {
-        throw res
+        dispatch(loadAllUserFavorites(data))
     }
 }
 
-export const getAllItemRatings = menuItemId => async dispatch => {
-    const res = await fetch(`/api/ratings/menuitems/${menuItemId}/`);
-    const data = await res.json();
-
-    if (res.ok) {
-        dispatch(loadAllRatings(data))
-    } else {
-        throw res
-    }
-}
-
-export const createRating = ratingData => async dispatch => {
-    const { userId, menuItemId, review, rating } = ratingData
-
-    const res = await fetch(`/api/ratings/create/`, {
+export const createFavorites = favoriteInfo => async dispatch => {
+    const { userId, venueId } = favoriteInfo
+    const res = await fetch(`/api/favorites/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
             user_id: userId,
-            menu_item_id: menuItemId,
-            review: review,
-            rating: rating
-        }),
-    });
-    const data = await res.json();
-
-
-    if (res.ok) {
-        dispatch(addRating(data.rating))
-    } else {
-        throw res
-    }
-    return data
-}
-
-export const updateRating = ratingData => async dispatch => {
-    const { userId, menuItemId, review, rating, ratingId } = ratingData
-
-    const res = await fetch(`/api/ratings/${ratingId}/`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            user_id: userId,
-            menu_item_id: menuItemId,
-            review: review,
-            rating: rating
-        }),
+            venue_id: venueId,
+        })
     });
     const data = await res.json();
 
     if (res.ok) {
-        dispatch(changeRating(data))
-        // dispatch(loadOneRating(ratingId))
-    } else {
-        throw res
-    }
-    return data
+        dispatch(addFavorites(data));
+    };
+    return data;
 }
 
-export const deleteRating = ratingId => async dispatch => {
-    const res = await fetch(`/api/ratings/${ratingId}/`, {
+export const deleteRating = favoriteId => async dispatch => {
+    const res = await fetch(`/api/favorites/${favoriteId}/`, {
         method: 'DELETE',
     })
 
     if (res.ok) {
-        dispatch(removeRating(ratingId));
-    } else {
-        throw res
+        dispatch(removeFavorite(favoriteId));
     }
 }
 
-//Reducers
 const initialState = {}
-
-const ratingsReducer = (state = initialState, action) => {
+const favoritesReducer = (state = initialState, action) => {
     let newState;
     switch (action.type) {
-        case READ_SINGLE_RATING:
+        case GET_FAVORITE:
             newState = { ...state };
             newState.current = action.payload;
             return newState;
 
-        case READ_ALL_RATINGS:
+        case GET_ALL_FAVORITES:
             newState = { ...action.payload };
             return newState
 
-        case CREATE_RATING:
+        case CREATE_FAVORITE:
             newState = Object.assign({}, state);
             newState[action.payload.id] = action.payload;
             return newState
 
-        case UPDATE_RATING:
-            newState = {
-                ...state,
-                [action.payload.id]: action.payload
-            }
-            return newState;
-
-        case DELETE_RATING:
+        case DELETE_FAVORITE:
             newState = { ...state }
             delete newState[action.payload]
             return newState
+
         default:
             return state;
     }
 }
 
-export default ratingsReducer;
+export default favoritesReducer;
