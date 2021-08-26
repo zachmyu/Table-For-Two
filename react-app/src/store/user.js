@@ -25,7 +25,7 @@ const removeUser = (user_id) => ({
 });
 
 
-export const getOneUser = (userId) => async dispatch => {
+export const getOneUser = userId => async dispatch => {
     const res = await fetch(`/api/users/${userId}/`)
     const data = await res.json();
 
@@ -39,9 +39,8 @@ export const getAllUsers = () => async dispatch => {
     if (res.ok) dispatch(loadAllUsers(data))
 }
 
-export const UpdateUser = (userData) => async dispatch => {
-    const { firstName, lastName, username, email, password, profile_image_url, userId } = userData
-
+export const UpdateUser = userData => async dispatch => {
+    const { firstName, lastName, username, email, password, profileImgUrl, userId } = userData
     const res = await fetch(`/api/users/${userId}/`, {
         method: 'PUT',
         headers: {
@@ -53,7 +52,7 @@ export const UpdateUser = (userData) => async dispatch => {
             username: username,
             email: email,
             password: password,
-            profile_image_url: profileImgUrl,
+            profile_image_url: profileImgUrl
         }),
     });
     const data = await res.json();
@@ -65,10 +64,10 @@ export const UpdateUser = (userData) => async dispatch => {
     return data;
 }
 
-export const deleteUser = (userId) => async dispatch => {
+export const deleteUser = userId => async dispatch => {
     const res = await fetch(`/api/products/${userId}/`, {
         method: 'DELETE',
-    })
+    });
 
     if (res.ok) dispatch(removeUser(userId));
 }
@@ -84,10 +83,7 @@ const usersReducer = (state = initialState, action) => {
             return newState;
 
         case READ_ALL_USERS:
-            newState = {};
-            action.payload.forEach((restaurant) => {
-                newState[restaurant.id] = restaurant;
-            });
+            newState = { ...action.payload };
             return newState
 
         case UPDATE_USER:
