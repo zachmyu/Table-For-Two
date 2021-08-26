@@ -98,8 +98,6 @@ export const signUp = (first_name, last_name, username, email, password, profile
 	return data
 }
 
-
-
 //   if (response.ok) {
 //     const data = await response.json();
 //     dispatch(setUser(data))
@@ -113,6 +111,43 @@ export const signUp = (first_name, last_name, username, email, password, profile
 //     return ['An error occurred. Please try again.']
 //   }
 // }
+
+export const signUp = (userData) => async (dispatch) => {
+	const { firstName, lastName, username, email, password, profile_image_url } = userData
+	const response = await fetch('/api/auth/signup/', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({
+			first_name: firstName,
+			last_name: lastName,
+			username,
+			email,
+			about,
+			profile_pix: profPixUrl,
+			account_type: accountType,
+			password
+		}),
+	});
+
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(setUser(data))
+		return data;
+	} else if (response.status < 500) {
+		const data = await response.json();
+		if (data.errors) {
+			return data.errors;
+		}
+	} else {
+		return ['An error occurred. Please try again.']
+	}
+}
+
+
+
+
 
 export default function reducer(state = initialState, action) {
 	switch (action.type) {

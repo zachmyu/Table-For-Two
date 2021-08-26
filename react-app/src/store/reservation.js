@@ -35,18 +35,14 @@ export const getOneReservation = reservationId => async dispatch => {
     const res = await fetch(`/api/reservations/${reservationId}/`)
     const data = await res.json();
 
-    if (res.ok) {
-        dispatch(loadSingleReservation(data))
-    }
+    if (res.ok) dispatch(loadSingleReservation(data));
 }
 
 export const getAllUserReservations = userId => async dispatch => {
     const res = await fetch(`/api/reservations/user/${userId}/`);
     const data = await res.json();
 
-    if (res.ok) {
-        dispatch(loadAllReservations(data))
-    }
+    if (res.ok) dispatch(loadAllReservations(data));
 }
 
 export const createReservation = reservationData => async dispatch => {
@@ -67,9 +63,7 @@ export const createReservation = reservationData => async dispatch => {
     });
     const data = await res.json();
 
-    if (res.ok) {
-        dispatch(addReservation(data.menu_item))
-    }
+    if (res.ok) dispatch(addReservation(data.menu_item));
     return data
 }
 
@@ -90,9 +84,7 @@ export const updateReservation = reservationData => async dispatch => {
     });
     const data = await res.json();
 
-    if (res.ok) {
-        dispatch(updateReservation(data));
-    }
+    if (res.ok) dispatch(updateReservation(data));
     return data
 }
 
@@ -101,9 +93,7 @@ export const deleteReservation = reservationId => async dispatch => {
         method: 'DELETE',
     })
 
-    if (res.ok) {
-        dispatch(deleteReservation(reservationId));
-    }
+    if (res.ok) dispatch(deleteReservation(reservationId));
 }
 
 
@@ -134,6 +124,7 @@ const menu_itemsReducer = (state = initialState, action) => {
             newState = { ...state }
             delete newState[action.payload]
             return newState
+
         default:
             return state;
     }
