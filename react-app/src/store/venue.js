@@ -1,141 +1,157 @@
-const READ_SINGLE_REVIEW = 'review/READ_SINGLE_REVIEW'
-const READ_ALL_REVIEWS = 'review/READ_ALL_REVIEWS'
-const CREATE_REVIEW = 'review/CREATE_REVIEW'
-const UPDATE_REVIEW = 'review/UPDATE_REVIEW'
-const DELETE_REVIEW = 'review/DELETE_REVIEW'
+const READ_SINGLE_VENUE = 'venue/READ_SINGLE_VENUE'
+const READ_ALL_VENUES = 'venue/READ_ALL_VENUES'
+const CREATE_VENUE = 'venue/CREATE_VENUE'
+const UPDATE_VENUE = 'venue/UPDATE_VENUE'
+const DELETE_VENUE = 'venue/DELETE_VENUE'
 
 
-const loadOneReview = review => ({
-    type: READ_SINGLE_REVIEW,
-    payload: review
+const loadOneVenue = venue => ({
+    type: READ_SINGLE_VENUE,
+    payload: venue
 });
 
-const loadAllReviews = reviews => ({
-    type: READ_ALL_REVIEWS,
-    payload: reviews
+const loadAllVenues = venues => ({
+    type: READ_ALL_VENUES,
+    payload: venues
 });
 
-const addReview = review => ({
-    type: CREATE_REVIEW,
-    payload: review
+const addVenue = venue => ({
+    type: CREATE_VENUE,
+    payload: venue
 });
 
-const changeReview = review => ({
-    type: UPDATE_REVIEW,
-    payload: review
+const changeVenue = venue => ({
+    type: UPDATE_VENUE,
+    payload: venue
 });
 
-const removeReview = review => ({
-    type: DELETE_REVIEW,
-    payload: review
+const removeVenue = venue => ({
+    type: DELETE_VENUE,
+    payload: venue
 });
 
 
-export const getOneRating = ratingId => async dispatch => {
-    const res = await fetch(`/api/ratings/${ratingId}/`)
+export const getOneVenue = venueId => async dispatch => {
+    const res = await fetch(`/api/venues/${venueId}/`)
     const data = await res.json();
 
-    if (res.ok) dispatch(loadOneReview(data));
+    if (res.ok) dispatch(loadOneVenue(data));
 }
 
-export const getAllUserRatings = userId => async dispatch => {
-    const res = await fetch(`/api/ratings/users/${userId}/`);
+export const getAllVenues = () => async dispatch => {
+    const res = await fetch(`/api/venues/`);
     const data = await res.json();
 
-    if (res.ok) dispatch(loadAllReviews(data));
+    if (res.ok) dispatch(loadAllVenues(data));
 }
 
-export const getAllItemRatings = menuItemId => async dispatch => {
-    const res = await fetch(`/api/ratings/menuitems/${menuItemId}/`);
+export const getAllUserVenues = userId => async dispatch => {
+    const res = await fetch(`/api/venues/users/${userId}/`);
     const data = await res.json();
 
-    if (res.ok) dispatch(loadAllReviews(data));
+    if (res.ok) dispatch(loadAllVenues(data));
 }
 
-export const createRating = ratingData => async dispatch => {
-    const { userId, menuItemId, review, rating } = ratingData
-
-    const res = await fetch(`/api/ratings/create/`, {
+export const createVenue = venueData => async dispatch => {
+    const { userId, name, dateTypeId, price, description, imageUrl, phoneNumber, address, city, state, zipcode, operationHours, latitude, longitude } = venueData
+    const res = await fetch(`/api/venues/create/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            user_id: userId,
-            menu_item_id: menuItemId,
-            review: review,
-            rating: rating
+            creator_id: userId,
+            name: name,
+            date_type_id: dateTypeId,
+            price: price,
+            description: description,
+            image_url: imageUrl,
+            phone_number: phoneNumber,
+            address: address,
+            city: city,
+            state: state,
+            zipcode: zipcode,
+            operation_hours: operationHours,
+            latitude: latitude,
+            longitude: longitude
         }),
     });
     const data = await res.json();
 
-    if (res.ok) dispatch(addReview(data.rating));
+    if (res.ok) dispatch(addVenue(data));
     return data
 }
 
-export const updateRating = ratingData => async dispatch => {
-    const { userId, menuItemId, review, rating, ratingId } = ratingData
-
-    const res = await fetch(`/api/ratings/${ratingId}/`, {
+export const updateVenue = venueData => async dispatch => {
+    const { userId, name, dateTypeId, price, description, imageUrl, phoneNumber, address, city, state, zipcode, operationHours, latitude, longitude, venueId } = venueData
+    const res = await fetch(`/api/venues/${venueId}/`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            user_id: userId,
-            menu_item_id: menuItemId,
-            review: review,
-            rating: rating
+            creator_id: userId,
+            name: name,
+            date_type_id: dateTypeId,
+            price: price,
+            description: description,
+            image_url: imageUrl,
+            phone_number: phoneNumber,
+            address: address,
+            city: city,
+            state: state,
+            zipcode: zipcode,
+            operation_hours: operationHours,
+            latitude: latitude,
+            longitude: longitude
         }),
     });
     const data = await res.json();
 
-    if (res.ok) dispatch(changeReview(data));
+    if (res.ok) dispatch(changeVenue(data));
     return data
 }
 
-export const deleteRating = ratingId => async dispatch => {
-    const res = await fetch(`/api/ratings/${ratingId}/`, {
+export const deleteVenue = venueId => async dispatch => {
+    const res = await fetch(`/api/venues/${venueId}/`, {
         method: 'DELETE',
     })
 
-    if (res.ok) dispatch(removeReview(ratingId));
+    if (res.ok) dispatch(removeVenue(venueId));
 }
 
 
 const initialState = {}
-const ratingsReducer = (state = initialState, action) => {
+const venuesReducer = (state = initialState, action) => {
     let newState;
     switch (action.type) {
-        case READ_SINGLE_RATING:
+        case READ_SINGLE_VENUE:
             newState = { ...state };
             newState.current = action.payload;
             return newState;
 
-        case READ_ALL_RATINGS:
+        case READ_ALL_VENUES:
             newState = { ...action.payload };
-            return newState
-
-        case CREATE_RATING:
-            newState = Object.assign({}, state);
-            newState[action.payload.id] = action.payload;
-            return newState
-
-        case UPDATE_RATING:
-            newState = {
-                ...state,
-                [action.payload.id]: action.payload
-            }
             return newState;
 
-        case DELETE_RATING:
+        case CREATE_VENUE:
+            newState = Object.assign({}, state);
+            newState[action.payload.id] = action.payload;
+            return newState;
+
+        case UPDATE_VENUE:
+            newState = { ...state };
+            newState.current = action.payload;
+            return newState;
+
+        case DELETE_VENUE:
             newState = { ...state }
             delete newState[action.payload]
-            return newState
+            return newState;
 
         default:
             return state;
     }
 }
 
-export default ratingsReducer;
+export default venuesReducer;
