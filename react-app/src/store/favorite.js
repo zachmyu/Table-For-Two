@@ -74,17 +74,17 @@ const favorite = (state = initialState, action) => {
 
         case GET_ALL_FAVORITES:
             newState = { ...action.payload };
-            return newState
+            return newState;
 
         case CREATE_FAVORITE:
             newState = Object.assign({}, state);
             newState[action.payload.id] = action.payload;
-            return newState
+            return newState;
 
         case DELETE_FAVORITE:
-            newState = { ...state }
-            delete newState[action.payload]
-            return newState
+            newState = { ...state };
+            delete newState[action.payload];
+            return newState;
 
         default:
             return state;

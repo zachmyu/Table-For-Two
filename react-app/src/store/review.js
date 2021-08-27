@@ -116,24 +116,24 @@ const reviewsReducer = (state = initialState, action) => {
 
         case READ_ALL_ReviewS:
             newState = { ...action.payload };
-            return newState
+            return newState;
 
         case CREATE_Review:
             newState = Object.assign({}, state);
             newState[action.payload.id] = action.payload;
-            return newState
+            return newState;
 
         case UPDATE_Review:
             newState = {
                 ...state,
                 [action.payload.id]: action.payload
-            }
+            };
             return newState;
 
         case DELETE_Review:
-            newState = { ...state }
-            delete newState[action.payload]
-            return newState
+            newState = { ...state };
+            delete newState[action.payload];
+            return newState;
 
         default:
             return state;

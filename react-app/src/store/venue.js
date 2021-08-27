@@ -145,8 +145,8 @@ const venuesReducer = (state = initialState, action) => {
             return newState;
 
         case DELETE_VENUE:
-            newState = { ...state }
-            delete newState[action.payload]
+            newState = { ...state };
+            delete newState[action.payload];
             return newState;
 
         default:

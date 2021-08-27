@@ -108,12 +108,12 @@ const menu_itemsReducer = (state = initialState, action) => {
 
         case READ_ALL_RESERVATIONS:
             newState = { ...action.payload };
-            return newState
+            return newState;
 
         case CREATE_RESERVATION:
             newState = Object.assign({}, state);
             newState[action.payload.id] = action.payload;
-            return newState
+            return newState;
 
         case UPDATE_RESERVATION:
             newState = { ...state };
@@ -121,9 +121,9 @@ const menu_itemsReducer = (state = initialState, action) => {
             return newState;
 
         case DELETE_RESERVATION:
-            newState = { ...state }
-            delete newState[action.payload]
-            return newState
+            newState = { ...state };
+            delete newState[action.payload];
+            return newState;
 
         default:
             return state;

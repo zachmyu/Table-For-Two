@@ -84,18 +84,18 @@ const usersReducer = (state = initialState, action) => {
 
         case READ_ALL_USERS:
             newState = { ...action.payload };
-            return newState
+            return newState;
 
         case UPDATE_USER:
             return {
                 ...state,
                 [action.payload.id]: action.payload
-            }
+            };
 
         case DELETE_USER:
-            newState = { ...state }
-            delete newState[action.payload]
-            return newState
+            newState = { ...state };
+            delete newState[action.payload];
+            return newState;
 
         default:
             return state;
