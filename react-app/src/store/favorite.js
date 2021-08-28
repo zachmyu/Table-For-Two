@@ -39,7 +39,7 @@ export const getAllUserFavorites = userId => async dispatch => {
 
 export const createFavorites = favoriteInfo => async dispatch => {
     const { userId, venueId } = favoriteInfo
-    const res = await fetch(`/api/favorites/`, {
+    const res = await fetch(`/api/favorites/create/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

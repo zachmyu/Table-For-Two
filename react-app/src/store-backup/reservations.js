@@ -25,8 +25,8 @@ const deleteSingleReservation = (reservation) => ({
 })
 
 
-export const getReservations = (user_id) => async (dispatch) => {
-    const response = await fetch(`/api/reservations/${user_id}/`)
+export const getUserReservations = (user_id) => async (dispatch) => {
+    const response = await fetch(`/api/reservations/user/${user_id}/`)
 
     if (response.ok) {
         const reservations = await response.json()

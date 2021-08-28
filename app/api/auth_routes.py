@@ -72,7 +72,6 @@ def sign_up():
         return {"errors": ["file type not permitted"]}, 400
 
     image.filename = get_unique_filename(image.filename)
-
     upload = upload_file_to_s3(image)
 
     if "url" not in upload:
