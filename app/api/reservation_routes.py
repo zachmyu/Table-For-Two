@@ -17,7 +17,7 @@ def reservation(id):
 # Read All User Reservations
 @reservation_routes.route('/user/<int:id>')
 @login_required
-def reservation(id):
+def user_reservation(id):
     reservations = Reservation.query.filter_by(user_id=id).all()
     return {"reservations": [reservation.to_dict() for reservation in reservations]}
 
