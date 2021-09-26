@@ -31,7 +31,7 @@ const removeVenue = venue => ({
 });
 
 
-export const getOneVenue = venueId => async dispatch => {
+export const getSingleVenue = venueId => async dispatch => {
     const res = await fetch(`/api/venues/${venueId}/`)
     const data = await res.json();
 
