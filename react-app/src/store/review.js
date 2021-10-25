@@ -20,14 +20,14 @@ const addReview = review => ({
     payload: review
 });
 
-const changeReview = review => ({
+const changeReview = review_id => ({
     type: UPDATE_REVIEW,
-    payload: review
+    payload: review_id
 });
 
-const removeReview = review => ({
+const removeReview = review_id => ({
     type: DELETE_REVIEW,
-    payload: review
+    payload: review_id
 });
 
 
@@ -35,21 +35,33 @@ export const getOneReview = reviewId => async dispatch => {
     const res = await fetch(`/api/reviews/${reviewId}/`)
     const data = await res.json();
 
-    if (res.ok) dispatch(loadOneReview(data));
+    if (res.ok) {
+        dispatch(loadOneReview(data))
+    } else {
+        throw res;
+    };
 }
 
 export const getAllUserReviews = userId => async dispatch => {
     const res = await fetch(`/api/reviews/users/${userId}/`);
     const data = await res.json();
 
-    if (res.ok) dispatch(loadAllReviews(data));
+    if (res.ok) {
+        dispatch(loadAllReviews(data))
+    } else {
+        throw res;
+    };
 }
 
 export const getAllVenueReviews = venueId => async dispatch => {
     const res = await fetch(`/api/reviews/venues/${venueId}/`);
     const data = await res.json();
 
-    if (res.ok) dispatch(loadAllReviews(data));
+    if (res.ok) {
+        dispatch(loadAllReviews(data))
+    } else {
+        throw res;
+    };
 }
 
 export const createReview = reviewData => async dispatch => {
@@ -70,7 +82,11 @@ export const createReview = reviewData => async dispatch => {
     });
     const data = await res.json();
 
-    if (res.ok) dispatch(addReview(data));
+    if (res.ok) {
+        dispatch(addReview(data))
+    } else {
+        throw res;
+    };
     return data
 }
 
@@ -92,7 +108,11 @@ export const updateReview = reviewData => async dispatch => {
     });
     const data = await res.json();
 
-    if (res.ok) dispatch(changeReview(data));
+    if (res.ok) {
+        dispatch(changeReview(data))
+    } else {
+        throw res;
+    };
     return data
 }
 
@@ -101,7 +121,11 @@ export const deleteReview = reviewId => async dispatch => {
         method: 'DELETE',
     })
 
-    if (res.ok) dispatch(removeReview(reviewId));
+    if (res.ok) {
+        dispatch(removeReview(reviewId))
+    } else {
+        throw res;
+    };
 }
 
 
