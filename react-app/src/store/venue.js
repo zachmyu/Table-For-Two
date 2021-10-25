@@ -35,21 +35,33 @@ export const getSingleVenue = venueId => async dispatch => {
     const res = await fetch(`/api/venues/${venueId}/`)
     const data = await res.json();
 
-    if (res.ok) dispatch(loadOneVenue(data));
+    if (res.ok) {
+        dispatch(loadOneVenue(data))
+    } else {
+        throw res;
+    };
 }
 
 export const getAllVenues = () => async dispatch => {
     const res = await fetch(`/api/venues/`);
     const data = await res.json();
 
-    if (res.ok) dispatch(loadAllVenues(data));
+    if (res.ok) {
+        dispatch(loadAllVenues(data))
+    } else {
+        throw res;
+    };
 }
 
 export const getAllUserVenues = userId => async dispatch => {
     const res = await fetch(`/api/venues/users/${userId}/`);
     const data = await res.json();
 
-    if (res.ok) dispatch(loadAllVenues(data));
+    if (res.ok) {
+        dispatch(loadAllVenues(data))
+    } else {
+        throw res;
+    };
 }
 
 export const createVenue = venueData => async dispatch => {
@@ -78,7 +90,11 @@ export const createVenue = venueData => async dispatch => {
     });
     const data = await res.json();
 
-    if (res.ok) dispatch(addVenue(data));
+    if (res.ok) {
+        dispatch(addVenue(data))
+    } else {
+        throw res;
+    };
     return data
 }
 
@@ -108,7 +124,11 @@ export const updateVenue = venueData => async dispatch => {
     });
     const data = await res.json();
 
-    if (res.ok) dispatch(changeVenue(data));
+    if (res.ok) {
+        dispatch(changeVenue(data))
+    } else {
+        throw res;
+    };
     return data
 }
 
@@ -117,7 +137,11 @@ export const deleteVenue = venueId => async dispatch => {
         method: 'DELETE',
     })
 
-    if (res.ok) dispatch(removeVenue(venueId));
+    if (res.ok) {
+        dispatch(removeVenue(venueId))
+    } else {
+        throw res;
+    };
 }
 
 
