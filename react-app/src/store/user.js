@@ -29,14 +29,23 @@ export const getOneUser = userId => async dispatch => {
     const res = await fetch(`/api/users/${userId}/`)
     const data = await res.json();
 
-    if (res.ok) dispatch(loadOneUser(data));
+    if (res.ok) {
+        dispatch(loadOneUser(data))
+    } else {
+        throw res
+    };
 }
 
 export const getAllUsers = () => async dispatch => {
     const res = await fetch(`/api/users/`)
     const data = await res.json();
 
-    if (res.ok) dispatch(loadAllUsers(data))
+    if (res.ok) {
+        dispatch(loadAllUsers(data));
+    } else {
+        throw res;
+    };
+
 }
 
 export const UpdateUser = userData => async dispatch => {
@@ -69,7 +78,11 @@ export const deleteUser = userId => async dispatch => {
         method: 'DELETE',
     });
 
-    if (res.ok) dispatch(removeUser(userId));
+    if (res.ok) {
+        dispatch(removeUser(userId))
+    } else {
+        throw res
+    };
 }
 
 
