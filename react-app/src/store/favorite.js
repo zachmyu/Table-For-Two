@@ -27,14 +27,22 @@ export const getOneFavorite = favoriteId => async dispatch => {
     const res = await fetch(`/api/favorites/${favoriteId}/`)
     const data = await res.json();
 
-    if (res.ok) dispatch(loadOneFavorite(data));
+    if (res.ok) {
+        dispatch(loadOneFavorite(data))
+    } else {
+        throw res
+    };
 }
 
 export const getAllUserFavorites = userId => async dispatch => {
     const res = await fetch(`/api/favorites/users/${userId}/`);
     const data = await res.json();
 
-    if (res.ok) dispatch(loadAllUserFavorites(data));
+    if (res.ok) {
+        dispatch(loadAllUserFavorites(data))
+    } else {
+        throw res
+    };
 }
 
 export const createFavorites = favoriteInfo => async dispatch => {
@@ -51,7 +59,11 @@ export const createFavorites = favoriteInfo => async dispatch => {
     });
     const data = await res.json();
 
-    if (res.ok) dispatch(addFavorites(data));
+    if (res.ok) {
+        dispatch(addFavorites(data))
+    } else {
+        throw res
+    };
     return data;
 }
 
@@ -60,10 +72,15 @@ export const deleteFavorites = favoriteId => async dispatch => {
         method: 'DELETE',
     })
 
-    if (res.ok) dispatch(removeFavorite(favoriteId));
+    if (res.ok) {
+        dispatch(removeFavorite(favoriteId))
+    } else {
+        throw res
+    };
 }
 
 const initialState = {}
+
 const favorite = (state = initialState, action) => {
     let newState;
     switch (action.type) {
@@ -73,7 +90,10 @@ const favorite = (state = initialState, action) => {
             return newState;
 
         case GET_ALL_FAVORITES:
-            newState = { ...action.payload };
+            newState = {}
+            action.payload.forEach((favorite) => {
+                newState[favorite.id] = favorite;
+            })
             return newState;
 
         case CREATE_FAVORITE:
