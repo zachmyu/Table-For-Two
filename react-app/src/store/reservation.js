@@ -25,9 +25,9 @@ const updateReservation = reservation => ({
     payload: reservation
 });
 
-const deleteReservation = reservation => ({
+const deleteReservation = reservation_id => ({
     type: DELETE_RESERVATION,
-    payload: reservation
+    payload: reservation_id
 });
 
 
@@ -35,14 +35,22 @@ export const getOneReservation = reservationId => async dispatch => {
     const res = await fetch(`/api/reservations/${reservationId}/`)
     const data = await res.json();
 
-    if (res.ok) dispatch(loadSingleReservation(data));
+    if (res.ok) {
+        dispatch(loadSingleReservation(data))
+    } else {
+        throw res;
+    };
 }
 
 export const getAllUserReservations = userId => async dispatch => {
     const res = await fetch(`/api/reservations/user/${userId}/`);
     const data = await res.json();
 
-    if (res.ok) dispatch(loadAllReservations(data));
+    if (res.ok) {
+        dispatch(loadAllReservations(data))
+    } else {
+        throw res;
+    };
 }
 
 export const createReservation = reservationData => async dispatch => {
@@ -63,7 +71,11 @@ export const createReservation = reservationData => async dispatch => {
     });
     const data = await res.json();
 
-    if (res.ok) dispatch(addReservation(data.menu_item));
+    if (res.ok) {
+        dispatch(addReservation(data))
+    } else {
+        throw res;
+    };
     return data
 }
 
@@ -84,7 +96,11 @@ export const updateReservation = reservationData => async dispatch => {
     });
     const data = await res.json();
 
-    if (res.ok) dispatch(updateReservation(data));
+    if (res.ok) {
+        dispatch(updateReservation(data))
+    } else {
+        throw res;
+    };
     return data
 }
 
@@ -93,7 +109,11 @@ export const deleteReservation = reservationId => async dispatch => {
         method: 'DELETE',
     })
 
-    if (res.ok) dispatch(deleteReservation(reservationId));
+    if (res.ok) {
+        dispatch(deleteReservation(reservationId))
+    } else {
+        throw res;
+    };
 }
 
 
