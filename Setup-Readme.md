@@ -132,3 +132,11 @@ of your Heroku app in the url and tag name:
    ```bash=3
    docker push registry.heroku.com/{NAME_OF_HEROKU_APP}/web
    ```
+<hr />
+Future to-do:
+- Add Google maps
+- Allow search to find by date type
+- Reservations to disappear past reservation date
+- Reservation locations to limit amount of reservations
+- Allow addition of venues
+- Show venue date type
